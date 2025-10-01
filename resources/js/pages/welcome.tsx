@@ -3,6 +3,7 @@ import { Text } from '@/components/Typography';
 import { NavLink } from '@/components/Navigation/NavLink';
 import PhoneMenu from '@/components/Navigation/PhoneMenu';
 import { delay, motion } from 'framer-motion';
+import Header from '@/components/Navigation/Header';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 10, filter: 'blur(10px)' },
@@ -24,17 +25,21 @@ export default function Welcome() {
                 <link href="https://fonts.bunny.net/css?family=inter:400,500,600" rel="stylesheet" />
             </Head>
 
-            {/* Hero Section */}
-            <div className="min-h-screen flex flex-col items-center justify-center container mx-auto px-4">
-                <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.4 }}>
-                    <Text variant="heading1" className="text-center mb-6">Crafting Luxury Life</Text>
-                </motion.div>
+            <div className='bg-primary'>
+                <Header color='transparent'/>
 
-                <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.6 }}>
-                    <Text variant="bodyMedium" color="text-blue-500" className="text-center mb-4">
-                        Redefining real estate through excellence, innovation, and trust.
-                    </Text>
-                </motion.div>
+                {/* Hero Section */}
+                <div className="min-h-screen flex flex-col items-center justify-center container mx-auto px-4">
+                    <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.4 }}>
+                        <Text variant="heading1" className="text-center mb-6">Crafting Luxury Life</Text>
+                    </motion.div>
+
+                    <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.6 }}>
+                        <Text variant="bodyMedium" color="text-blue-500" className="text-center mb-4">
+                            Redefining real estate through excellence, innovation, and trust.
+                        </Text>
+                    </motion.div>
+                </div>
             </div>
         </>
     );
