@@ -14,7 +14,11 @@ createInertiaApp({
         const root = createRoot(el);
 
         root.render(
-            <LenisProvider>
+            <LenisProvider
+                scrollSpeed="normal"
+            // You can also pass custom options to override the preset:
+            // options={{ duration: 1.2, mouseMultiplier: 0.8 }}
+            >
                 <App {...props} />
             </LenisProvider>
         );
