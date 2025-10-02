@@ -15,7 +15,7 @@ const ARROW_TRANSITION: Transition = {
 const BUTTON_VARIANTS = {
     primary: {
         container: "bg-ui-1",
-        text: "text-primary",
+        text: "text-text-primary",
         icon: "text-text-primary",
     },
     secondary: {
@@ -33,27 +33,29 @@ const BUTTON_VARIANTS = {
 type ButtonVariant = keyof typeof BUTTON_VARIANTS;
 
 interface ButtonProps {
-    href: string;
+    href?: string;
     text: string;
     variant?: ButtonVariant;
     icon?: boolean;
+    onClick?: () => void;
 }
 
-export default function Button({ href, text, variant = "primary", icon = true }: ButtonProps) {
+export default function Button({ href, text, variant = "primary", icon = true, onClick }: ButtonProps) {
     const [isHovered, setIsHovered] = useState(false);
     const styles = BUTTON_VARIANTS[variant];
 
-    return (
-        <Link
-            href={href}
-            className={cn(
-                "flex items-center w-max justify-center transition-all duration-400 px-6 py-3 rounded-xl cursor-pointer",
-                icon ? "gap-2 hover:gap-3" : "",
-                styles.container
-            )}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
+    const commonProps = {
+        className: cn(
+            "flex items-center w-max justify-center transition-all duration-400 px-6 py-3 rounded-xl cursor-pointer",
+            icon ? "gap-2 hover:gap-3" : "",
+            styles.container
+        ),
+        onMouseEnter: () => setIsHovered(true),
+        onMouseLeave: () => setIsHovered(false),
+    };
+
+    const content = (
+        <>
             <Text variant='bodyMedium' className={styles.text}>{text}</Text>
             {icon && (
                 <div className={cn("flex items-center justify-center gap-2.5 px-1.5 overflow-hidden relative", styles.icon)}>
@@ -76,6 +78,35 @@ export default function Button({ href, text, variant = "primary", icon = true }:
                     </motion.div>
                 </div>
             )}
-        </Link>
+        </>
+    );
+
+    if (onClick) {
+        return (
+            <button
+                {...commonProps}
+                onClick={onClick}
+            >
+                {content}
+            </button>
+        );
+    }
+
+    if (href) {
+        return (
+            <Link
+                href={href}
+                {...commonProps}
+            >
+                {content}
+            </Link>
+        );
+    }
+
+    // Fallback to button if neither href nor onClick is provided
+    return (
+        <button {...commonProps}>
+            {content}
+        </button>
     );
 }

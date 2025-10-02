@@ -10,6 +10,9 @@ import AgentCard from '@/components/Cards/AgentCard';
 import DetailCard from '@/components/Cards/DetailCard';
 import FeatureCard from '@/components/Cards/FeatureCard';
 import FAQs from '@/components/FAQs';
+import WhatsAppIcon from '@/components/WhatsAppIcon';
+import SocialIcon from '@/components/SocialIcon';
+import Features from '@/components/Features';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 10, filter: 'blur(10px)' },
@@ -33,6 +36,10 @@ export default function Welcome() {
 
             <div className='bg-primary'>
                 <Header color='transparent' />
+
+                <WhatsAppIcon href='https://wa.me/966503422777' />
+                <SocialIcon iconName='XLogoIcon' href={'#'}/>
+                <SocialIcon iconName='LinkedinLogoIcon' href={'#'}/>
 
                 <PrimaryButton href="/link" text="Click me" variant="primary" />          {/* icon shown */}
                 <PrimaryButton href="/link" text="Click me" variant="secondary" icon />     {/* icon shown */}
@@ -80,6 +87,9 @@ export default function Welcome() {
 
                     <AgentCard href="/agents/john-doe" title='John Doe' img="https://placehold.co/150" role='Real Estate Agent' />
                 </div>
+
+                {/* Features Section */}
+                <Features />
 
                 <Footer />
             </div>

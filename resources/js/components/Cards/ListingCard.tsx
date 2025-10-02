@@ -26,16 +26,17 @@ export default function ListingCard({ href, img, name, price, bed, bath, livingS
                         }}
                         transition={{
                             type: 'spring',
-                            stiffness: 400,
-                            damping: 80,
-                            mass: 1,
+                            stiffness: 300,
+                            damping: 30,
+                            mass: 0.8,
                         }}
                     />
                 </div>
                 <motion.div
-                    className="flex flex-col gap-3"
+                    className="flex flex-col gap-3 px-[18px] pt-[18px] pb-6"
                     animate={{
-                        padding: isHovered ? "24px 24px 24px 24px" : "18px 18px 24px 18px"
+                        x: isHovered ? 6 : 0,
+                        y: isHovered ? 6 : 0
                     }}
                     transition={{
                         type: "spring",

@@ -115,6 +115,7 @@ const Text = forwardRef<HTMLElement, TextProps>(
             '--font-size-sm': `${config.sizes.sm}px`,
             '--font-size-md': `${config.sizes.md}px`,
             '--font-size-lg': `${config.sizes.lg}px`,
+            fontFeatureSettings: '"blwf" 1, "salt" 1, "ss01" 1, "ss07" 1',
         } as React.CSSProperties;
 
         return (

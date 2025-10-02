@@ -32,7 +32,7 @@ export default function FAQs() {
     };
 
     return (
-        <div className="flex flex-col w-[559px] gap-3">
+        <div className="flex flex-col w-full gap-3">
             {faqs.map((faq, index) => (
                 <FAQ
                     key={index}

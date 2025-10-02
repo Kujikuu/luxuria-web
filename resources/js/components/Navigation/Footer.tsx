@@ -5,7 +5,7 @@ import { DotIcon } from "@phosphor-icons/react";
 
 export default function Footer() {
     return (
-        <footer className="flex flex-col gap-6 md:px-10 md:pt-24 bg-primary text-ui-1 overflow-hidden px-3.5 pt-10">
+        <footer className="flex flex-col gap-6 md:px-10 md:pt-24 bg-primary text-ui-1 overflow-hidden px-3.5 pt-10 w-full">
             <div className="flex flex-col gap-11 p-0 max-w-7xl mx-auto md:min-h-96 w-full min-h-auto ">
                 <div className="flex md:gap-11 md:flex-row gap-11 flex-col">
                     <div className="flex flex-col gap-6 w-full">

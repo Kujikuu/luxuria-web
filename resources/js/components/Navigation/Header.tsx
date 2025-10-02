@@ -115,7 +115,7 @@ export default function Header({ section = "hero", color = "white" }: HeaderProp
     const defaultNavLinkColor = color === "white" ? "primary" : "white";
 
     return (
-        <div className={`sticky z-50 h-auto order-first top-0 left-0 right-0 transition-all duration-300 ${isScrolled ? scrollStyling : getDefaultStyling()
+        <div className={`sticky z-50 w-full h-auto order-first top-0 left-0 right-0 transition-all duration-300 ${isScrolled ? scrollStyling : getDefaultStyling()
             }`}>
             <nav className={`flex items-center justify-between relative overflow-visible transition-all duration-300 ${isScrolled
                 ? 'py-3 px-4 md:py-5 md:px-11'

@@ -15,7 +15,7 @@ export default function FAQ({ question, answer, isOpen, onClick }: FAQProps) {
     };
 
     return (
-        <motion.div className={`flex flex-col w-[559px] px-4 py-6 bg-ui-2 border border-ui-3 rounded-2xl overflow-hidden cursor-pointer ${isOpen ? 'gap-5' : 'gap-0'}`} role="button" onClick={handleClick}
+        <motion.div className={`flex flex-col px-4 py-6 bg-ui-2 border border-ui-3 rounded-2xl overflow-hidden cursor-pointer ${isOpen ? 'gap-5' : 'gap-0'}`} role="button" onClick={handleClick}
             aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
             tabIndex={0}
