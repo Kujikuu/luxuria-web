@@ -7,6 +7,7 @@ import Header from '@/components/Navigation/Header';
 import Footer from '@/components/Navigation/Footer';
 import PrimaryButton from '@/components/Buttons/Button';
 import ListingCard from '@/components/Cards/ListingCard';
+import { BlogCardLarge, BlogCardMedium } from '@/components/Cards/BlogCard';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 10, filter: 'blur(10px)' },
@@ -57,6 +58,9 @@ export default function Welcome() {
                         bath={2}
                         livingSpce={1200}
                     />
+
+                    <BlogCardLarge href="/blog/sample-post" />
+                    <BlogCardMedium href="/blog/sample-post" />
                 </div>
 
                 <Footer />
