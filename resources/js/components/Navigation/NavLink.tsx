@@ -1,20 +1,59 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { Text } from "../Typography";
 import { Link } from "@inertiajs/react";
+import { motion } from "framer-motion";
 
 export const NavLink = ({
     children,
-    href,
-    color = "text-primary"
+    color = "primary",
+    ...linkProps
 }: {
     children: ReactNode;
-    href: string;
     color?: string;
-}) => {
+} & Omit<React.ComponentProps<typeof Link>, 'children'>) => {
+
+    const [isHovered, setIsHovered] = useState(false);
+
+    const getDefaultStyling = () => {
+        switch (color) {
+            case "primary":
+                return "text-primary";
+            case "white":
+                return "text-white";
+            case "dark":
+                return "text-white";
+            default:
+                return "text-white";
+        }
+    };
+
+    const getDefaultBg = () => {
+        switch (color) {
+            case "primary":
+                return "bg-primary";
+            case "white":
+                return "bg-white";
+            case "dark":
+                return "bg-white";
+            default:
+                return "bg-white";
+        }
+    };
+
+
     return (
-        <Link href={href} className='group flex flex-col w-max overflow-visible'>
-            <Text variant="bodyMedium" color={color}>{children}</Text>
-            <div className={`w-[8px] h-[1px] opacity-0 bg-${color} group-hover:w-full group-hover:opacity-100 transition-all duration-300 ease-in-out`}></div>
+        <Link 
+            className='group flex flex-col w-max overflow-visible' 
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            {...linkProps}
+        >
+            <Text variant="bodyMedium" color={getDefaultStyling()}>{children}</Text>
+            <motion.div className={`h-[1px] ${getDefaultBg()} origin-left`}
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: isHovered ? 1 : 0, opacity: isHovered ? 1 : 0 }}
+                transition={{ type: "spring", stiffness: 400, damping: 80, mass: 1 }}
+            ></motion.div>
         </Link>
     );
 }

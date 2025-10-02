@@ -4,6 +4,8 @@ import { NavLink } from '@/components/Navigation/NavLink';
 import PhoneMenu from '@/components/Navigation/PhoneMenu';
 import { delay, motion } from 'framer-motion';
 import Header from '@/components/Navigation/Header';
+import Footer from '@/components/Navigation/Footer';
+import PrimaryButton from '@/components/Buttons/Button';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 10, filter: 'blur(10px)' },
@@ -26,7 +28,12 @@ export default function Welcome() {
             </Head>
 
             <div className='bg-primary'>
-                <Header color='transparent'/>
+                <Header color='transparent' />
+
+                <PrimaryButton href="/link" text="Click me" variant="primary" />          {/* icon shown */}
+                <PrimaryButton href="/link" text="Click me" variant="primary" icon />     {/* icon shown */}
+                <PrimaryButton href="/link" text="Click me" variant="primary" icon={false} />  {/* no icon */}
+                <PrimaryButton href="/link" text="Click me" variant="form" icon={false} />  {/* no icon */}
 
                 {/* Hero Section */}
                 <div className="min-h-screen flex flex-col items-center justify-center container mx-auto px-4">
@@ -40,6 +47,8 @@ export default function Welcome() {
                         </Text>
                     </motion.div>
                 </div>
+
+                <Footer />
             </div>
         </>
     );

@@ -20,44 +20,47 @@ interface TextProps {
     color?: string;
 }
 
+interface VariantConfig {
+    sizes: { lg: number; md: number; sm: number };
+    weight: string;
+    leading: string;
+    extras?: string;
+}
+
 const Text = ({ children, variant, className, color }: TextProps) => {
     const getVariantStyles = (variant: TextVariant, color?: string) => {
         const defaultColor = variant === "bodyLight" ? "text-secondary" : "text-primary";
         const textColor = color || defaultColor;
 
-        const variants = {
-            heading1: `text-6xl font-semibold text-${textColor} leading-tight`,
-            heading2: `text-5xl font-medium text-${textColor} leading-tight`,
-            heading3: `text-4xl font-medium text-${textColor} leading-tight`,
-            heading4: `text-2xl font-medium text-${textColor} leading-tight`,
-            bodyLarge: `text-lg text-${textColor} leading-snug`,
-            bodyLight: `text-lg text-${textColor} leading-snug`,
-            bodyBold: `text-lg font-medium text-${textColor} leading-tight`,
-            bodyMedium: `text-base text-${textColor} leading-snug`,
-            bodyLong: `text-base text-${textColor} leading-relaxed`,
-            bodySmall: `text-sm text-${textColor} leading-snug font-stretch-semi-condensed`,
-            bodySmallBold: `text-sm font-medium text-${textColor} leading-snug font-stretch-semi-condensed`,
+        const variantConfigs: Record<TextVariant, VariantConfig> = {
+            heading1: { sizes: { lg: 66, md: 64, sm: 50 }, weight: "font-semibold", leading: "leading-tight" },
+            heading2: { sizes: { lg: 42, md: 40, sm: 30 }, weight: "font-medium", leading: "leading-tight" },
+            heading3: { sizes: { lg: 32, md: 24, sm: 18 }, weight: "font-medium", leading: "leading-tight" },
+            heading4: { sizes: { lg: 22, md: 20, sm: 18 }, weight: "font-medium", leading: "leading-tight" },
+            bodyLarge: { sizes: { lg: 18, md: 18, sm: 16 }, weight: "font-medium", leading: "leading-snug" },
+            bodyLight: { sizes: { lg: 18, md: 16, sm: 16 }, weight: "font-medium", leading: "leading-snug" },
+            bodyBold: { sizes: { lg: 18, md: 16, sm: 16 }, weight: "font-medium", leading: "leading-tight" },
+            bodyMedium: { sizes: { lg: 18, md: 16, sm: 16 }, weight: "font-medium", leading: "leading-snug" },
+            bodyLong: { sizes: { lg: 18, md: 16, sm: 16 }, weight: "font-medium", leading: "leading-relaxed" },
+            bodySmall: { sizes: { lg: 14, md: 14, sm: 14 }, weight: "font-medium", leading: "leading-snug", extras: "font-stretch-semi-condensed" },
+            bodySmallBold: { sizes: { lg: 14, md: 14, sm: 14 }, weight: "font-medium", leading: "leading-snug", extras: "font-stretch-semi-condensed" },
         };
 
-        return variants[variant];
+        const config = variantConfigs[variant];
+        const sizeClasses = `lg:text-[${config.sizes.lg}px] md:text-[${config.sizes.md}px] sm:text-[${config.sizes.sm}px]`;
+        const extras = config.extras ? ` ${config.extras}` : "";
+        
+        return `${sizeClasses} ${config.weight} text-${textColor} ${config.leading}${extras}`;
     };
 
-    const getElement = (variant: TextVariant) => {
-        switch (variant) {
-            case "heading1":
-                return "h1";
-            case "heading2":
-                return "h2";
-            case "heading3":
-                return "h3";
-            case "heading4":
-                return "h4";
-            default:
-                return "p";
-        }
+    const variantToElement: Record<string, keyof JSX.IntrinsicElements> = {
+        heading1: "h1",
+        heading2: "h2",
+        heading3: "h3",
+        heading4: "h4",
     };
 
-    const Element = getElement(variant) as keyof JSX.IntrinsicElements;
+    const Element = (variantToElement[variant] || "p") as keyof JSX.IntrinsicElements;
     const variantStyles = getVariantStyles(variant, color);
     const combinedClassName = `${variantStyles} ${className ?? ''}`;
 
@@ -65,48 +68,27 @@ const Text = ({ children, variant, className, color }: TextProps) => {
 };
 
 // Backward compatibility exports
-const Heading1 = ({ children, className, color = "text-primary" }: { children: ReactNode; className?: string; color?: string }) => (
-    <Text variant="heading1" className={className} color={color}>{children}</Text>
-);
+interface ComponentProps {
+    children: ReactNode;
+    className?: string;
+    color?: string;
+}
 
-const Heading2 = ({ children, className, color = "text-primary" }: { children: ReactNode; className?: string; color?: string }) => (
-    <Text variant="heading2" className={className} color={color}>{children}</Text>
-);
+const createTextComponent = (variant: TextVariant, defaultColor = "text-primary") => 
+    ({ children, className, color = defaultColor }: ComponentProps) => (
+        <Text variant={variant} className={className} color={color}>{children}</Text>
+    );
 
-const Heading3 = ({ children, className, color = "text-primary" }: { children: ReactNode; className?: string; color?: string }) => (
-    <Text variant="heading3" className={className} color={color}>{children}</Text>
-);
-
-const Heading4 = ({ children, className, color = "text-primary" }: { children: ReactNode; className?: string; color?: string }) => (
-    <Text variant="heading4" className={className} color={color}>{children}</Text>
-);
-
-const BodyLarge = ({ children, className, color = "text-primary" }: { children: ReactNode; className?: string; color?: string }) => (
-    <Text variant="bodyLarge" className={className} color={color}>{children}</Text>
-);
-
-const BodyLight = ({ children, className, color = "text-secondary" }: { children: ReactNode; className?: string; color?: string }) => (
-    <Text variant="bodyLight" className={className} color={color}>{children}</Text>
-);
-
-const BodyBold = ({ children, className, color = "text-primary" }: { children: ReactNode; className?: string; color?: string }) => (
-    <Text variant="bodyBold" className={className} color={color}>{children}</Text>
-);
-
-const BodyMedium = ({ children, className, color = "text-primary" }: { children: ReactNode; className?: string; color?: string }) => (
-    <Text variant="bodyMedium" className={className} color={color}>{children}</Text>
-);
-
-const BodyLong = ({ children, className, color = "text-primary" }: { children: ReactNode; className?: string; color?: string }) => (
-    <Text variant="bodyLong" className={className} color={color}>{children}</Text>
-);
-
-const BodySmall = ({ children, className, color = "text-primary" }: { children: ReactNode; className?: string; color?: string }) => (
-    <Text variant="bodySmall" className={className} color={color}>{children}</Text>
-);
-
-const BodySmallBold = ({ children, className, color = "text-primary" }: { children: ReactNode; className?: string; color?: string }) => (
-    <Text variant="bodySmallBold" className={className} color={color}>{children}</Text>
-);
+const Heading1 = createTextComponent("heading1");
+const Heading2 = createTextComponent("heading2");
+const Heading3 = createTextComponent("heading3");
+const Heading4 = createTextComponent("heading4");
+const BodyLarge = createTextComponent("bodyLarge");
+const BodyLight = createTextComponent("bodyLight", "text-secondary");
+const BodyBold = createTextComponent("bodyBold");
+const BodyMedium = createTextComponent("bodyMedium");
+const BodyLong = createTextComponent("bodyLong");
+const BodySmall = createTextComponent("bodySmall");
+const BodySmallBold = createTextComponent("bodySmallBold");
 
 export { Text, Heading1, Heading2, Heading3, Heading4, BodyLarge, BodyLight, BodyBold, BodyMedium, BodyLong, BodySmall, BodySmallBold }

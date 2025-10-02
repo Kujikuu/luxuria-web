@@ -18,6 +18,13 @@ const appearEffect = {
     }
 }
 
+const navigationItems = [
+    { href: '/properties', label: 'Properties' },
+    { href: '/brokers', label: 'Brokers' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
+];
+
 interface HeaderProps {
     section?: string;
     color?: string;
@@ -130,66 +137,32 @@ export default function Header({ section = "hero", color = "white" }: HeaderProp
                     />
                 </div>
                 <div className="hidden md:flex items-center gap-6">
-                    <NavLink
-                        href="/properties"
-                        color={isScrolled ? scrollNavLinkColor : defaultNavLinkColor}
-                    >
-                        Properties
-                    </NavLink>
-                    <NavLink
-                        href="/brokers"
-                        color={isScrolled ? scrollNavLinkColor : defaultNavLinkColor}
-                    >
-                        Brokers
-                    </NavLink>
-                    <NavLink
-                        href="/about"
-                        color={isScrolled ? scrollNavLinkColor : defaultNavLinkColor}
-                    >
-                        About
-                    </NavLink>
-                    <NavLink
-                        href="/contact"
-                        color={isScrolled ? scrollNavLinkColor : defaultNavLinkColor}
-                    >
-                        Contact
-                    </NavLink>
+                    {navigationItems.map((item) => (
+                        <NavLink
+                            key={item.href}
+                            href={item.href}
+                            color={isScrolled ? scrollNavLinkColor : defaultNavLinkColor}
+                        >
+                            {item.label}
+                        </NavLink>
+                    ))}
                 </div>
             </nav>
 
             {/* Mobile Menu Overlay */}
             {isMobileMenuOpen && (
                 <motion.div {...appearEffect} transition={appearEffect.transition} className='absolute top-20 right-5 w-max z-50 md:hidden flex flex-col items-end bg-white rounded-2xl shadow-md p-8 gap-8'>
-                    <NavLink
-                        color="primary"
-                        href="/properties"
-                    >
-                        Properties
-                    </NavLink>
-                    <NavLink
-                        color="primary"
-                        href="/brokers"
-
-                    >
-                        Brokers
-                    </NavLink>
-                    <NavLink
-                        color="primary"
-                        href="/about"
-
-                    >
-                        About
-                    </NavLink>
-                    <NavLink
-                        color="primary"
-                        href="/contact"
-
-                    >
-                        Contact
-                    </NavLink>
+                    {navigationItems.map((item) => (
+                        <NavLink
+                            key={item.href}
+                            href={item.href}
+                            color="primary"
+                        >
+                            {item.label}
+                        </NavLink>
+                    ))}
                 </motion.div>
-            )
-            }
+            )}
         </div >
     );
 }
