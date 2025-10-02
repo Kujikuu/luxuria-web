@@ -32,7 +32,7 @@ export default function Welcome() {
                 <Header color='transparent' />
 
                 <PrimaryButton href="/link" text="Click me" variant="primary" />          {/* icon shown */}
-                <PrimaryButton href="/link" text="Click me" variant="primary" icon />     {/* icon shown */}
+                <PrimaryButton href="/link" text="Click me" variant="secondary" icon />     {/* icon shown */}
                 <PrimaryButton href="/link" text="Click me" variant="primary" icon={false} />  {/* no icon */}
                 <PrimaryButton href="/link" text="Click me" variant="form" icon={false} />  {/* no icon */}
 

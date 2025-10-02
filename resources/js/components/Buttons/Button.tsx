@@ -20,12 +20,12 @@ const BUTTON_VARIANTS = {
     },
     secondary: {
         container: "bg-text-primary",
-        text: "ui-1",
+        text: "text-ui-1",
         icon: "text-ui-1",
     },
     form: {
         container: "bg-primary",
-        text: "ui-1",
+        text: "text-ui-1",
         icon: "text-ui-1",
     }
 } as const;
@@ -54,7 +54,7 @@ export default function Button({ href, text, variant = "primary", icon = true }:
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <Text variant='bodyMedium' color={styles.text}>{text}</Text>
+            <Text variant='bodyMedium' className={styles.text}>{text}</Text>
             {icon && (
                 <div className={cn("flex items-center justify-center gap-2.5 px-1.5 overflow-hidden relative", styles.icon)}>
                     <motion.div
