@@ -16,7 +16,7 @@ export default function HomePage() {
             <HomeListings />
 
             {/* Features Container */}
-            <div className="w-full relative h-fit flex py-10 px-3.5 md:py-24 md:px-10 bg-ui-2 border-t border-b border-ui-3 justify-center">
+            <div className="w-full relative h-fit flex py-10 md:py-24 bg-ui-2 border-t border-b border-ui-3 justify-center">
                 <Features />
             </div>
 

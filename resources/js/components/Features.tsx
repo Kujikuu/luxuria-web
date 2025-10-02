@@ -47,16 +47,18 @@ export default function Features() {
     const [activeFeature, setActiveFeature] = useState(1);
 
     return (
-        <section className="flex flex-col md:flex-row items-center justify-center gap-6 h-[600px]">
+        <section className="flex flex-col lg:flex-row items-stretch justify-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 min-h-[400px] lg:h-[600px] px-4 sm:px-6 md:px-10 py-8 sm:py-12 md:py-16 lg:py-0 w-full max-w-[1200px] mx-auto">
             {/* Content */}
-            <div className="flex flex-col w-full h-full justify-between">
+            <div className="flex flex-col w-full lg:w-1/2 h-full justify-between">
 
                 {/* Header */}
-                <div className="flex flex-col gap-6 w-full h-max">
+                <div className="flex flex-col gap-4 sm:gap-6 w-full h-max">
 
-                    <Tag text="Features" />
+                    <div className="flex">
+                        <Tag text="Features" />
+                    </div>
 
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-4 sm:gap-6">
                         <Text variant="heading2" className="text-text-primary">
                             Discover our features
                         </Text>
@@ -67,11 +69,11 @@ export default function Features() {
                 </div>
 
                 {/* Features List */}
-                <div className="flex flex-col w-full">
+                <div className="flex flex-col w-full mt-6 lg:mt-0">
                     {features.map((feature, index) => (
                         <motion.div
                             key={feature.id}
-                            className={`flex flex-col pb-6 gap-3 overflow-hidden border-b border-ui-3 cursor-pointer transition-all duration-300 ${index === 0 ? 'pt-0' : 'pt-6'
+                            className={`flex flex-col pb-4 sm:pb-6 gap-3 overflow-hidden border-b border-ui-3 cursor-pointer transition-all duration-300 ${index === 0 ? 'pt-0' : 'pt-4 sm:pt-6'
                                 }`}
                             onClick={() => setActiveFeature(feature.id)}
                         >
@@ -96,8 +98,8 @@ export default function Features() {
             </div>
 
             {/* Right Images */}
-            <div className="flex justify-center items-center w-full h-full">
-                <div className="relative w-[548px] h-[600px] rounded-[18px] overflow-hidden">
+            <div className="flex justify-center items-center w-full lg:w-1/2 h-full mt-6 lg:mt-0">
+                <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-[18px] overflow-hidden">
                     {features.map((feature) => (
                         <motion.div
                             key={feature.id}

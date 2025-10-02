@@ -12,11 +12,11 @@ export default function ListingCard({ href, img, name, price, bed, bath, livingS
     return (
         <Link href={href}>
             <motion.div
-                className="bg-ui-2 w-[434px] rounded-2xl border border-ui-3 overflow-hidden"
+                className="bg-ui-2 w-full rounded-2xl border border-ui-3 overflow-hidden"
                 onHoverStart={() => setIsHovered(true)}
                 onHoverEnd={() => setIsHovered(false)}
             >
-                <div className="w-full h-80 rounded-2xl overflow-hidden">
+                <div className="w-full h-64 sm:h-72 md:h-80 rounded-2xl overflow-hidden">
                     <motion.img
                         className="w-full h-full object-cover shadow-md"
                         src={img}
@@ -33,7 +33,7 @@ export default function ListingCard({ href, img, name, price, bed, bath, livingS
                     />
                 </div>
                 <motion.div
-                    className="flex flex-col gap-3 px-[18px] pt-[18px] pb-6"
+                    className="flex flex-col gap-3 px-4 sm:px-[18px] pt-4 sm:pt-[18px] pb-4 sm:pb-6"
                     animate={{
                         x: isHovered ? 6 : 0,
                         y: isHovered ? 6 : 0
@@ -47,7 +47,7 @@ export default function ListingCard({ href, img, name, price, bed, bath, livingS
                 >
                     <Text variant='bodyLarge' className="text-text-secondary">{name}</Text>
                     <Text variant='heading4' className="text-text-primary">{price.toLocaleString()} SAR</Text>
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-3 sm:gap-4 md:gap-6 text-sm sm:text-base">
                         <div className="flex gap-1.5 items-center text-text-secondary">
                             <BedIcon size={15} />
                             <Text variant='bodyMedium'>{bed}</Text>
@@ -60,7 +60,8 @@ export default function ListingCard({ href, img, name, price, bed, bath, livingS
                         <Divider />
                         <div className="flex gap-1.5 items-center text-text-secondary">
                             <RulerIcon size={15} />
-                            <Text variant='bodyMedium'>{livingSpce} sqft</Text>
+                            <Text variant='bodyMedium' className="hidden xs:block">{livingSpce} sqft</Text>
+                            <Text variant='bodyMedium' className="block xs:hidden">{livingSpce}</Text>
                         </div>
                     </div>
                 </motion.div>
