@@ -8,6 +8,9 @@ import Footer from '@/components/Navigation/Footer';
 import PrimaryButton from '@/components/Buttons/Button';
 import ListingCard from '@/components/Cards/ListingCard';
 import { BlogCardLarge, BlogCardMedium } from '@/components/Cards/BlogCard';
+import AgentCard from '@/components/Cards/AgentCard';
+import DetailCard from '@/components/Cards/DetailCard';
+import FeatureCard from '@/components/Cards/FeatureCard';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 10, filter: 'blur(10px)' },
@@ -61,6 +64,20 @@ export default function Welcome() {
 
                     <BlogCardLarge href="/blog/sample-post" />
                     <BlogCardMedium href="/blog/sample-post" />
+
+                    <DetailCard
+                        iconName="BuildingsIcon"
+                        title="Luxury Villa"
+                        description="Beautiful villa with ocean view"
+                    />
+
+                    <FeatureCard
+                        iconName="CarIcon"
+                        title="Parking Space"
+                        description="With deep knowledge of the local market, we understand the nuances of every neighborhood."
+                    />
+
+                    <AgentCard href="/agents/john-doe" title='John Doe' img="https://placehold.co/150" role='Real Estate Agent' />
                 </div>
 
                 <Footer />
