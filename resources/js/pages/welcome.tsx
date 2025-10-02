@@ -1,7 +1,5 @@
 import { Head } from '@inertiajs/react';
 import { Text } from '@/components/Typography';
-import { NavLink } from '@/components/Navigation/NavLink';
-import PhoneMenu from '@/components/Navigation/PhoneMenu';
 import { delay, motion } from 'framer-motion';
 import Header from '@/components/Navigation/Header';
 import Footer from '@/components/Navigation/Footer';
@@ -11,6 +9,7 @@ import { BlogCardLarge, BlogCardMedium } from '@/components/Cards/BlogCard';
 import AgentCard from '@/components/Cards/AgentCard';
 import DetailCard from '@/components/Cards/DetailCard';
 import FeatureCard from '@/components/Cards/FeatureCard';
+import FAQs from '@/components/FAQs';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 10, filter: 'blur(10px)' },
@@ -70,6 +69,8 @@ export default function Welcome() {
                         title="Luxury Villa"
                         description="Beautiful villa with ocean view"
                     />
+
+                    <FAQs />
 
                     <FeatureCard
                         iconName="CarIcon"
