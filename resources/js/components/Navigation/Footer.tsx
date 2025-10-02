@@ -10,11 +10,11 @@ export default function Footer() {
                 <div className="flex md:gap-11 md:flex-row gap-11 flex-col">
                     <div className="flex flex-col gap-6 w-full">
                         <LuxuriaLogo />
-                        <Text variant='bodyMedium' className="text-color-ui-2 max-w-96">At LUXURIA, we redefine real estate by blending innovation, professionalism, and luxury.</Text>
+                        <Text variant='bodyMedium' className="max-w-96 text-ui-2">At LUXURIA, we redefine real estate by blending innovation, professionalism, and luxury.</Text>
                     </div>
                     <div className="grid md:grid-cols-3 grid-cols-2 gap-9 w-full">
                         <div className="flex flex-col gap-4">
-                            <Text variant='bodyBold' className="text-color-ui-1">Main Pages</Text>
+                            <Text variant='bodyBold' className="text-ui-1">Main Pages</Text>
                             <NavLink color="ui-1" href="/">Home</NavLink>
                             <NavLink color="ui-1" href="/about">About</NavLink>
                             <NavLink color="ui-1" href="/contact">Contact</NavLink>
@@ -22,14 +22,14 @@ export default function Footer() {
                             <NavLink color="ui-1" href="/properties">Properties</NavLink>
                         </div>
                         <div className="flex flex-col gap-4">
-                            <Text variant='bodyBold' className="text-color-ui-1">Other Pages</Text>
+                            <Text variant='bodyBold' className="text-ui-1">Other Pages</Text>
                             <NavLink color="ui-1" href="/property">Property</NavLink>
                             <NavLink color="ui-1" href="/broker">Broker</NavLink>
                             <NavLink color="ui-1" href="/privacy-policy">Privacy Policy</NavLink>
                             <NavLink color="ui-1" href="/404">404</NavLink>
                         </div>
                         <div className="flex flex-col gap-4">
-                            <Text variant='bodyBold' className="text-color-ui-1">Follow Us</Text>
+                            <Text variant='bodyBold' className="text-ui-1">Follow Us</Text>
                             <NavLink color="ui-1" href="https://www.linkedin.com/company/luxuria/" target="_blank">Linkedin</NavLink>
                             <NavLink color="ui-1" href="https://www.instagram.com/luxuria/" target="_blank">Instagram</NavLink>
                             <NavLink color="ui-1" href="https://www.twitter.com/luxuria/" target="_blank">Twitter</NavLink>
@@ -39,12 +39,12 @@ export default function Footer() {
                 </div>
                 <div className="flex justify-between py-6 flex-col items-center gap-6 md:flex-row md:justify-between md:gap-0">
                     <div className="flex">
-                        <Text variant='bodyMedium' className="text-color-ui-2">Copyright © All rights reserved</Text>
+                        <Text variant='bodyMedium' className="text-ui-2">Copyright © All rights reserved</Text>
                         <DotIcon size={24} />
                         <NavLink color="ui-2" href="/privacy-policy">Privacy Policy</NavLink>
                     </div>
                     <div className="flex gap-2">
-                        <Text variant='bodyMedium' className="text-color-ui-2">Powered by</Text>
+                        <Text variant='bodyMedium' className="text-ui-2">Powered by</Text>
                         <NavLink color="ui-2" href="https://afifistudio.com" target="_blank">AfifiStudio</NavLink>
                     </div>
                 </div>

@@ -42,13 +42,13 @@ export const NavLink = ({
 
 
     return (
-        <Link 
-            className='group flex flex-col w-max overflow-visible' 
+        <Link
+            className='group flex flex-col w-max overflow-visible'
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             {...linkProps}
         >
-            <Text variant="bodyMedium" color={getDefaultStyling()}>{children}</Text>
+            <Text variant="bodyMedium" className={getDefaultStyling()}>{children}</Text>
             <motion.div className={`h-[1px] ${getDefaultBg()} origin-left`}
                 initial={{ scaleX: 0, opacity: 0 }}
                 animate={{ scaleX: isHovered ? 1 : 0, opacity: isHovered ? 1 : 0 }}

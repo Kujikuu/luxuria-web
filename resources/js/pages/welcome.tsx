@@ -6,6 +6,7 @@ import { delay, motion } from 'framer-motion';
 import Header from '@/components/Navigation/Header';
 import Footer from '@/components/Navigation/Footer';
 import PrimaryButton from '@/components/Buttons/Button';
+import ListingCard from '@/components/Cards/ListingCard';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 10, filter: 'blur(10px)' },
@@ -38,14 +39,24 @@ export default function Welcome() {
                 {/* Hero Section */}
                 <div className="min-h-screen flex flex-col items-center justify-center container mx-auto px-4">
                     <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.4 }}>
-                        <Text variant="heading1" className="text-center mb-6">Crafting Luxury Life</Text>
+                        <Text variant='heading1' className="text-center text-ui-1 mb-6">Crafting Luxury Life</Text>
                     </motion.div>
 
                     <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.6 }}>
-                        <Text variant="bodyMedium" color="text-blue-500" className="text-center mb-4">
+                        <Text variant="bodyMedium" className="text-center mb-4 text-ui-2">
                             Redefining real estate through excellence, innovation, and trust.
                         </Text>
                     </motion.div>
+
+                    <ListingCard
+                        href="/link"
+                        img="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200"
+                        name="Villa for Sale in Al Rawdah"
+                        price={6500000}
+                        bed={2}
+                        bath={2}
+                        livingSpce={1200}
+                    />
                 </div>
 
                 <Footer />
