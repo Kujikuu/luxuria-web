@@ -37,6 +37,16 @@ class PropertyController extends Controller
             ->paginate(6)
             ->withQueryString();
 
+        // Format image URLs for frontend access
+        $properties->getCollection()->transform(function ($property) {
+            if ($property->images) {
+                $property->images = array_map(function($image) {
+                    return '/storage/' . $image;
+                }, $property->images);
+            }
+            return $property;
+        });
+
         return Inertia::render('Properties/Index', [
             'properties' => $properties,
             'filters' => [
@@ -54,6 +64,13 @@ class PropertyController extends Controller
     public function show(Request $request, string $slug)
     {
         $property = Property::where('slug', $slug)->firstOrFail();
+
+        // Format image URLs for frontend access
+        if ($property->images) {
+            $property->images = array_map(function($image) {
+                return '/storage/' . $image;
+            }, $property->images);
+        }
 
         return Inertia::render('Properties/Show', [
             'property' => $property,
@@ -73,6 +90,16 @@ class PropertyController extends Controller
                 ->limit(6)
                 ->get();
         }
+
+        // Format image URLs for frontend access
+        $featuredProperties->transform(function ($property) {
+            if ($property->images) {
+                $property->images = array_map(function($image) {
+                    return '/storage/' . $image;
+                }, $property->images);
+            }
+            return $property;
+        });
 
         return $featuredProperties;
     }

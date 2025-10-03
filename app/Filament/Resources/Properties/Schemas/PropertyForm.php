@@ -149,6 +149,7 @@ class PropertyForm
                                 '1:1',
                             ])
                             ->directory('property-images')
+                            ->disk('public')
                             ->visibility('public')
                             ->reorderable()
                             ->appendFiles()

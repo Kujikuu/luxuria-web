@@ -21,9 +21,10 @@ class BlogsTable
         return $table
             ->columns([
                 ImageColumn::make('featured_image')
+                    ->disk('public')
                     ->size(60)
                     ->square()
-                    ->defaultImageUrl('https://via.placeholder.com/300x300.png?text=No+Image'),
+                    ->defaultImageUrl('https://placehold.co/300x300.png?text=No+Image'),
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable()

@@ -28,6 +28,17 @@ class BlogController extends Controller
             ->paginate(6)
             ->withQueryString();
 
+        // Format image URLs for frontend access
+        $blogs->getCollection()->transform(function ($blog) {
+            if ($blog->featured_image) {
+                $blog->featured_image = '/storage/' . $blog->featured_image;
+            }
+            if ($blog->author->image) {
+                $blog->author->image = '/storage/' . $blog->author->image;
+            }
+            return $blog;
+        });
+
         return Inertia::render('Blog/Index', [
             'blogs' => $blogs,
             'filters' => [
@@ -43,6 +54,14 @@ class BlogController extends Controller
             ->where('publish_date', '<=', now())
             ->firstOrFail();
 
+        // Format image URLs for frontend access
+        if ($blog->featured_image) {
+            $blog->featured_image = '/storage/' . $blog->featured_image;
+        }
+        if ($blog->author->image) {
+            $blog->author->image = '/storage/' . $blog->author->image;
+        }
+
         // Get 3 related blogs (excluding current blog)
         $relatedBlogs = Blog::with('author')
             ->where('id', '!=', $blog->id)
@@ -50,6 +69,17 @@ class BlogController extends Controller
             ->orderBy('publish_date', 'desc')
             ->limit(3)
             ->get();
+
+        // Format image URLs for related blogs
+        $relatedBlogs->transform(function ($relatedBlog) {
+            if ($relatedBlog->featured_image) {
+                $relatedBlog->featured_image = '/storage/' . $relatedBlog->featured_image;
+            }
+            if ($relatedBlog->author->image) {
+                $relatedBlog->author->image = '/storage/' . $relatedBlog->author->image;
+            }
+            return $relatedBlog;
+        });
 
         return Inertia::render('Blog/Show', [
             'blog' => $blog,

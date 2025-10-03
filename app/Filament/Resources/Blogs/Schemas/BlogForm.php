@@ -87,6 +87,7 @@ class BlogForm
                                 '1:1',
                             ])
                             ->directory('blog-images')
+                            ->disk('public')
                             ->visibility('public')
                             ->columnSpanFull()
                             ->helperText('Upload a featured image (recommended: 1200x675px for 16:9 ratio)'),

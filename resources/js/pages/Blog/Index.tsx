@@ -68,7 +68,7 @@ export default function BlogPage({ blogs, filters }: BlogPageProps) {
                     <>
                         {/* Main Blog Post (First/Latest) */}
                         <BlogCardLarge
-                            img={blogs.data[0].featured_image || 'https://via.placeholder.com/1200x800.png?text=No+Image'}
+                            img={blogs.data[0].featured_image || 'https://placehold.co/1200x800.png?text=No+Image'}
                             date={blogs.data[0].publish_date}
                             title={blogs.data[0].title}
                             description={blogs.data[0].about}
@@ -84,7 +84,7 @@ export default function BlogPage({ blogs, filters }: BlogPageProps) {
                                 {blogs.data.slice(1).map((blog) => (
                                     <BlogCardMedium
                                         key={blog.id}
-                                        img={blog.featured_image || 'https://via.placeholder.com/400x300.png?text=No+Image'}
+                                        img={blog.featured_image || 'https://placehold.co/400x300.png?text=No+Image'}
                                         date={blog.publish_date}
                                         title={blog.title}
                                         href={`/blog/${blog.slug}`}

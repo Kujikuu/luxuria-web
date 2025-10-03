@@ -67,7 +67,7 @@ export default function BlogPost({ blog, relatedBlogs }: BlogPostProps) {
 
                 {/* Featured Image */}
                 <img 
-                    src={blog.featured_image || 'https://via.placeholder.com/1200x500.png?text=No+Image'} 
+                    src={blog.featured_image || 'https://placehold.co/1200x500.png?text=No+Image'} 
                     alt={blog.title} 
                     className="w-full h-[500px] object-cover rounded-2xl overflow-hidden" 
                 />
@@ -118,7 +118,7 @@ export default function BlogPost({ blog, relatedBlogs }: BlogPostProps) {
                         {relatedBlogs.map((relatedBlog) => (
                             <BlogCardMedium
                                 key={relatedBlog.id}
-                                img={relatedBlog.featured_image || 'https://via.placeholder.com/400x300.png?text=No+Image'}
+                                img={relatedBlog.featured_image || 'https://placehold.co/400x300.png?text=No+Image'}
                                 date={relatedBlog.publish_date}
                                 title={relatedBlog.title}
                                 href={`/blog/${relatedBlog.slug}`}

@@ -21,9 +21,10 @@ class PropertiesTable
             ->columns([
                 ImageColumn::make('images')
                     ->getStateUsing(fn ($record) => $record->images[0] ?? null)
+                    ->disk('public')
                     ->size(60)
                     ->square()
-                    ->defaultImageUrl('https://via.placeholder.com/300x300.png?text=No+Image'),
+                    ->defaultImageUrl('https://placehold.co/300x300.png?text=No+Image'),
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable()

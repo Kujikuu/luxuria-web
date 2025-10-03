@@ -101,7 +101,7 @@ export default function PropertiesPage({
                                 <PropertyCard
                                     key={property.id}
                                     href={`/properties/${property.slug}`}
-                                    img={property.images[0] || 'https://via.placeholder.com/400x300.png?text=No+Image'}
+                                    img={property.images[0] || 'https://placehold.co/400x300.png?text=No+Image'}
                                     name={property.title}
                                     price={property.price}
                                     area={property.property_area}

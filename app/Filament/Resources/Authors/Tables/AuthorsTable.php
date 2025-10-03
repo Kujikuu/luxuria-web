@@ -18,6 +18,7 @@ class AuthorsTable
         return $table
             ->columns([
                 ImageColumn::make('image')
+                    ->disk('public')
                     ->circular()
                     ->size(50)
                     ->defaultImageUrl(fn () => 'https://ui-avatars.com/api/?name='.urlencode('Author').'&color=7F9CF5&background=EBF4FF'),

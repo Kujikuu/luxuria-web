@@ -107,7 +107,7 @@ export default function PropertyPage({ property }: PropertyPageProps) {
                     {property.title}
                 </Text>
                 <img 
-                    src={property.images[0] || 'https://via.placeholder.com/1200x500.png?text=No+Image'} 
+                    src={property.images[0] || 'https://placehold.co/1200x500.png?text=No+Image'} 
                     alt={property.title} 
                     className="w-full max-w-6xl h-[300px] sm:h-[400px] md:h-[500px] object-cover rounded-2xl" 
                 />

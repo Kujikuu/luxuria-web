@@ -46,6 +46,7 @@ class AuthorForm
                                 '4:3',
                             ])
                             ->directory('authors')
+                            ->disk('public')
                             ->visibility('public')
                             ->columnSpanFull()
                             ->helperText('Upload a profile picture for the author (recommended: 400x400px)'),
