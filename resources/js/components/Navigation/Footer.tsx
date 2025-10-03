@@ -6,7 +6,7 @@ import { useLocale, useTranslations } from "@/hooks/useLocalization";
 
 export default function Footer() {
     const { getLocalizedPath } = useLocale();
-    const { t } = useTranslations();
+    const { t, isRtl } = useTranslations();
     return (
         <footer className="flex flex-col gap-6 md:px-10 md:pt-24 bg-primary text-ui-1 overflow-hidden px-3.5 pt-10 w-full">
             <div className="flex flex-col gap-11 p-0 max-w-7xl mx-auto md:min-h-96 w-full min-h-auto ">
@@ -48,7 +48,7 @@ export default function Footer() {
                     </div>
                     <div className="flex gap-2">
                         <Text variant='bodyMedium' className="text-ui-2">{t('powered_by') || 'Powered by'}</Text>
-                        <NavLink color="ui-2" href="https://afifistudio.com" target="_blank">AfifiStudio</NavLink>
+                        <NavLink color="ui-2" href="https://afifistudio.com" target="_blank">{t('afifi_studio') || 'Afifi Studio'}</NavLink>
                     </div>
                 </div>
             </div>

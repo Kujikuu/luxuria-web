@@ -79,5 +79,6 @@ return [
     'main_pages' => 'الصفحات الرئيسية',
     'follow_us' => 'تابعنا',
     'powered_by' => 'مدعوم بواسطة',
+    'afifi_studio' => 'عفيفي',
 
 ];

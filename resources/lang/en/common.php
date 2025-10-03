@@ -79,5 +79,6 @@ return [
     'main_pages' => 'Main Pages',
     'follow_us' => 'Follow Us',
     'powered_by' => 'Powered by',
+    'afifi_studio' => 'Afifi Studio',
 
 ];
