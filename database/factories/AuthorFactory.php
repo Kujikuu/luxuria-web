@@ -21,14 +21,7 @@ class AuthorFactory extends Factory
             'name_ar' => $this->generateArabicName(),
             'role' => fake()->randomElement(['Writer', 'Editor', 'Blogger', 'Journalist', 'Content Creator', 'Technical Writer']),
             'role_ar' => $this->generateArabicRole(),
-            'image' => collect([
-                'https://framerusercontent.com/images/nV5khFPcsJzJ1tk6zisRyfQ0NYQ.jpg?width=400&height=400',
-                'https://framerusercontent.com/images/eH3cDCSV4FLhttsYe5eMku2caaA.jpg?scale-down-to=512&width=980&height=980',
-            ])
-                ->shuffle()
-                ->take(1)
-                ->values()
-                ->all(),
+            'image' => fake()->imageUrl(300, 300, 'people', true),
             'about' => fake()->paragraph(3),
             'about_ar' => $this->generateArabicAbout(),
         ];
