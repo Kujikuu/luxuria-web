@@ -2,31 +2,32 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Text } from "./Typography";
 import Tag from "./Tag";
+import { useTranslations } from "@/hooks/useLocalization";
 
 interface Feature {
     id: number;
-    title: string;
-    description: string;
+    titleKey: string;
+    descriptionKey: string;
     image: string;
 }
 
-const features: Feature[] = [
+const featuresData: Feature[] = [
     {
         id: 1,
-        title: "Expert Brokerage",
-        description: "Professional sales & marketing to maximize property value and ensure smooth transactions.",
+        titleKey: "feature_brokerage_title",
+        descriptionKey: "feature_brokerage_description",
         image: "https://framerusercontent.com/images/FnGLm2yRNviYdXrQyrqRuUBnz0.png?width=904&height=1200"
     },
     {
         id: 2,
-        title: "Property Management",
-        description: "Comprehensive property management services to maintain and optimize your real estate investments.",
+        titleKey: "feature_management_title",
+        descriptionKey: "feature_management_description",
         image: "https://framerusercontent.com/images/PjHJMX19p4rUgEbsFA6rEDDges.png?width=1200&height=800"
     },
     {
         id: 3,
-        title: "Investment Guidance",
-        description: "Strategic investment advice to help you make informed decisions in the luxury real estate market.",
+        titleKey: "feature_investment_title",
+        descriptionKey: "feature_investment_description",
         image: "https://framerusercontent.com/images/OKoiSJ7boY71o8nLuIvbtaihs4.png?width=1200&height=923"
     }
 ];
@@ -44,6 +45,7 @@ const fadeInUp = {
 };
 
 export default function Features() {
+    const { t } = useTranslations('pages');
     const [activeFeature, setActiveFeature] = useState(1);
 
     return (
@@ -55,22 +57,22 @@ export default function Features() {
                 <div className="flex flex-col gap-4 sm:gap-6 w-full h-max">
 
                     <div className="flex">
-                        <Tag text="Features" />
+                        <Tag text={t('features') || 'Features'} />
                     </div>
 
                     <div className="flex flex-col gap-4 sm:gap-6">
                         <Text variant="heading2" className="text-text-primary">
-                            Discover our features
+                            {t('features_title') || 'Discover our features'}
                         </Text>
                         <Text variant="bodyLarge" className="text-text-secondary">
-                            Features built to simplify your journey.
+                            {t('features_subtitle') || 'Features built to simplify your journey.'}
                         </Text>
                     </div>
                 </div>
 
                 {/* Features List */}
                 <div className="flex flex-col w-full mt-6 lg:mt-0">
-                    {features.map((feature, index) => (
+                    {featuresData.map((feature, index) => (
                         <motion.div
                             key={feature.id}
                             className={`flex flex-col pb-4 sm:pb-6 gap-3 overflow-hidden border-b border-ui-3 cursor-pointer transition-all duration-300 ${index === 0 ? 'pt-0' : 'pt-4 sm:pt-6'
@@ -78,7 +80,7 @@ export default function Features() {
                             onClick={() => setActiveFeature(feature.id)}
                         >
                             <Text variant="heading4" className="text-text-primary">
-                                {feature.title}
+                                {t(feature.titleKey) || 'Feature Title'}
                             </Text>
                             {activeFeature === feature.id && (
                                 <motion.div
@@ -88,7 +90,7 @@ export default function Features() {
                                     transition={{ type: 'spring', stiffness: 400, damping: 80, mass: 1 }}
                                 >
                                     <Text variant="bodyLong" className="text-text-secondary">
-                                        {feature.description}
+                                        {t(feature.descriptionKey) || 'Feature description'}
                                     </Text>
                                 </motion.div>
                             )}
@@ -100,7 +102,7 @@ export default function Features() {
             {/* Right Images */}
             <div className="flex justify-center items-center w-full lg:w-1/2 h-full mt-6 lg:mt-0">
                 <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-[18px] overflow-hidden">
-                    {features.map((feature) => (
+                    {featuresData.map((feature) => (
                         <motion.div
                             key={feature.id}
                             className="absolute inset-0 w-full h-full"
@@ -112,7 +114,7 @@ export default function Features() {
                         >
                             <img
                                 src={feature.image}
-                                alt={feature.title}
+                                alt={t(feature.titleKey) || 'Feature'}
                                 className="w-full h-full object-cover"
                                 loading="lazy"
                             />

@@ -11,12 +11,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import HomeFaqs from "@/components/Home/HomeFaqs";
 import { FormEventHandler } from "react";
+import { useTranslations } from "@/hooks/useLocalization";
 
 interface ContactProps {
     success?: string;
 }
 
 export default function Contact({ success }: ContactProps) {
+    const { t } = useTranslations('pages');
+    const { t: tc } = useTranslations('common');
+    
     const { data, setData, post, processing, errors, reset } = useForm({
         request_type: '',
         first_name: '',
@@ -33,21 +37,21 @@ export default function Contact({ success }: ContactProps) {
     };
     return (
         <AppLayout color='primary' section='hero'>
-            <Head title="Contact" />
+            <Head title={t('contact_title')} />
 
             {/* Hero Section */}
             <section id="hero" className="flex flex-col gap-10 relative pt-24 sm:pt-32 md:pt-52 -mt-24 bg-primary overflow-hidden w-full items-center justify-center">
                 {/* Header */}
                 <div className="flex flex-col gap-6 max-w-6xl w-full items-center">
-                    <Text variant="heading2" className="w-full text-ui-1 text-center">Here to connect</Text>
-                    <Text variant="bodyLarge" className="text-ui-2 text-center max-w-[400px]">Need help? Browse our FAQs for quick answers or reach out to us directly.</Text>
+                    <Text variant="heading2" className="w-full text-ui-1 text-center">{t('contact_hero_title')}</Text>
+                    <Text variant="bodyLarge" className="text-ui-2 text-center max-w-[400px]">{t('contact_hero_subtitle')}</Text>
                 </div>
 
                 {/* Contact Form */}
                 <form onSubmit={submit} className="flex flex-col gap-6 max-w-[600px] w-full items-center bg-ui-2 rounded-2xl p-6 z-10">
                     <div className="text-center mb-2">
-                        <Text variant="heading3" className="text-text-primary mb-2">Send us a message</Text>
-                        <Text variant="bodyMedium" className="text-text-secondary">We'll get back to you within 24 hours</Text>
+                        <Text variant="heading3" className="text-text-primary mb-2">{t('contact_form_title')}</Text>
+                        <Text variant="bodyMedium" className="text-text-secondary">{t('contact_form_subtitle')}</Text>
                     </div>
 
                     {/* Success Message */}
@@ -59,15 +63,15 @@ export default function Contact({ success }: ContactProps) {
                     
                     {/* Request Select */}
                     <div className="grid w-full items-center gap-3">
-                        <Label htmlFor="request_type">Request Type</Label>
+                        <Label htmlFor="request_type">{t('request_type')}</Label>
                         <Select value={data.request_type} onValueChange={(value) => setData('request_type', value)}>
                             <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select Request Type" />
+                                <SelectValue placeholder={t('request_type_placeholder')} />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="buy">Buy Property</SelectItem>
-                                <SelectItem value="sell">Sell Property</SelectItem>
-                                <SelectItem value="rent">Consulting</SelectItem>
+                                <SelectItem value="buy">{t('request_type_buy')}</SelectItem>
+                                <SelectItem value="sell">{t('request_type_sell')}</SelectItem>
+                                <SelectItem value="rent">{t('request_type_consulting')}</SelectItem>
                             </SelectContent>
                         </Select>
                         {errors.request_type && (
@@ -78,10 +82,10 @@ export default function Contact({ success }: ContactProps) {
                     {/* First Name & Phone Inputs */}
                     <div className="flex gap-6 w-full">
                         <div className="grid w-full items-center gap-3">
-                            <Label htmlFor="first_name">First Name</Label>
+                            <Label htmlFor="first_name">{t('first_name')}</Label>
                             <Input 
                                 id="first_name"
-                                placeholder="First Name" 
+                                placeholder={t('first_name_placeholder')} 
                                 value={data.first_name}
                                 onChange={(e) => setData('first_name', e.target.value)}
                             />
@@ -90,10 +94,10 @@ export default function Contact({ success }: ContactProps) {
                             )}
                         </div>
                         <div className="grid w-full items-center gap-3">
-                            <Label htmlFor="phone">Phone</Label>
+                            <Label htmlFor="phone">{tc('phone')}</Label>
                             <Input 
                                 id="phone"
-                                placeholder="Phone" 
+                                placeholder={t('phone_placeholder')} 
                                 type="tel" 
                                 value={data.phone}
                                 onChange={(e) => setData('phone', e.target.value)}
@@ -106,10 +110,10 @@ export default function Contact({ success }: ContactProps) {
 
                     {/* Email Input */}
                     <div className="grid w-full items-center gap-3">
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">{tc('email')}</Label>
                         <Input 
                             id="email"
-                            placeholder="Email" 
+                            placeholder={t('email_placeholder')} 
                             type="email" 
                             value={data.email}
                             onChange={(e) => setData('email', e.target.value)}
@@ -121,10 +125,10 @@ export default function Contact({ success }: ContactProps) {
 
                     {/* Message Input */}
                     <div className="grid w-full items-center gap-3">
-                        <Label htmlFor="message">Message</Label>
+                        <Label htmlFor="message">{tc('message')}</Label>
                         <Textarea 
                             id="message"
-                            placeholder="Tell us about your requirements..." 
+                            placeholder={t('message_placeholder')} 
                             value={data.message}
                             onChange={(e) => setData('message', e.target.value)}
                             rows={4}
@@ -136,7 +140,7 @@ export default function Contact({ success }: ContactProps) {
 
                     {/* Submit Button */}
                     <Button type="submit" className="w-full" disabled={processing}>
-                        {processing ? 'Sending...' : 'Send Message'}
+                        {processing ? t('sending') : t('send_message')}
                     </Button>
                 </form>
 
@@ -151,12 +155,12 @@ export default function Contact({ success }: ContactProps) {
                 <div className="w-full max-w-6xl">
                     {/* Header */}
                     <div className="flex flex-col items-center text-center gap-6 mb-12">
-                        <Tag text="Contact Info" />
+                        <Tag text={t('contact_info_tag')} />
                         <Text variant="heading2" className="text-text-primary">
-                            Get In Touch
+                            {t('get_in_touch_title')}
                         </Text>
                         <Text variant="bodyLarge" className="text-text-secondary max-w-2xl">
-                            Ready to find your dream property or need expert real estate advice? We're here to help.
+                            {t('get_in_touch_subtitle')}
                         </Text>
                     </div>
 
@@ -170,9 +174,9 @@ export default function Contact({ success }: ContactProps) {
                                 </svg>
                             </div>
                             <div className="text-center">
-                                <Text variant="heading4" className="text-text-primary mb-2">Phone</Text>
-                                <Text variant="bodyMedium" className="text-text-secondary">+966 11 234 5678</Text>
-                                <Text variant="bodyMedium" className="text-text-secondary">+966 50 123 4567</Text>
+                                <Text variant="heading4" className="text-text-primary mb-2">{t('phone_contact')}</Text>
+                                <Text variant="bodyMedium" className="text-text-secondary">{t('phone_number_1')}</Text>
+                                <Text variant="bodyMedium" className="text-text-secondary">{t('phone_number_2')}</Text>
                             </div>
                         </div>
 
@@ -185,9 +189,9 @@ export default function Contact({ success }: ContactProps) {
                                 </svg>
                             </div>
                             <div className="text-center">
-                                <Text variant="heading4" className="text-text-primary mb-2">Email</Text>
-                                <Text variant="bodyMedium" className="text-text-secondary">info@luxuria.sa</Text>
-                                <Text variant="bodyMedium" className="text-text-secondary">sales@luxuria.sa</Text>
+                                <Text variant="heading4" className="text-text-primary mb-2">{t('email_contact')}</Text>
+                                <Text variant="bodyMedium" className="text-text-secondary">{t('email_info')}</Text>
+                                <Text variant="bodyMedium" className="text-text-secondary">{t('email_sales')}</Text>
                             </div>
                         </div>
 
@@ -199,9 +203,9 @@ export default function Contact({ success }: ContactProps) {
                                 </svg>
                             </div>
                             <div className="text-center">
-                                <Text variant="heading4" className="text-text-primary mb-2">Address</Text>
-                                <Text variant="bodyMedium" className="text-text-secondary">King Fahd Road</Text>
-                                <Text variant="bodyMedium" className="text-text-secondary">Riyadh 12345, KSA</Text>
+                                <Text variant="heading4" className="text-text-primary mb-2">{t('address_contact')}</Text>
+                                <Text variant="bodyMedium" className="text-text-secondary">{t('address_line_1')}</Text>
+                                <Text variant="bodyMedium" className="text-text-secondary">{t('address_line_2')}</Text>
                             </div>
                         </div>
 
@@ -213,23 +217,23 @@ export default function Contact({ success }: ContactProps) {
                                 </svg>
                             </div>
                             <div className="text-center">
-                                <Text variant="heading4" className="text-text-primary mb-2">Follow Us</Text>
+                                <Text variant="heading4" className="text-text-primary mb-2">{t('follow_us')}</Text>
                                 <div className="flex gap-2 justify-center">
                                     <a href="#" className="text-text-secondary hover:text-accent-primary transition-colors">
-                                        <Text variant="bodyMedium">Instagram</Text>
+                                        <Text variant="bodyMedium">{t('social_instagram')}</Text>
                                     </a>
                                     <Text variant="bodyMedium" className="text-text-tertiary">•</Text>
                                     <a href="#" className="text-text-secondary hover:text-accent-primary transition-colors">
-                                        <Text variant="bodyMedium">LinkedIn</Text>
+                                        <Text variant="bodyMedium">{t('social_linkedin')}</Text>
                                     </a>
                                 </div>
                                 <div className="flex gap-2 justify-center mt-1">
                                     <a href="#" className="text-text-secondary hover:text-accent-primary transition-colors">
-                                        <Text variant="bodyMedium">Twitter</Text>
+                                        <Text variant="bodyMedium">{t('social_twitter')}</Text>
                                     </a>
                                     <Text variant="bodyMedium" className="text-text-tertiary">•</Text>
                                     <a href="#" className="text-text-secondary hover:text-accent-primary transition-colors">
-                                        <Text variant="bodyMedium">Facebook</Text>
+                                        <Text variant="bodyMedium">{t('social_facebook')}</Text>
                                     </a>
                                 </div>
                             </div>

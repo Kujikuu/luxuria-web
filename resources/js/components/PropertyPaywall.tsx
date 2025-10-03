@@ -1,6 +1,7 @@
 import { Text } from "@/components/Typography";
 import { StarIcon } from "@phosphor-icons/react";
 import { useForm } from "@inertiajs/react";
+import { useTranslations } from "@/hooks/useLocalization";
 
 interface PropertyPaywallProps {
     propertyId: number;
@@ -8,6 +9,7 @@ interface PropertyPaywallProps {
 }
 
 export default function PropertyPaywall({ propertyId, onUnlock }: PropertyPaywallProps) {
+    const { t, isRtl } = useTranslations('components');
     const { data, setData, post, processing, errors, reset } = useForm({
         property_id: propertyId,
         name: '',
@@ -45,8 +47,8 @@ export default function PropertyPaywall({ propertyId, onUnlock }: PropertyPaywal
                         <StarIcon size={32} className="text-ui-1" />
                     </div>
                 </div>
-                <Text variant="heading3" className="text-text-primary">
-                    Please add your details to unlock this property
+                <Text variant="heading3" className={`text-text-primary ${isRtl ? 'text-right' : 'text-left'}`}>
+                    {t('paywall_title') || 'Please add your details to unlock this property'}
                 </Text>
                 {/* <Text variant="bodyLarge" className="text-text-secondary max-w-md mx-auto">
                     Get instant access to this property and ALL future property details for 30 days. View pricing, full descriptions, image galleries, location maps, and contact information.
@@ -87,32 +89,35 @@ export default function PropertyPaywall({ propertyId, onUnlock }: PropertyPaywal
                 <div className="grid grid-cols-1 gap-4">
                     <input
                         type="text"
-                        placeholder="Your name *"
+                        placeholder={t('name_placeholder') || 'Your name *'}
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
-                        className={`px-4 py-3 border rounded-xl bg-ui-1 text-text-primary placeholder-text-secondary focus:outline-none focus:border-text-primary transition-colors ${errors.name ? 'border-red-500' : 'border-ui-3'}`}
+                        className={`px-4 py-3 border rounded-xl bg-ui-1 text-text-primary placeholder-text-secondary focus:outline-none focus:border-text-primary transition-colors ${isRtl ? 'text-right' : 'text-left'} ${errors.name ? 'border-red-500' : 'border-ui-3'}`}
+                        dir={isRtl ? 'rtl' : 'ltr'}
                         required
                     />
-                    {errors.name && <Text variant="bodySmall" className="text-red-500">{errors.name}</Text>}
+                    {errors.name && <Text variant="bodySmall" className={`text-red-500 ${isRtl ? 'text-right' : 'text-left'}`}>{errors.name}</Text>}
 
                     <input
                         type="tel"
-                        placeholder="Your phone number *"
+                        placeholder={t('phone_placeholder') || 'Your phone number *'}
                         value={data.phone}
                         onChange={(e) => setData('phone', e.target.value)}
-                        className={`px-4 py-3 border rounded-xl bg-ui-1 text-text-primary placeholder-text-secondary focus:outline-none focus:border-text-primary transition-colors ${errors.phone ? 'border-red-500' : 'border-ui-3'}`}
+                        className={`px-4 py-3 border rounded-xl bg-ui-1 text-text-primary placeholder-text-secondary focus:outline-none focus:border-text-primary transition-colors ${isRtl ? 'text-right' : 'text-left'} ${errors.phone ? 'border-red-500' : 'border-ui-3'}`}
+                        dir={isRtl ? 'rtl' : 'ltr'}
                         required
                     />
-                    {errors.phone && <Text variant="bodySmall" className="text-red-500">{errors.phone}</Text>}
+                    {errors.phone && <Text variant="bodySmall" className={`text-red-500 ${isRtl ? 'text-right' : 'text-left'}`}>{errors.phone}</Text>}
 
                     <input
                         type="email"
-                        placeholder="Your email (optional)"
+                        placeholder={t('email_placeholder') || 'Your email (optional)'}
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
-                        className={`px-4 py-3 border rounded-xl bg-ui-1 text-text-primary placeholder-text-secondary focus:outline-none focus:border-text-primary transition-colors ${errors.email ? 'border-red-500' : 'border-ui-3'}`}
+                        className={`px-4 py-3 border rounded-xl bg-ui-1 text-text-primary placeholder-text-secondary focus:outline-none focus:border-text-primary transition-colors ${isRtl ? 'text-right' : 'text-left'} ${errors.email ? 'border-red-500' : 'border-ui-3'}`}
+                        dir={isRtl ? 'rtl' : 'ltr'}
                     />
-                    {errors.email && <Text variant="bodySmall" className="text-red-500">{errors.email}</Text>}
+                    {errors.email && <Text variant="bodySmall" className={`text-red-500 ${isRtl ? 'text-right' : 'text-left'}`}>{errors.email}</Text>}
                 </div>
                 <button
                     type="submit"
@@ -122,10 +127,10 @@ export default function PropertyPaywall({ propertyId, onUnlock }: PropertyPaywal
                     {processing ? (
                         <>
                             <div className="animate-spin rounded-full h-4 w-4 border-2 border-ui-1 border-t-transparent"></div>
-                            Submitting...
+                            {t('submitting') || 'Submitting...'}
                         </>
                     ) : (
-                        'Unlock'
+                        t('unlock') || 'Unlock'
                     )}
                 </button>
             </form>

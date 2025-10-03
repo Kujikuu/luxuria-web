@@ -2,6 +2,7 @@ import { Link } from "@inertiajs/react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Text } from "../Typography";
+import { useTranslations } from "@/hooks/useLocalization";
 
 interface PaginationLink {
     url: string | null;
@@ -24,17 +25,21 @@ interface BlogPaginationProps {
 }
 
 export default function BlogPagination({ pagination }: BlogPaginationProps) {
+    const { t, isRtl } = useTranslations('components');
+    
     if (pagination.last_page <= 1) {
         return null;
     }
 
     const { current_page, last_page, from, to, total, links } = pagination;
+    const PrevIcon = isRtl ? ArrowRightIcon : ArrowLeftIcon;
+    const NextIcon = isRtl ? ArrowLeftIcon : ArrowRightIcon;
 
     return (
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full max-w-6xl">
             {/* Results Info */}
             <Text variant="bodyMedium" className="text-text-secondary">
-                Showing {from}-{to} of {total} blog posts
+                {t('showing_results', { from, to, total: t('blog_posts_count', { count: total }) }) || `Showing ${from}-${to} of ${total} blog posts`}
             </Text>
 
             {/* Pagination Links */}
@@ -42,9 +47,9 @@ export default function BlogPagination({ pagination }: BlogPaginationProps) {
                 {/* Previous Button */}
                 {links[0]?.url && (
                     <Link href={links[0].url!} preserveState preserveScroll>
-                        <Button variant="outline" size="sm" className="flex items-center gap-2">
-                            <ArrowLeftIcon size={16} />
-                            Previous
+                        <Button variant="outline" size="sm" className={`flex items-center gap-2 ${isRtl ? 'flex-row-reverse' : ''}`}>
+                            <PrevIcon size={16} />
+                            {t('previous') || 'Previous'}
                         </Button>
                     </Link>
                 )}
@@ -85,9 +90,9 @@ export default function BlogPagination({ pagination }: BlogPaginationProps) {
                 {/* Next Button */}
                 {links[links.length - 1]?.url && (
                     <Link href={links[links.length - 1].url!} preserveState preserveScroll>
-                        <Button variant="outline" size="sm" className="flex items-center gap-2">
-                            Next
-                            <ArrowRightIcon size={16} />
+                        <Button variant="outline" size="sm" className={`flex items-center gap-2 ${isRtl ? 'flex-row-reverse' : ''}`}>
+                            {t('next') || 'Next'}
+                            <NextIcon size={16} />
                         </Button>
                     </Link>
                 )}

@@ -8,7 +8,7 @@ const fadeInUp = {
     whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
     viewport: { once: true, amount: 0.3 },
     transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 80,
         mass: 1,
@@ -16,20 +16,20 @@ const fadeInUp = {
 };
 
 export default function HomeHero() {
-    const { t } = useTranslations();
+    const { t } = useTranslations('pages');
     return (
         <section id="hero" className="flex flex-col relative pt-24 sm:pt-32 md:pt-52 -mt-24 bg-gradient-to-b from-primary from-55% to-primary/0 overflow-hidden w-full items-center justify-center">
             <div className="flex flex-col w-full relative gap-6 sm:gap-8 md:gap-10 justify-center items-center">
                 {/* Text */}
                 <div className="flex flex-col relative items-center justify-center gap-4 sm:gap-5 md:gap-6 px-4 sm:px-6 md:px-10 w-full text-center">
                     <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.4 }}>
-                        <Text variant="heading1" className="text-ui-1 max-w-[280px] sm:max-w-[400px] md:max-w-[700px]" >{t('Crafting Luxury Life')}</Text>
+                        <Text variant="heading1" className="text-ui-1 max-w-[280px] sm:max-w-[400px] md:max-w-[700px]" >{t('home_hero_title') || 'Crafting Luxury Life'}</Text>
                     </motion.div>
                     <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.6 }}>
-                        <Text variant='bodyMedium' className="text-ui-2 max-w-[280px] sm:max-w-[350px] md:max-w-[440px]">Redefining real estate through excellence, innovation, and trust.</Text>
+                        <Text variant='bodyMedium' className="text-ui-2 max-w-[280px] sm:max-w-[350px] md:max-w-[440px]">{t('home_hero_subtitle') || 'Redefining real estate through excellence, innovation, and trust.'}</Text>
                     </motion.div>
                     <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.8 }}>
-                        <Button text="Explore more" onClick={() => window.scrollTo({ top: document.getElementById("nav")?.offsetTop || 0, behavior: 'smooth' })} />
+                        <Button text={t('explore_more') || 'Explore more'} onClick={() => window.scrollTo({ top: document.getElementById("nav")?.offsetTop || 0, behavior: 'smooth' })} />
                     </motion.div>
                 </div>
 

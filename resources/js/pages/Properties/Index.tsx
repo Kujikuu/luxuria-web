@@ -59,7 +59,7 @@ export default function PropertiesPage({ properties, filters, propertyTypes, pro
     const { t } = useTranslations('pages');
     return (
         <AppLayout color="white" section="hero">
-            <Head title={t('properties')} />
+            <Head title={t('properties_title')} />
 
             {/* Hero */}
             <div className="-mt-20 flex w-full flex-col items-center justify-center gap-10 px-4 pt-24 pb-24 sm:px-6 sm:pt-32 md:px-10 md:pt-52">

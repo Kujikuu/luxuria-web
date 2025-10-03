@@ -1,6 +1,7 @@
 import { CaretDownIcon } from "@phosphor-icons/react";
 import { Text } from "./Typography";
 import { motion } from "framer-motion";
+import { useTranslations } from "@/hooks/useLocalization";
 
 interface FAQProps {
     question: string;
@@ -10,6 +11,8 @@ interface FAQProps {
 }
 
 export default function FAQ({ question, answer, isOpen, onClick }: FAQProps) {
+    const { isRtl } = useTranslations();
+
     const handleClick = () => {
         onClick();
     };
@@ -27,10 +30,10 @@ export default function FAQ({ question, answer, isOpen, onClick }: FAQProps) {
             }}
             transition={{ type: "spring", stiffness: 400, damping: 80, mass: 1 }}
         >
-            <div className="flex items-center gap-6 w-full">
-                <Text variant="bodyBold" className="text-text-primary w-full" as="p">{question || "What is the return policy?"}</Text>
+            <div className={`flex items-center gap-6 w-full `}>
+                <Text variant="bodyBold" className={`text-text-primary w-full ${isRtl ? 'text-right' : 'text-left'}`} as="p">{question || "What is the return policy?"}</Text>
                 <motion.div
-                    className="p-2 bg-ui-3 rounded-full"
+                    className="p-2 bg-ui-3 rounded-full flex-shrink-0"
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ type: "spring", stiffness: 400, damping: 80, mass: 1 }}
                 >
@@ -44,7 +47,7 @@ export default function FAQ({ question, answer, isOpen, onClick }: FAQProps) {
                 transition={{ type: "spring", stiffness: 400, damping: 80, mass: 1 }}
             >
                 <div className="pb-2">
-                    <Text variant="bodyLong" className={`text-text-secondary`}>{answer || "Our return policy allows returns within 30 days of purchase with a valid receipt. Items must be in original condition."}</Text>
+                    <Text variant="bodyLong" className={`text-text-secondary ${isRtl ? 'text-right' : 'text-left'}`}>{answer || "Our return policy allows returns within 30 days of purchase with a valid receipt. Items must be in original condition."}</Text>
                 </div>
             </motion.div>
         </motion.div>

@@ -61,4 +61,19 @@ return [
     'search_blog_placeholder' => 'البحث في مقالات المدونة...',
     'clear_search' => 'مسح البحث',
 
+    // Pagination Components
+    'showing_results' => 'عرض :from-:to من :total',
+    'blog_posts_count' => ':count مقال مدونة',
+    'properties_count' => ':count عقار',
+    'previous' => 'السابق',
+    'next' => 'التالي',
+
+    // Property Paywall Component
+    'paywall_title' => 'يرجى إضافة تفاصيلك لإلغاء قفل هذا العقار',
+    'name_placeholder' => 'اسمك *',
+    'phone_placeholder' => 'رقم هاتفك *',
+    'email_placeholder' => 'بريدك الإلكتروني (اختياري)',
+    'submitting' => 'جاري الإرسال...',
+    'unlock' => 'إلغاء القفل',
+
 ];

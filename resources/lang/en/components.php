@@ -61,4 +61,19 @@ return [
     'search_blog_placeholder' => 'Search blog posts...',
     'clear_search' => 'Clear search',
 
+    // Pagination Components
+    'showing_results' => 'Showing :from-:to of :total',
+    'blog_posts_count' => ':count blog posts',
+    'properties_count' => ':count properties',
+    'previous' => 'Previous',
+    'next' => 'Next',
+
+    // Property Paywall Component
+    'paywall_title' => 'Please add your details to unlock this property',
+    'name_placeholder' => 'Your name *',
+    'phone_placeholder' => 'Your phone number *',
+    'email_placeholder' => 'Your email (optional)',
+    'submitting' => 'Submitting...',
+    'unlock' => 'Unlock',
+
 ];

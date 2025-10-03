@@ -12,23 +12,27 @@ import { ArrowRightIcon, ArrowLeftIcon } from "@phosphor-icons/react";
 import AgentCard from "@/components/Cards/AgentCard";
 import HomeFaqs from "@/components/Home/HomeFaqs";
 import FeatureCard from "@/components/Cards/FeatureCard";
+import { useTranslations } from "@/hooks/useLocalization";
 
 
 export default function AboutPage() {
+    const { t } = useTranslations('pages');
+    const { t: tc } = useTranslations('common');
+    
     return (
         <AppLayout color='white' section='hero'>
-            <Head title="About" />
+            <Head title={t('about_title')} />
 
             {/* Hero */}
             <section id="hero" className="flex flex-col items-center justify-center gap-10 pt-24 sm:pt-32 md:pt-52 -mt-20 px-4 sm:px-6 md:px-10">
                 {/* Header */}
                 <div className="flex flex-col lg:flex-row gap-6 max-w-6xl w-full">
                     <div className="flex flex-col gap-6">
-                        <Tag text="About" />
-                        <Text variant="heading2" className="w-full text-text-primary">Redefining real estate through excellence, innovation, and trust</Text>
+                        <Tag text={tc('about')} />
+                        <Text variant="heading2" className="w-full text-text-primary">{t('about_hero_title')}</Text>
                     </div>
                     <div className="flex gap-6 w-full items-start lg:items-end max-w-96 lg:justify-end">
-                        <Text variant="bodyLarge" className="text-text-secondary">At LUXURIA, we are committed to making real estate transactions seamless and rewarding.</Text>
+                        <Text variant="bodyLarge" className="text-text-secondary">{t('about_hero_subtitle')}</Text>
                     </div>
                 </div>
 
@@ -43,12 +47,12 @@ export default function AboutPage() {
                 <div className="w-full max-w-6xl">
                     {/* Header */}
                     <div className="flex flex-col items-center text-center gap-6 mb-12">
-                        <Tag text="Mission & Vision" />
+                        <Tag text={t('mission_vision_tag')} />
                         <Text variant="heading2" className="text-text-primary">
-                            Our Purpose & Direction
+                            {t('mission_vision_title')}
                         </Text>
                         <Text variant="bodyLarge" className="text-text-secondary max-w-2xl">
-                            Driven by purpose and guided by vision, we shape the future of real estate.
+                            {t('mission_vision_subtitle')}
                         </Text>
                     </div>
 
@@ -57,20 +61,20 @@ export default function AboutPage() {
                         {/* Mission Card */}
                         <div className="flex flex-col gap-6 p-8 bg-ui-2 rounded-2xl">
                             <div className="flex items-center gap-3">
-                                <Text variant="heading3" className="text-text-primary">Our Mission</Text>
+                                <Text variant="heading3" className="text-text-primary">{t('mission_title')}</Text>
                             </div>
                             <Text variant="bodyLarge" className="text-text-secondary leading-relaxed">
-                                To revolutionize the real estate experience by providing exceptional service, innovative solutions, and personalized guidance that empowers clients to achieve their property dreams while building lasting relationships founded on trust and integrity.
+                                {t('mission_text')}
                             </Text>
                         </div>
 
                         {/* Vision Card */}
                         <div className="flex flex-col gap-6 p-8 bg-accent-primary/5 rounded-2xl border border-accent-primary/10">
                             <div className="flex items-center gap-3">
-                                <Text variant="heading3" className="text-text-primary">Our Vision</Text>
+                                <Text variant="heading3" className="text-text-primary">{t('vision_title')}</Text>
                             </div>
                             <Text variant="bodyLarge" className="text-text-secondary leading-relaxed">
-                                To become the most trusted and innovative real estate company, setting new industry standards through technology-driven solutions, sustainable practices, and a commitment to transforming communities one property at a time.
+                                {t('vision_text')}
                             </Text>
                         </div>
                     </div>
@@ -81,45 +85,45 @@ export default function AboutPage() {
             <section className="py-16 px-4 sm:px-6 md:px-10 bg-ui-2 w-full">
                 <div className="flex flex-col gap-10 max-w-6xl mx-auto">
                     <div className="flex flex-col items-center text-center gap-6">
-                            <Tag text="Our Values" />
+                            <Tag text={t('values_tag')} />
                         <Text variant="heading2" className="text-text-primary">
-                            What We Stand For
+                            {t('values_title')}
                         </Text>
                         <Text variant="bodyLarge" className="text-text-secondary max-w-[400px]">
-                            The core principles that guide everything we do at LUXURIA.
+                            {t('values_subtitle')}
                         </Text>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <FeatureCard
                             iconName="HandShake"
-                            title="Integrity"
-                            description="Building trust through transparency, honesty, and ethical practices in every transaction."
+                            title={t('value_integrity_title')}
+                            description={t('value_integrity_description')}
                         />
                         <FeatureCard
                             iconName="Star"
-                            title="Excellence"
-                            description="Pursuing the highest standards of quality and service to exceed client expectations."
+                            title={t('value_excellence_title')}
+                            description={t('value_excellence_description')}
                         />
                         <FeatureCard
                             iconName="Lightbulb"
-                            title="Innovation"
-                            description="Embracing cutting-edge technology and creative solutions to transform the real estate experience."
+                            title={t('value_innovation_title')}
+                            description={t('value_innovation_description')}
                         />
                         <FeatureCard
                             iconName="UserIcon"
-                            title="Client-First"
-                            description="Putting our clients' needs, dreams, and success at the heart of everything we do."
+                            title={t('value_client_first_title')}
+                            description={t('value_client_first_description')}
                         />
                         <FeatureCard
                             iconName="Heart"
-                            title="Passion"
-                            description="Bringing enthusiasm and dedication to help clients find their perfect property match."
+                            title={t('value_passion_title')}
+                            description={t('value_passion_description')}
                         />
                         <FeatureCard
                             iconName="ShieldCheck"
-                            title="Reliability"
-                            description="Delivering consistent, dependable service you can count on throughout your real estate journey."
+                            title={t('value_reliability_title')}
+                            description={t('value_reliability_description')}
                         />
                     </div>
                 </div>
@@ -128,9 +132,9 @@ export default function AboutPage() {
             {/* Details */}
             <section className="flex gap-6 sm:gap-8 md:gap-10 py-12 sm:py-16 md:py-24 px-4 sm:px-6 md:px-10 items-start justify-center w-full">
                 <div className="flex flex-col md:flex-row gap-6 max-w-5xl px-12">
-                    <DetailCard iconName="ArrowLineUpRightIcon" title="Innovation First" description="We integrate the latest technologies and market insights to deliver modern property solutions." />
-                    <DetailCard iconName="UserIcon" title="Client-Centered" description="Every service is designed to align with evolving client aspirations and expectations." />
-                    <DetailCard iconName="HandShakeIcon" title="Trusted Expertise" description="Backed by years of experience, we provide reliable guidance and sustainable growth opportunities." />
+                    <DetailCard iconName="ArrowLineUpRightIcon" title={t('detail_innovation_title')} description={t('detail_innovation_description')} />
+                    <DetailCard iconName="UserIcon" title={t('detail_client_centered_title')} description={t('detail_client_centered_description')} />
+                    <DetailCard iconName="HandShakeIcon" title={t('detail_expertise_title')} description={t('detail_expertise_description')} />
                 </div>
             </section>
 
@@ -141,15 +145,15 @@ export default function AboutPage() {
                     <div className="flex flex-col gap-4 sm:gap-6 w-full h-max">
 
                         <div className="flex">
-                            <Tag text="Our Team" />
+                            <Tag text={t('team_tag')} />
                         </div>
 
                         <div className="flex flex-col gap-4 sm:gap-6">
                             <Text variant="heading2" className="text-text-primary">
-                                Meet Our Team
+                                {t('team_title')}
                             </Text>
                             <Text variant="bodyLarge" className="text-text-secondary max-w-[400px]">
-                            Passionate professionals committed to redefining real estate with vision and expertise.
+                            {t('team_subtitle')}
                             </Text>
                         </div>
                     </div>
@@ -158,20 +162,20 @@ export default function AboutPage() {
                     <div className="w-full grid grid-cols-2 gap-6">
                         <div className="col-span-1 w-auto">
                             <AgentCard
-                                img="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
-                                role="Real Estate Agent"
-                                title="John Doe"
+                                img="https://framerusercontent.com/images/nV5khFPcsJzJ1tk6zisRyfQ0NYQ.jpg?width=400&height=400"
+                                role="Founder & CEO"
+                                title="Yousef Alharbi"
                                 href="#"
                             />
                         </div>
-                        <div className="col-span-1 w-auto">
+                        {/* <div className="col-span-1 w-auto">
                             <AgentCard
                                 img="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
                                 role="Real Estate Agent"
                                 title="John Doe"
                                 href="#"
                             />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </section>
