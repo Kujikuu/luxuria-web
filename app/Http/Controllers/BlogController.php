@@ -30,7 +30,7 @@ class BlogController extends Controller
             })
             ->where('publish_date', '<=', now())
             ->orderBy('publish_date', 'desc')
-            ->paginate(6)
+            ->paginate(7)
             ->withQueryString();
 
         // Format image URLs for frontend access
