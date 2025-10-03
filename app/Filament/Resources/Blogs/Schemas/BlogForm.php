@@ -10,6 +10,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
 
@@ -19,29 +20,106 @@ class BlogForm
     {
         return $schema
             ->components([
-                Section::make('Blog Information')
-                    ->description('Manage the blog post basic information.')
-                    ->schema([
-                        Grid::make(2)
+                Tabs::make('Blog Content')
+                    ->tabs([
+                        Tabs\Tab::make('English')
                             ->schema([
-                                TextInput::make('title')
-                                    ->required()
-                                    ->maxLength(255)
-                                    ->live(onBlur: true)
-                                    ->afterStateUpdated(fn (string $operation, $state, callable $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null)
-                                    ->placeholder('Enter blog post title'),
-                                TextInput::make('slug')
-                                    ->required()
-                                    ->maxLength(255)
-                                    ->unique(ignoreRecord: true)
-                                    ->placeholder('auto-generated-slug'),
+                                Section::make('Blog Information (English)')
+                                    ->description('Manage the blog post basic information.')
+                                    ->schema([
+                                        Grid::make(2)
+                                            ->schema([
+                                                TextInput::make('title')
+                                                    ->required()
+                                                    ->maxLength(255)
+                                                    ->live(onBlur: true)
+                                                    ->afterStateUpdated(fn (string $operation, $state, callable $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null)
+                                                    ->placeholder('Enter blog post title'),
+                                                TextInput::make('slug')
+                                                    ->required()
+                                                    ->maxLength(255)
+                                                    ->unique(ignoreRecord: true)
+                                                    ->placeholder('auto-generated-slug'),
+                                            ]),
+                                        Textarea::make('about')
+                                            ->required()
+                                            ->rows(3)
+                                            ->maxLength(500)
+                                            ->columnSpanFull()
+                                            ->placeholder('Write a brief description or excerpt of the blog post...'),
+                                    ]),
+                                Section::make('Content (English)')
+                                    ->description('Write the main content of your blog post.')
+                                    ->schema([
+                                        RichEditor::make('content')
+                                            ->required()
+                                            ->columnSpanFull()
+                                            ->toolbarButtons([
+                                                'attachFiles',
+                                                'blockquote',
+                                                'bold',
+                                                'bulletList',
+                                                'codeBlock',
+                                                'h2',
+                                                'h3',
+                                                'italic',
+                                                'link',
+                                                'orderedList',
+                                                'redo',
+                                                'strike',
+                                                'underline',
+                                                'undo',
+                                            ])
+                                            ->placeholder('Start writing your blog post content...'),
+                                    ]),
                             ]),
-                        Textarea::make('about')
-                            ->required()
-                            ->rows(3)
-                            ->maxLength(500)
-                            ->columnSpanFull()
-                            ->placeholder('Write a brief description or excerpt of the blog post...'),
+                        Tabs\Tab::make('العربية')
+                            ->schema([
+                                Section::make('معلومات المقال (عربي)')
+                                    ->description('إدارة المعلومات الأساسية لمقال المدونة.')
+                                    ->schema([
+                                        TextInput::make('title_ar')
+                                            ->required()
+                                            ->maxLength(255)
+                                            ->placeholder('أدخل عنوان المقال')
+                                            ->label('العنوان')
+                                            ->helperText('عنوان المقال باللغة العربية'),
+                                        Textarea::make('about_ar')
+                                            ->required()
+                                            ->rows(3)
+                                            ->maxLength(500)
+                                            ->columnSpanFull()
+                                            ->placeholder('اكتب وصف مختصر أو مقتطف من مقال المدونة...')
+                                            ->label('الوصف')
+                                            ->helperText('وصف مختصر للمقال باللغة العربية'),
+                                    ]),
+                                Section::make('المحتوى (عربي)')
+                                    ->description('اكتب المحتوى الرئيسي لمقال مدونتك.')
+                                    ->schema([
+                                        RichEditor::make('content_ar')
+                                            ->required()
+                                            ->columnSpanFull()
+                                            ->toolbarButtons([
+                                                'attachFiles',
+                                                'blockquote',
+                                                'bold',
+                                                'bulletList',
+                                                'codeBlock',
+                                                'h2',
+                                                'h3',
+                                                'italic',
+                                                'link',
+                                                'orderedList',
+                                                'redo',
+                                                'strike',
+                                                'underline',
+                                                'undo',
+                                            ])
+                                            ->placeholder('ابدأ كتابة محتوى مقال مدونتك...')
+                                            ->label('المحتوى')
+                                            ->helperText('المحتوى الرئيسي للمقال باللغة العربية'),
+                                    ]),
+                            ]),
                     ]),
                 Section::make('Publishing Details')
                     ->description('Set publishing information and metadata.')
@@ -93,30 +171,6 @@ class BlogForm
                             ->helperText('Upload a featured image (recommended: 1200x675px for 16:9 ratio)'),
                     ])
                     ->collapsible(),
-                Section::make('Content')
-                    ->description('Write the main content of your blog post.')
-                    ->schema([
-                        RichEditor::make('content')
-                            ->required()
-                            ->columnSpanFull()
-                            ->toolbarButtons([
-                                'attachFiles',
-                                'blockquote',
-                                'bold',
-                                'bulletList',
-                                'codeBlock',
-                                'h2',
-                                'h3',
-                                'italic',
-                                'link',
-                                'orderedList',
-                                'redo',
-                                'strike',
-                                'underline',
-                                'undo',
-                            ])
-                            ->placeholder('Start writing your blog post content...'),
-                    ]),
             ]);
     }
 }

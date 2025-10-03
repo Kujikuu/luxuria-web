@@ -7,17 +7,21 @@ import Button from "@/components/Buttons/Button";
 import { NavLink } from "@/components/Navigation/NavLink";
 import { usePropertiesUnlock } from "@/hooks/usePropertiesUnlock";
 import PropertyPaywall from "@/components/PropertyPaywall";
+import { useLocale, useTranslations } from "@/hooks/useLocalization";
 
 interface Property {
     id: number;
     title: string;
+    title_ar?: string;
     slug: string;
     property_type: string;
     property_category: string;
     property_description: string;
     description?: string;
+    description_ar?: string;
     property_area: number;
     property_location: string;
+    property_location_ar?: string;
     images: string[];
     price: number;
     advertising_license_number: string;
@@ -38,12 +42,17 @@ export default function PropertyPage({ property }: PropertyPageProps) {
     const { props } = usePage();
     const flash = props.flash as { success?: string; error?: string } | undefined;
     const { isUnlocked, unlockData, saveUnlockStatus, getRemainingDays } = usePropertiesUnlock();
+    const { isArabic } = useLocale();
+    const { t } = useTranslations('pages');
 
     const handleUnlock = (data: { name: string; phone: string; email: string }) => {
         // Save unlock status to localStorage
         saveUnlockStatus(data, property.id);
     };
     const formatPropertyType = (type: string) => {
+        const translatedType = t(`property_type_${type}`);
+        if (translatedType) return translatedType;
+        
         const labels: { [key: string]: string } = {
             'sell': 'For Sale',
             'rent': 'For Rent',
@@ -54,12 +63,18 @@ export default function PropertyPage({ property }: PropertyPageProps) {
     };
 
     const formatPropertyDescription = (description: string) => {
+        const translatedDescription = t(`property_description_${description}`);
+        if (translatedDescription) return translatedDescription;
+        
         return description.replace('_', ' ').split(' ').map(word => 
             word.charAt(0).toUpperCase() + word.slice(1)
         ).join(' ');
     };
 
     const formatCapitalize = (text: string) => {
+        const translatedCategory = t(`property_category_${text}`);
+        if (translatedCategory) return translatedCategory;
+        
         return text.charAt(0).toUpperCase() + text.slice(1);
     };
 
@@ -73,7 +88,7 @@ export default function PropertyPage({ property }: PropertyPageProps) {
     };
 
     const formatDate = (dateString: string) => {
-        return new Date(dateString).toLocaleDateString('en-US', {
+        return new Date(dateString).toLocaleDateString(isArabic ? 'ar-SA' : 'en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
@@ -106,7 +121,7 @@ export default function PropertyPage({ property }: PropertyPageProps) {
     );
     return (
         <AppLayout color='white' section='hero'>
-            <Head title={`${property.title}`} />
+            <Head title={`${isArabic && property.title_ar ? property.title_ar : property.title}`} />
 
             {/* Flash Messages */}
             {flash?.success && (
@@ -125,14 +140,14 @@ export default function PropertyPage({ property }: PropertyPageProps) {
                 {/* Go Back */}
                 <div className="flex justify-between items-center">
                     <div>
-                        <NavLink href="/properties" className="text-text-primary" arrow={true}>Go Back</NavLink>
+                        <NavLink href="/properties" className="text-text-primary" arrow={true}>{t('go_back') || 'Go Back'}</NavLink>
                     </div>
                     
                     {/* Unlock Status Indicator */}
                     {/* <UnlockStatusBanner compact /> */}
                 </div>
                 <Text variant="heading2" className="text-text-primary max-w-6xl" as="h1">
-                    {property.title}
+                    {isArabic && property.title_ar ? property.title_ar : property.title}
                 </Text>
                 <img 
                     src={property.images[0] || 'https://placehold.co/1200x500.png?text=No+Image'} 
@@ -149,14 +164,17 @@ export default function PropertyPage({ property }: PropertyPageProps) {
                         <div className="flex gap-2.5 items-start">
                             <MapPinIcon size={20} className="mt-1 flex-shrink-0" />
                             <div className="flex flex-col gap-2">
-                                <Text variant="bodyLarge" className="text-text-primary">Location</Text>
+                                <Text variant="bodyLarge" className="text-text-primary">{t('location') || 'Location'}</Text>
+                                <Text variant="bodyMedium" className="text-text-secondary mb-2">
+                                    {isArabic && property.property_location_ar ? property.property_location_ar : property.property_location}
+                                </Text>
                                 <a 
                                     href={property.property_location}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-text-secondary hover:text-text-primary transition-colors"
                                 >
-                                    View on Google Maps
+                                    {t('view_on_maps') || 'View on Google Maps'}
                                 </a>
                             </div>
                         </div>
@@ -164,11 +182,11 @@ export default function PropertyPage({ property }: PropertyPageProps) {
                         {/* Property Description - Limited Preview */}
                         {property.description && (
                             <div className="flex flex-col gap-4">
-                                <Text variant="bodyLarge" className="text-text-primary">Description</Text>
+                                <Text variant="bodyLarge" className="text-text-primary">{t('description') || 'Description'}</Text>
                                 {isUnlocked ? (
                                     <div 
                                         className="text-text-secondary prose prose-sm max-w-none [&>h2]:text-lg [&>h2]:font-semibold [&>h2]:text-text-primary [&>h2]:mt-4 [&>h2]:mb-2 [&>h3]:text-base [&>h3]:font-medium [&>h3]:text-text-primary [&>h3]:mt-3 [&>h3]:mb-2 [&>p]:mb-3 [&>ul]:mb-3 [&>ol]:mb-3 [&>li]:mb-1 [&>blockquote]:border-l-4 [&>blockquote]:border-ui-3 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-text-secondary"
-                                        dangerouslySetInnerHTML={{ __html: property.description }}
+                                        dangerouslySetInnerHTML={{ __html: isArabic && property.description_ar ? property.description_ar : property.description }}
                                     />
                                 ) : (
                                     <div 
@@ -176,7 +194,7 @@ export default function PropertyPage({ property }: PropertyPageProps) {
                                     >
                                         <div 
                                             className="max-h-24 overflow-hidden"
-                                            dangerouslySetInnerHTML={{ __html: property.description.substring(0, 150) + '...' }}
+                                            dangerouslySetInnerHTML={{ __html: (isArabic && property.description_ar ? property.description_ar : property.description || '').substring(0, 150) + '...' }}
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ui-2" />
                                     </div>
@@ -199,47 +217,47 @@ export default function PropertyPage({ property }: PropertyPageProps) {
                                 <Text variant="heading3" className="text-text-primary">
                                     {Math.round(property.price).toLocaleString('en-US')}
                                 </Text>
-                                <Text variant="bodyMedium" className="text-text-secondary">SAR</Text>
+                                <Text variant="bodyMedium" className="text-text-secondary">{isArabic ? 'ر.س' : 'SAR'}</Text>
                             </div>
                         )}
                         
                         {/* CTA - Only show when unlocked */}
                         {isUnlocked && (
-                            <Button text="Request a quote" variant='secondary' href="/contact" />
+                            <Button text={t('request_quote') || 'Request a quote'} variant='secondary' href="/contact" />
                         )}
                     </div>
 
                     {/* Details - Only show when unlocked */}
                     {isUnlocked && (
                         <div className="w-full h-fit gap-6 flex flex-col p-4 sm:p-6 overflow-hidden bg-ui-2 border border-ui-3 rounded-2xl">
-                            <Text variant="heading3" className="text-text-primary w-full">Details</Text>
+                            <Text variant="heading3" className="text-text-primary w-full">{t('details') || 'Details'}</Text>
                             <div className="flex flex-col gap-4">
                                 <DetailRow 
-                                    label="Area" 
+                                    label={t('area') || 'Area'} 
                                     value={`${property.property_area} m²`} 
                                 />
                                 <DetailRow 
-                                    label="Type" 
+                                    label={t('type') || 'Type'} 
                                     value={formatPropertyDescription(property.property_description)} 
                                 />
                                 <DetailRow 
-                                    label="Category" 
+                                    label={t('category') || 'Category'} 
                                     value={formatCapitalize(property.property_category)} 
                                 />
                                 <DetailRow 
-                                    label="License" 
+                                    label={t('license') || 'License'} 
                                     value={property.advertising_license_number} 
                                 />
                                 {property.pdf && (
                                     <DetailRow 
-                                        label="Documents" 
-                                        value="View PDF"
+                                        label={t('documents') || 'Documents'} 
+                                        value={t('view_pdf') || 'View PDF'}
                                         isLink={true}
                                         href={`/storage/${property.pdf}`}
                                     />
                                 )}
                                 <DetailRow 
-                                    label="Listed Date" 
+                                    label={t('listed_date') || 'Listed Date'} 
                                     value={formatDate(property.created_at)}
                                     isLast={true}
                                 />
@@ -251,7 +269,7 @@ export default function PropertyPage({ property }: PropertyPageProps) {
                 {/* Image Gallery - Only show when unlocked */}
                 {isUnlocked && property.images.length > 1 && (
                     <div className="flex flex-col w-full gap-6 max-w-6xl">
-                        <Text variant="heading3" className="text-text-primary">Gallery</Text>
+                        <Text variant="heading3" className="text-text-primary">{t('gallery') || 'Gallery'}</Text>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {property.images.slice(1).map((image, index) => (
                                 <img 
@@ -268,7 +286,7 @@ export default function PropertyPage({ property }: PropertyPageProps) {
                 {/* Location Map - Only show when unlocked */}
                 {isUnlocked && (
                     <div className="flex flex-col w-full gap-6 max-w-6xl">
-                        <Text variant="heading3" className="text-text-primary">Location</Text>
+                        <Text variant="heading3" className="text-text-primary">{t('location') || 'Location'}</Text>
                         <div className="w-full h-[400px] rounded-2xl overflow-hidden">
                             <iframe
                                 src={getGoogleMapsEmbedUrl(property.property_location)}

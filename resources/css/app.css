@@ -13,6 +13,9 @@
     --font-serif: 'Inter Display', ui-serif, serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 
+    --font-arabic: 'Cairo', 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
     --color-primary: #013841;
     --color-text-primary: #171717;
     --color-text-secondary: #5C5C5C;
@@ -150,4 +153,77 @@
   body {
     @apply bg-background text-foreground;
     }
+}
+
+@layer utilities {
+    /* Arabic font utilities */
+    .font-arabic {
+        font-family: var(--font-arabic);
+    }
+    
+    /* Apply Arabic font to all text when Arabic locale is active */
+    .font-arabic * {
+        font-family: var(--font-arabic);
+    }
+    
+    /* RTL utilities */
+    .rtl\:text-right:where([dir="rtl"], [dir="rtl"] *) {
+        text-align: right;
+    }
+    
+    .rtl\:text-left:where([dir="rtl"], [dir="rtl"] *) {
+        text-align: left;
+    }
+    
+    .rtl\:ml-auto:where([dir="rtl"], [dir="rtl"] *) {
+        margin-left: auto;
+    }
+    
+    .rtl\:mr-auto:where([dir="rtl"], [dir="rtl"] *) {
+        margin-right: auto;
+    }
+    
+    .rtl\:flex-row-reverse:where([dir="rtl"], [dir="rtl"] *) {
+        flex-direction: row-reverse;
+    }
+    
+    .rtl\:space-x-reverse:where([dir="rtl"], [dir="rtl"] *) > :not([hidden]) ~ :not([hidden]) {
+        --space-x-reverse: 1;
+    }
+
+    /* Logical margin utilities */
+    .ms-1 { margin-inline-start: 0.25rem; }
+    .ms-2 { margin-inline-start: 0.5rem; }
+    .ms-3 { margin-inline-start: 0.75rem; }
+    .ms-4 { margin-inline-start: 1rem; }
+    .ms-5 { margin-inline-start: 1.25rem; }
+    .ms-6 { margin-inline-start: 1.5rem; }
+    .ms-8 { margin-inline-start: 2rem; }
+    .ms-auto { margin-inline-start: auto; }
+    
+    .me-1 { margin-inline-end: 0.25rem; }
+    .me-2 { margin-inline-end: 0.5rem; }
+    .me-3 { margin-inline-end: 0.75rem; }
+    .me-4 { margin-inline-end: 1rem; }
+    .me-5 { margin-inline-end: 1.25rem; }
+    .me-6 { margin-inline-end: 1.5rem; }
+    .me-8 { margin-inline-end: 2rem; }
+    .me-auto { margin-inline-end: auto; }
+
+    /* Logical padding utilities */
+    .ps-1 { padding-inline-start: 0.25rem; }
+    .ps-2 { padding-inline-start: 0.5rem; }
+    .ps-3 { padding-inline-start: 0.75rem; }
+    .ps-4 { padding-inline-start: 1rem; }
+    .ps-5 { padding-inline-start: 1.25rem; }
+    .ps-6 { padding-inline-start: 1.5rem; }
+    .ps-8 { padding-inline-start: 2rem; }
+    
+    .pe-1 { padding-inline-end: 0.25rem; }
+    .pe-2 { padding-inline-end: 0.5rem; }
+    .pe-3 { padding-inline-end: 0.75rem; }
+    .pe-4 { padding-inline-end: 1rem; }
+    .pe-5 { padding-inline-end: 1.25rem; }
+    .pe-6 { padding-inline-end: 1.5rem; }
+    .pe-8 { padding-inline-end: 2rem; }
 }

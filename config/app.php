@@ -86,6 +86,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Available Locales
+    |--------------------------------------------------------------------------
+    |
+    | List all of the available locales for the application. This will be used
+    | by the locale middleware to determine if the requested locale is valid.
+    |
+    */
+
+    'available_locales' => ['en', 'ar'],
+
+    /*
+    |--------------------------------------------------------------------------
     | Encryption Key
     |--------------------------------------------------------------------------
     |

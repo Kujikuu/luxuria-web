@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { useState } from "react";
 import { Text } from "../Typography";
 import { Link } from "@inertiajs/react";
+import { useLocale, useTranslations } from "@/hooks/useLocalization";
 
 interface BlogCardProps {
     href: string;
@@ -26,6 +27,8 @@ export default function BlogCard({
     readTime 
 }: BlogCardProps) {
     const [isHovered, setIsHovered] = useState(false);
+    const { isArabic } = useLocale();
+    const { t } = useTranslations('components');
 
     const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString('en-US', {
@@ -111,7 +114,7 @@ export default function BlogCard({
                             <div className="flex items-center gap-1">
                                 <ClockIcon size={14} />
                                 <Text variant="bodySmall">
-                                    {readTime} min
+                                    {readTime} {t('min_read') || 'min'}
                                 </Text>
                             </div>
                         </div>

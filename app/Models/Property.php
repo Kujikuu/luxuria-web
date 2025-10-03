@@ -12,13 +12,16 @@ class Property extends Model
 
     protected $fillable = [
         'title',
+        'title_ar',
         'slug',
         'property_type',
         'property_category',
         'property_description',
         'description',
+        'description_ar',
         'property_area',
         'property_location',
+        'property_location_ar',
         'images',
         'price',
         'advertising_license_number',
@@ -45,4 +48,34 @@ class Property extends Model
         'land', 'villa', 'apartment', 'room', 'building',
         'commercial_complex', 'station', 'shop', 'other',
     ];
+
+    /**
+     * Get the localized title based on the current locale
+     */
+    public function getLocalizedTitle(?string $locale = null): string
+    {
+        $locale = $locale ?: app()->getLocale();
+
+        return ($locale === 'ar' && $this->title_ar) ? $this->title_ar : $this->title;
+    }
+
+    /**
+     * Get the localized description based on the current locale
+     */
+    public function getLocalizedDescription(?string $locale = null): ?string
+    {
+        $locale = $locale ?: app()->getLocale();
+
+        return ($locale === 'ar' && $this->description_ar) ? $this->description_ar : $this->description;
+    }
+
+    /**
+     * Get the localized location based on the current locale
+     */
+    public function getLocalizedLocation(?string $locale = null): string
+    {
+        $locale = $locale ?: app()->getLocale();
+
+        return ($locale === 'ar' && $this->property_location_ar) ? $this->property_location_ar : $this->property_location;
+    }
 }

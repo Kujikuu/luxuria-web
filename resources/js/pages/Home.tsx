@@ -3,6 +3,7 @@ import HomeFaqs from "@/components/Home/HomeFaqs";
 import HomeHero from "@/components/Home/HomeHero";
 import HomeProperties from "@/components/Home/HomeProperties";
 import AppLayout from "@/layouts/app-layout";
+import { useTranslations } from "@/hooks/useLocalization";
 import { Head } from "@inertiajs/react";
 
 interface Property {
@@ -20,10 +21,12 @@ interface HomePageProps {
 }
 
 export default function HomePage({ featuredProperties }: HomePageProps) {
+    const { t } = useTranslations();
+    
     return (
         <AppLayout color='transparent' section='hero'>
-            <Head title="Home" />
-
+            <Head title={t('home')} />
+        
             {/* Hero */}
             <HomeHero />
 

@@ -36,7 +36,7 @@ export default function Contact({ success }: ContactProps) {
             <Head title="Contact" />
 
             {/* Hero Section */}
-            <section id="hero" className="flex flex-col gap-10 relative pt-24 sm:pt-32 md:pt-52 -mt-20 bg-primary overflow-hidden w-full items-center justify-center">
+            <section id="hero" className="flex flex-col gap-10 relative pt-24 sm:pt-32 md:pt-52 -mt-24 bg-primary overflow-hidden w-full items-center justify-center">
                 {/* Header */}
                 <div className="flex flex-col gap-6 max-w-6xl w-full items-center">
                     <Text variant="heading2" className="w-full text-ui-1 text-center">Here to connect</Text>

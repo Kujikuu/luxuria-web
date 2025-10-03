@@ -2,9 +2,11 @@ import { NavLink } from "./NavLink";
 import { useState, useEffect } from "react";
 import { LuxuriaLogo } from "./LuxuriaLogo";
 import { motion } from 'framer-motion';
+import LanguageSwitcher from "../LanguageSwitcher";
 
 import { Link } from "@inertiajs/react";
 import PhoneMenu from "./PhoneMenu";
+import { useTranslations } from "@/hooks/useLocalization";
 
 const appearEffect = {
     initial: { opacity: 0, y: 20 },
@@ -18,13 +20,6 @@ const appearEffect = {
     }
 }
 
-const navigationItems = [
-    { href: '/properties', label: 'Properties' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact' },
-];
-
 interface HeaderProps {
     section?: string;
     color?: string;
@@ -34,6 +29,14 @@ export default function Header({ section = "hero", color = "white" }: HeaderProp
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { t } = useTranslations();
+
+    const navigationItems = [
+        { href: '/properties', label: t('properties') },
+        { href: '/blog', label: t('blog') },
+        { href: '/about', label: t('about') },
+        { href: '/contact', label: t('contact') },
+    ];
 
     useEffect(() => {
         const handleScroll = () => {
@@ -146,6 +149,18 @@ export default function Header({ section = "hero", color = "white" }: HeaderProp
                             {item.label}
                         </NavLink>
                     ))}
+                    <div className="ms-2">
+                        <LanguageSwitcher
+                            className={`
+                                ${isScrolled
+                                    ? 'border-gray-300 text-gray-700 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700'
+                                    : color === 'white'
+                                        ? 'border-gray-300 text-gray-700 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700'
+                                        : 'border-white/20 text-white hover:bg-white/10 bg-transparent'
+                                }
+                            `}
+                        />
+                    </div>
                 </div>
             </nav>
 
@@ -161,6 +176,9 @@ export default function Header({ section = "hero", color = "white" }: HeaderProp
                             {item.label}
                         </NavLink>
                     ))}
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                        <LanguageSwitcher className="border-gray-300 text-gray-700 hover:bg-gray-50" />
+                    </div>
                 </motion.div>
             )}
         </div >
