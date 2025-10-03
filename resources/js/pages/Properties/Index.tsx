@@ -4,6 +4,7 @@ import PropertySearch from "@/components/PropertySearch";
 import { Text } from "@/components/Typography";
 import AppLayout from "@/layouts/app-layout";
 import { Head } from "@inertiajs/react";
+import UnlockStatusBanner from "@/components/UnlockStatusBanner";
 
 interface Property {
     id: number;
@@ -74,6 +75,11 @@ export default function PropertiesPage({
                         </Text>
                     </div>
                 </div>
+
+                {/* Premium Status Banner
+                <div className="w-full max-w-6xl">
+                    <UnlockStatusBanner />
+                </div> */}
 
                 {/* Search and Filters */}
                 <PropertySearch

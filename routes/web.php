@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\PropertyInquiryController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,3 +25,5 @@ Route::get('/contact', function () {
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+
+Route::post('/property-inquiries', [PropertyInquiryController::class, 'store'])->name('property-inquiries.store');
