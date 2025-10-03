@@ -12,7 +12,23 @@ function BlogCardLarge({ img, date, title, description, author, authorImage, aut
                 <div className="flex flex-col w-full md:justify-between gap-6 p-4 md:p-6 overflow-hidden">
                     <div className="flex flex-col gap-6 overflow-hidden">
                         <div className="flex bg-text-primary py-[7px] px-[16px] w-max rounded-full text-ui-1">
-                            <Text variant="bodySmall" className="text-ui-1" as="p">{date || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</Text>
+                            <Text variant="bodySmall" className="text-ui-1" as="p">{date ? (() => {
+                                const now = new Date();
+                                const postDate = new Date(date);
+                                const diffTime = Math.abs(now.getTime() - postDate.getTime());
+                                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                                
+                                if (diffDays === 0) return 'Today';
+                                if (diffDays === 1) return '1 day ago';
+                                if (diffDays === 2) return '2 days ago';
+                                
+                                // After 2 days, show real date
+                                return postDate.toLocaleDateString('en-US', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric'
+                                });
+                            })() : 'Today'}</Text>
                         </div>
 
                         <div className="flex flex-col gap-3">
@@ -44,7 +60,23 @@ function BlogCardMedium({ img, date, title, href }: { img?: string, date?: strin
 
                 <div className="flex flex-col gap-3 px-0 md:group-hover:px-6 transition-padding duration-400">
                     <Text variant="heading4" className="text-text-primary">{title || "High-End Properties"}</Text>
-                    <Text variant="bodyMedium" className="text-text-secondary">{date || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</Text>
+                    <Text variant="bodyMedium" className="text-text-secondary">{date ? (() => {
+                        const now = new Date();
+                        const postDate = new Date(date);
+                        const diffTime = Math.abs(now.getTime() - postDate.getTime());
+                        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                        
+                        if (diffDays === 0) return 'Today';
+                        if (diffDays === 1) return '1 day ago';
+                        if (diffDays === 2) return '2 days ago';
+                        
+                        // After 2 days, show real date
+                        return postDate.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        });
+                    })() : 'Today'}</Text>
                 </div>
             </div>
         </Link>

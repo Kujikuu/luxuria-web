@@ -16,12 +16,14 @@ class Property extends Model
         'property_type',
         'property_category',
         'property_description',
+        'description',
         'property_area',
         'property_location',
         'images',
         'price',
         'advertising_license_number',
         'pdf',
+        'featured',
     ];
 
     protected function casts(): array
@@ -30,6 +32,7 @@ class Property extends Model
             'images' => 'array',
             'property_area' => 'decimal:2',
             'price' => 'decimal:2',
+            'featured' => 'boolean',
         ];
     }
 

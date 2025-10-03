@@ -1,0 +1,79 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Models\Property;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+
+class PropertyController extends Controller
+{
+    public function index(Request $request)
+    {
+        $search = $request->get('search');
+        $propertyType = $request->get('property_type');
+        $propertyCategory = $request->get('property_category');
+        $propertyDescription = $request->get('property_description');
+
+        $properties = Property::query()
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                      ->orWhere('slug', 'like', "%{$search}%")
+                      ->orWhere('property_location', 'like', "%{$search}%");
+                });
+            })
+            ->when($propertyType, function ($query, $type) {
+                $query->where('property_type', $type);
+            })
+            ->when($propertyCategory, function ($query, $category) {
+                $query->where('property_category', $category);
+            })
+            ->when($propertyDescription, function ($query, $description) {
+                $query->where('property_description', $description);
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(6)
+            ->withQueryString();
+
+        return Inertia::render('Properties/Index', [
+            'properties' => $properties,
+            'filters' => [
+                'search' => $search,
+                'property_type' => $propertyType,
+                'property_category' => $propertyCategory,
+                'property_description' => $propertyDescription,
+            ],
+            'propertyTypes' => Property::PROPERTY_TYPES,
+            'propertyCategories' => Property::PROPERTY_CATEGORIES,
+            'propertyDescriptions' => Property::PROPERTY_DESCRIPTIONS,
+        ]);
+    }
+
+    public function show(Request $request, string $slug)
+    {
+        $property = Property::where('slug', $slug)->firstOrFail();
+
+        return Inertia::render('Properties/Show', [
+            'property' => $property,
+        ]);
+    }
+
+    public static function getFeaturedProperties()
+    {
+        // Get featured properties, fallback to latest 6 if no featured properties exist
+        $featuredProperties = Property::where('featured', true)
+            ->orderBy('created_at', 'desc')
+            ->limit(6)
+            ->get();
+
+        if ($featuredProperties->count() === 0) {
+            $featuredProperties = Property::orderBy('created_at', 'desc')
+                ->limit(6)
+                ->get();
+        }
+
+        return $featuredProperties;
+    }
+}

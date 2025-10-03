@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Home');
+    return Inertia::render('Home', [
+        'featuredProperties' => PropertyController::getFeaturedProperties(),
+    ]);
 })->name('home');
 
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties');
@@ -19,10 +22,5 @@ Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
 
-Route::get('/blog', function () {
-    return Inertia::render('Blog');
-})->name('blog');
-
-Route::get('/blog/{slug}', function () {
-    return Inertia::render('Blog/[slug]');
-})->name('blog.slug');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');

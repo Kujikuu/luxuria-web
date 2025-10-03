@@ -1,4 +1,4 @@
-import { BathtubIcon, BedIcon, RulerIcon } from "@phosphor-icons/react";
+import { RulerIcon } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { Text } from "../Typography";
@@ -6,7 +6,7 @@ import { Link } from "@inertiajs/react";
 
 const Divider = () => <div className="w-[1px] h-5 bg-ui-3"></div>
 
-export default function PropertyCard({ href, img, name, price, bed, bath, livingSpce }: { href: string, img: string, name: string, price: number, bed: number, bath: number, livingSpce: number }) {
+export default function PropertyCard({ href, img, name, price, area, propertyType }: { href: string, img: string, name: string, price: number, area: number, propertyType: string }) {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -46,22 +46,16 @@ export default function PropertyCard({ href, img, name, price, bed, bath, living
                     }}
                 >
                     <Text variant='bodyLarge' className="text-text-secondary">{name}</Text>
-                    <Text variant='heading4' className="text-text-primary">{price.toLocaleString()} SAR</Text>
+                    <Text variant='heading4' className="text-text-primary">{Math.round(price).toLocaleString('en-US')} SAR</Text>
                     <div className="flex items-center gap-3 sm:gap-4 md:gap-6 text-sm sm:text-base">
                         <div className="flex gap-1.5 items-center text-text-secondary">
-                            <BedIcon size={15} />
-                            <Text variant='bodyMedium'>{bed}</Text>
-                        </div>
-                        <Divider />
-                        <div className="flex gap-1.5 items-center text-text-secondary">
-                            <BathtubIcon size={15} />
-                            <Text variant='bodyMedium'>{bath}</Text>
+                            <Text variant='bodyMedium' className="capitalize">{propertyType.replace('_', ' ')}</Text>
                         </div>
                         <Divider />
                         <div className="flex gap-1.5 items-center text-text-secondary">
                             <RulerIcon size={15} />
-                            <Text variant='bodyMedium' className="hidden xs:block">{livingSpce} sqft</Text>
-                            <Text variant='bodyMedium' className="block xs:hidden">{livingSpce}</Text>
+                            <Text variant='bodyMedium' className="hidden xs:block">{area} m²</Text>
+                            <Text variant='bodyMedium' className="block xs:hidden">{area}</Text>
                         </div>
                     </div>
                 </motion.div>

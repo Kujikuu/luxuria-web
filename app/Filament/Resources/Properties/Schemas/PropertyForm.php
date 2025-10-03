@@ -3,9 +3,11 @@
 namespace App\Filament\Resources\Properties\Schemas;
 
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -40,6 +42,10 @@ class PropertyForm
                             ->unique(ignoreRecord: true)
                             ->placeholder('ADV-123456')
                             ->helperText('Enter the official advertising license number'),
+                        Toggle::make('featured')
+                            ->label('Featured Property')
+                            ->helperText('Mark this property as featured to display on homepage')
+                            ->default(false),
                     ])
                     ->columnSpan(2),
                 Section::make('Property Classification')
@@ -106,6 +112,27 @@ class PropertyForm
                             ->rows(2)
                             ->placeholder('https://maps.google.com/?q=25.2048,55.2708')
                             ->helperText('Enter Google Maps location link')
+                            ->columnSpanFull(),
+                        RichEditor::make('description')
+                            ->nullable()
+                            ->toolbarButtons([
+                                'attachFiles',
+                                'blockquote',
+                                'bold',
+                                'bulletList',
+                                'codeBlock',
+                                'h2',
+                                'h3',
+                                'italic',
+                                'link',
+                                'orderedList',
+                                'redo',
+                                'strike',
+                                'underline',
+                                'undo',
+                            ])
+                            ->placeholder('Enter detailed property description...')
+                            ->helperText('Add a detailed description with formatting (optional)')
                             ->columnSpanFull(),
                     ])
                     ->columnSpan(3),

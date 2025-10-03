@@ -16,7 +16,7 @@ class BlogSeeder extends Seeder
         // Get existing authors or create some if none exist
         $authors = Author::all();
         if ($authors->isEmpty()) {
-            $authors = Author::factory(3)->create();
+            $authors = Author::factory(2)->create();
         }
 
         // Create blogs for each author
