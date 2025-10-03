@@ -50,7 +50,7 @@ export default function BlogPage({ blogs, filters }: BlogPageProps) {
             <Head title="Blog" />
 
             {/* Hero */}
-            <section id="hero" className="flex flex-col items-center justify-center gap-10 pt-48 px-4 sm:px-6 md:px-10 pb-24">
+            <section id="hero" className="flex flex-col items-center justify-center gap-10 pt-24 sm:pt-32 md:pt-52 -mt-20 px-4 sm:px-6 md:px-10 pb-24">
                 {/* Header */}
                 <div className="flex flex-col lg:flex-row gap-6 max-w-6xl w-full">
                     <div className="flex flex-col gap-6">

@@ -95,7 +95,7 @@ export default function PropertyPage({ property }: PropertyPageProps) {
             <Head title={`${property.title}`} />
 
             {/* Hero */}
-            <section id="hero" className="flex flex-col gap-10 pt-48 px-4 sm:px-6 md:px-10 pb-24 w-full max-w-6xl">
+            <section id="hero" className="flex flex-col gap-10 pt-24 sm:pt-32 md:pt-52 -mt-20 px-4 sm:px-6 md:px-10 pb-24 w-full max-w-6xl">
                 {/* Go Back */}
                 <div className="flex justify-between items-center">
                     <div>

@@ -36,7 +36,7 @@ export default function BlogPost({ blog, relatedBlogs }: BlogPostProps) {
         <AppLayout color='white' section='hero'>
             <Head title={`${blog.title} - Blog`} />
 
-            <section id='hero' className="flex flex-col gap-10 pt-48 px-4 sm:px-6 md:px-10 pb-24 max-w-5xl mx-auto">
+            <section id='hero' className="flex flex-col gap-10 pt-24 sm:pt-32 md:pt-52 -mt-20 px-4 sm:px-6 md:px-10 pb-24 max-w-5xl mx-auto">
                 {/* Text */}
                 <div className="flex flex-col gap-6">
                     {/* Header */}
