@@ -28,18 +28,7 @@ class BlogFactory extends Factory
             'about_ar' => $this->generateArabicAbout(),
             'read_time' => fake()->numberBetween(2, 15),
             'publish_date' => fake()->dateTimeBetween('-1 year', 'now'),
-            'featured_image' => collect([
-                'https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?scale-down-to=1024&width=904&height=1200',
-                'https://framerusercontent.com/images/5rbBnU4EZudjdrSDJqFkv0L6wk.png?scale-down-to=512&width=2912&height=1664',
-                'https://framerusercontent.com/images/h47Rv2shExyEhkfIVA3PIrL5bY.png?scale-down-to=1024&width=960&height=1200',
-                'https://framerusercontent.com/images/wAdSPQGdzEABwWjwwWOqCZX5pQ.png?scale-down-to=1024&width=800&height=1200',
-                'https://framerusercontent.com/images/Oasrwz28dGKaQ476CQW1saXGo68.png?scale-down-to=1024&width=684&height=1200',
-                'https://framerusercontent.com/images/QSxpletV1pAh5fbUXfkmyftm2Kg.png?scale-down-to=1024&width=800&height=1200',
-            ])
-                ->shuffle()
-                ->take(1)
-                ->values()
-                ->all(),
+            'featured_image' => fake()->imageUrl(800, 400, 'technology', true),
             'content' => $this->generateHtmlContent(),
             'content_ar' => $this->generateArabicHtmlContent(),
             'author_id' => Author::factory(),
