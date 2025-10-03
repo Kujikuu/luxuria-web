@@ -88,11 +88,23 @@ class SystemSettingsHelper
         $features = static::getActiveFeatures();
 
         return $features->map(function ($feature) use ($locale) {
+            // Format image URL - add /storage/ prefix only for local files (not full URLs)
+            $imageUrl = null;
+            if ($feature->image) {
+                if (str_starts_with($feature->image, 'http://') || str_starts_with($feature->image, 'https://')) {
+                    // External URL - use as is
+                    $imageUrl = $feature->image;
+                } else {
+                    // Local file - add /storage/ prefix
+                    $imageUrl = '/storage/'.$feature->image;
+                }
+            }
+
             return (object) [
                 'id' => $feature->id,
                 'title' => $feature->getLocalizedTitle($locale),
                 'description' => $feature->getLocalizedDescription($locale),
-                'image' => $feature->image,
+                'image' => $imageUrl,
                 'sort_order' => $feature->sort_order,
             ];
         });

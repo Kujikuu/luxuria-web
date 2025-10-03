@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,15 +16,15 @@ class BlogController extends Controller
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('title', 'like', "%{$search}%")
-                      ->orWhere('title_ar', 'like', "%{$search}%")
-                      ->orWhere('about', 'like', "%{$search}%")
-                      ->orWhere('about_ar', 'like', "%{$search}%")
-                      ->orWhere('content', 'like', "%{$search}%")
-                      ->orWhere('content_ar', 'like', "%{$search}%")
-                      ->orWhereHas('author', function ($authorQuery) use ($search) {
-                          $authorQuery->where('name', 'like', "%{$search}%")
-                                     ->orWhere('name_ar', 'like', "%{$search}%");
-                      });
+                        ->orWhere('title_ar', 'like', "%{$search}%")
+                        ->orWhere('about', 'like', "%{$search}%")
+                        ->orWhere('about_ar', 'like', "%{$search}%")
+                        ->orWhere('content', 'like', "%{$search}%")
+                        ->orWhere('content_ar', 'like', "%{$search}%")
+                        ->orWhereHas('author', function ($authorQuery) use ($search) {
+                            $authorQuery->where('name', 'like', "%{$search}%")
+                                ->orWhere('name_ar', 'like', "%{$search}%");
+                        });
                 });
             })
             ->where('publish_date', '<=', now())
@@ -36,11 +35,18 @@ class BlogController extends Controller
         // Format image URLs for frontend access
         $blogs->getCollection()->transform(function ($blog) {
             if ($blog->featured_image) {
-                $blog->featured_image =  $blog->featured_image;
+                // Add /storage/ prefix only for local files (not full URLs)
+                if (! str_starts_with($blog->featured_image, 'http://') && ! str_starts_with($blog->featured_image, 'https://')) {
+                    $blog->featured_image = '/storage/'.$blog->featured_image; // Local file - add prefix
+                }
             }
             if ($blog->author->image) {
-                $blog->author->image = $blog->author->image;
+                // Add /storage/ prefix only for local files (not full URLs)
+                if (! str_starts_with($blog->author->image, 'http://') && ! str_starts_with($blog->author->image, 'https://')) {
+                    $blog->author->image = '/storage/'.$blog->author->image; // Local file - add prefix
+                }
             }
+
             return $blog;
         });
 
@@ -61,10 +67,16 @@ class BlogController extends Controller
 
         // Format image URLs for frontend access
         if ($blog->featured_image) {
-            $blog->featured_image = '/storage/' . $blog->featured_image;
+            // Add /storage/ prefix only for local files (not full URLs)
+            if (! str_starts_with($blog->featured_image, 'http://') && ! str_starts_with($blog->featured_image, 'https://')) {
+                $blog->featured_image = '/storage/'.$blog->featured_image;
+            }
         }
         if ($blog->author->image) {
-            $blog->author->image = '/storage/' . $blog->author->image;
+            // Add /storage/ prefix only for local files (not full URLs)
+            if (! str_starts_with($blog->author->image, 'http://') && ! str_starts_with($blog->author->image, 'https://')) {
+                $blog->author->image = '/storage/'.$blog->author->image;
+            }
         }
 
         // Get 3 related blogs (excluding current blog)
@@ -78,11 +90,18 @@ class BlogController extends Controller
         // Format image URLs for related blogs
         $relatedBlogs->transform(function ($relatedBlog) {
             if ($relatedBlog->featured_image) {
-                $relatedBlog->featured_image = '/storage/' . $relatedBlog->featured_image;
+                // Add /storage/ prefix only for local files (not full URLs)
+                if (! str_starts_with($relatedBlog->featured_image, 'http://') && ! str_starts_with($relatedBlog->featured_image, 'https://')) {
+                    $relatedBlog->featured_image = '/storage/'.$relatedBlog->featured_image;
+                }
             }
             if ($relatedBlog->author->image) {
-                $relatedBlog->author->image = '/storage/' . $relatedBlog->author->image;
+                // Add /storage/ prefix only for local files (not full URLs)
+                if (! str_starts_with($relatedBlog->author->image, 'http://') && ! str_starts_with($relatedBlog->author->image, 'https://')) {
+                    $relatedBlog->author->image = '/storage/'.$relatedBlog->author->image;
+                }
             }
+
             return $relatedBlog;
         });
 

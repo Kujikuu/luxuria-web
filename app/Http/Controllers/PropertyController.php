@@ -44,7 +44,12 @@ class PropertyController extends Controller
         $properties->getCollection()->transform(function ($property) {
             if ($property->images) {
                 $property->images = array_map(function ($image) {
-                    return '/storage/'.$image;
+                    // Add /storage/ prefix only for local files (not full URLs)
+                    if (str_starts_with($image, 'http://') || str_starts_with($image, 'https://')) {
+                        return $image; // External URL - use as is
+                    } else {
+                        return '/storage/'.$image; // Local file - add prefix
+                    }
                 }, $property->images);
             }
 
@@ -84,7 +89,12 @@ class PropertyController extends Controller
         // Format image URLs for frontend access
         if ($property->images) {
             $property->images = array_map(function ($image) {
-                return '/storage/'.$image;
+                // Add /storage/ prefix only for local files (not full URLs)
+                if (str_starts_with($image, 'http://') || str_starts_with($image, 'https://')) {
+                    return $image; // External URL - use as is
+                } else {
+                    return '/storage/'.$image; // Local file - add prefix
+                }
             }, $property->images);
         }
 
@@ -111,7 +121,12 @@ class PropertyController extends Controller
         $featuredProperties->transform(function ($property) {
             if ($property->images) {
                 $property->images = array_map(function ($image) {
-                    return '/storage/'.$image;
+                    // Add /storage/ prefix only for local files (not full URLs)
+                    if (str_starts_with($image, 'http://') || str_starts_with($image, 'https://')) {
+                        return $image; // External URL - use as is
+                    } else {
+                        return '/storage/'.$image; // Local file - add prefix
+                    }
                 }, $property->images);
             }
 
