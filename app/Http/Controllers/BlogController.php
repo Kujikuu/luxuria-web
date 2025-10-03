@@ -31,10 +31,10 @@ class BlogController extends Controller
         // Format image URLs for frontend access
         $blogs->getCollection()->transform(function ($blog) {
             if ($blog->featured_image) {
-                $blog->featured_image = '/storage/' . $blog->featured_image;
+                $blog->featured_image =  $blog->featured_image;
             }
             if ($blog->author->image) {
-                $blog->author->image = '/storage/' . $blog->author->image;
+                $blog->author->image = $blog->author->image;
             }
             return $blog;
         });

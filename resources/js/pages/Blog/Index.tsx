@@ -73,7 +73,7 @@ export default function BlogPage({ blogs, filters }: BlogPageProps) {
                             title={blogs.data[0].title}
                             description={blogs.data[0].about}
                             author={blogs.data[0].author.name}
-                            authorImage={blogs.data[0].author.image || `https://ui-avatars.com/api/?name=${blogs.data[0].author.name}&size=80&background=f0f0f0&color=666`}
+                            authorImage={blogs.data[0].author.image}
                             authorRole={blogs.data[0].author.role}
                             href={`/blog/${blogs.data[0].slug}`}
                         />
