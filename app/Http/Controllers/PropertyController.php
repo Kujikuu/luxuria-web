@@ -37,7 +37,7 @@ class PropertyController extends Controller
                 $query->where('property_description', $description);
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(3)
+            ->paginate(6)
             ->withQueryString();
 
         // Format image URLs for frontend access

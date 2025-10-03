@@ -55,22 +55,30 @@ class PropertyFactory extends Factory
 
     private function generateGoogleMapsLink(): string
     {
-        $lat = fake()->latitude(24.4539, 26.0667); // UAE coordinates range
-        $lng = fake()->longitude(51.5795, 56.3968);
+        $lat = fake()->latitude(16.0, 32.0); // KSA latitude range
+        $lng = fake()->longitude(34.0, 56.0); // KSA longitude range
 
         return "https://maps.google.com/?q={$lat},{$lng}";
     }
 
     private function generateImageUrls(): array
     {
-        $imageCount = fake()->numberBetween(3, 8);
-        $images = [];
+        $availableImages = [
+            'https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?scale-down-to=1024&width=904&height=1200',
+            'https://framerusercontent.com/images/5rbBnU4EZudjdrSDJqFkv0L6wk.png?scale-down-to=512&width=2912&height=1664',
+            'https://framerusercontent.com/images/h47Rv2shExyEhkfIVA3PIrL5bY.png?scale-down-to=1024&width=960&height=1200',
+            'https://framerusercontent.com/images/wAdSPQGdzEABwWjwwWOqCZX5pQ.png?scale-down-to=1024&width=800&height=1200',
+            'https://framerusercontent.com/images/Oasrwz28dGKaQ476CQW1saXGo68.png?scale-down-to=1024&width=684&height=1200',
+            'https://framerusercontent.com/images/QSxpletV1pAh5fbUXfkmyftm2Kg.png?scale-down-to=1024&width=800&height=1200',
+        ];
 
-        for ($i = 0; $i < $imageCount; $i++) {
-            $images[] = fake()->imageUrl(800, 600, 'business', true);
-        }
+        $imageCount = fake()->numberBetween(1, 3);
 
-        return $images;
+        return collect($availableImages)
+            ->shuffle()
+            ->take($imageCount)
+            ->values()
+            ->all();
     }
 
     private function generateHtmlDescription(): string
@@ -109,12 +117,12 @@ class PropertyFactory extends Factory
         $arabicLocations = [
             'الرياض، المملكة العربية السعودية',
             'جدة، المملكة العربية السعودية',
-            'دبي، الإمارات العربية المتحدة',
-            'أبو ظبي، الإمارات العربية المتحدة',
-            'الدوحة، قطر',
-            'الكويت، الكويت',
-            'المنامة، البحرين',
-            'مسقط، عمان',
+            'مكة المكرمة، المملكة العربية السعودية',
+            'الدمام، المملكة العربية السعودية',
+            'الخبر، المملكة العربية السعودية',
+            'المدينة المنورة، المملكة العربية السعودية',
+            'تبوك، المملكة العربية السعودية',
+            'أبها، المملكة العربية السعودية',
         ];
 
         return fake()->randomElement($arabicLocations);

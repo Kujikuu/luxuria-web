@@ -16,12 +16,12 @@ class BlogSeeder extends Seeder
         // Get existing authors or create some if none exist
         $authors = Author::all();
         if ($authors->isEmpty()) {
-            $authors = Author::factory(2)->create();
+            $authors = Author::factory(1)->create();
         }
 
         // Create blogs for each author
         foreach ($authors as $author) {
-            Blog::factory(fake()->numberBetween(2, 5))
+            Blog::factory(fake()->numberBetween(6, 8))
                 ->create(['author_id' => $author->id]);
         }
     }
