@@ -22,3 +22,11 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
+
+Route::get('/blog', function () {
+    return Inertia::render('Blog');
+})->name('blog');
+
+Route::get('/blog/{slug}', function () {
+    return Inertia::render('Blog/[slug]');
+})->name('blog.slug');

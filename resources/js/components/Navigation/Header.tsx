@@ -20,7 +20,7 @@ const appearEffect = {
 
 const navigationItems = [
     { href: '/properties', label: 'Properties' },
-    { href: '/brokers', label: 'Brokers' },
+    { href: '/blog', label: 'Blog' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
 ];

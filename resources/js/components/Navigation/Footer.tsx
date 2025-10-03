@@ -12,22 +12,22 @@ export default function Footer() {
                         <LuxuriaLogo />
                         <Text variant='bodyMedium' className="max-w-96 text-ui-2">At LUXURIA, we redefine real estate by blending innovation, professionalism, and luxury.</Text>
                     </div>
-                    <div className="grid md:grid-cols-3 grid-cols-2 gap-9 w-full">
+                    <div className="grid md:grid-cols-2 grid-cols-2 gap-9 w-full">
                         <div className="flex flex-col gap-4">
                             <Text variant='bodyBold' className="text-ui-1">Main Pages</Text>
                             <NavLink color="ui-1" href="/">Home</NavLink>
+                            <NavLink color="ui-1" href="/properties">Properties</NavLink>
+                            <NavLink color="ui-1" href="/blog">Blog</NavLink>
                             <NavLink color="ui-1" href="/about">About</NavLink>
                             <NavLink color="ui-1" href="/contact">Contact</NavLink>
-                            <NavLink color="ui-1" href="/blog">Blog</NavLink>
-                            <NavLink color="ui-1" href="/properties">Properties</NavLink>
                         </div>
-                        <div className="flex flex-col gap-4">
+                        {/* <div className="flex flex-col gap-4">
                             <Text variant='bodyBold' className="text-ui-1">Other Pages</Text>
                             <NavLink color="ui-1" href="/property">Property</NavLink>
                             <NavLink color="ui-1" href="/broker">Broker</NavLink>
                             <NavLink color="ui-1" href="/privacy-policy">Privacy Policy</NavLink>
                             <NavLink color="ui-1" href="/404">404</NavLink>
-                        </div>
+                        </div> */}
                         <div className="flex flex-col gap-4">
                             <Text variant='bodyBold' className="text-ui-1">Follow Us</Text>
                             <NavLink color="ui-1" href="https://www.linkedin.com/company/luxuria/" target="_blank">Linkedin</NavLink>

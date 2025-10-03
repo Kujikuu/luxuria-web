@@ -2,14 +2,17 @@ import { ReactNode, useState } from "react";
 import { Text } from "../Typography";
 import { Link } from "@inertiajs/react";
 import { motion } from "framer-motion";
+import { ArrowLeftIcon } from "@phosphor-icons/react";
 
 export const NavLink = ({
     children,
     color = "primary",
+    arrow = false,
     ...linkProps
 }: {
     children: ReactNode;
     color?: string;
+    arrow?: boolean;
 } & Omit<React.ComponentProps<typeof Link>, 'children'>) => {
 
     const [isHovered, setIsHovered] = useState(false);
@@ -48,12 +51,15 @@ export const NavLink = ({
             onMouseLeave={() => setIsHovered(false)}
             {...linkProps}
         >
-            <Text variant="bodyMedium" className={getDefaultStyling()}>{children}</Text>
+            <div className="flex gap-1 items-center">
+                {arrow && <ArrowLeftIcon className={getDefaultStyling()} size={18} weight='bold' />}
+                <Text variant="bodyMedium" className={getDefaultStyling()}>{children}</Text>
+            </div>
             <motion.div className={`h-[1px] ${getDefaultBg()} origin-left`}
                 initial={{ scaleX: 0, opacity: 0 }}
                 animate={{ scaleX: isHovered ? 1 : 0, opacity: isHovered ? 1 : 0 }}
                 transition={{ type: "spring", stiffness: 400, damping: 80, mass: 1 }}
-            ></motion.div>
+            />
         </Link>
     );
 }

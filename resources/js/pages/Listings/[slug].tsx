@@ -4,6 +4,7 @@ import AppLayout from "@/layouts/app-layout";
 import { Head } from "@inertiajs/react";
 import { LockLaminatedOpenIcon, MapPinIcon, NavigationArrowIcon } from "@phosphor-icons/react";
 import Button from "@/components/Buttons/Button";
+import { NavLink } from "@/components/Navigation/NavLink";
 
 export default function ListingPage() {
     return (
@@ -11,7 +12,14 @@ export default function ListingPage() {
             <Head title="Listing" />
 
             {/* Hero */}
-            <div className="flex flex-col gap-10 pt-48 px-4 sm:px-6 md:px-10 pb-24">
+            <section id="hero" className="flex flex-col gap-10 pt-48 px-4 sm:px-6 md:px-10 pb-24">
+                {/* Go Back */}
+                <div className="flex justify-between items-center">
+                    <div>
+                        <NavLink href="/properties" className="text-text-primary" arrow={true}>Go Back</NavLink>
+                    </div>
+                    
+                </div>
                 <Text variant="heading2" className="text-text-primary max-w-6xl" as="h1">Villa for Sale in Al Rawdah</Text>
                 <img src="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200" alt="Listing" className="w-full max-w-6xl h-[300px] sm:h-[400px] md:h-[500px] object-cover rounded-2xl" />
                 <div className="flex flex-col lg:flex-row w-full gap-6">
@@ -73,7 +81,7 @@ export default function ListingPage() {
                     <img src="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200" alt="Listing" className="w-full max-w-6xl h-[300px] sm:h-[400px] md:h-[500px] object-cover rounded-2xl" />
                     <img src="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200" alt="Listing" className="w-full max-w-6xl h-[300px] sm:h-[400px] md:h-[500px] object-cover rounded-2xl" />
                 </div>
-            </div>
+            </section>
         </AppLayout>
     );
 }

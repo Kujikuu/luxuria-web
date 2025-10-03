@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import HomeFaqs from "@/components/Home/HomeFaqs";
 
 export default function Contact() {
     return (
@@ -73,6 +74,22 @@ export default function Contact() {
 
                 </div>
             </section>
+
+            {/* Google map emebed container */}
+            <section className="flex gap-6 sm:gap-8 md:gap-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-10 bg-ui-2 items-start justify-center w-full border-t border-b border-ui-3">
+                <div className="w-full max-w-5xl h-[400px] px-4 sm:px-6 md:px-10">
+                    <iframe
+                        src="https://maps.google.com/maps?q=Riyadh%2C%20KSA&z=15&output=embed"
+                        spellCheck={false}
+                        aria-label="To enrich screen reader interactions, please activate Accessibility in Grammarly extension settings"
+                        style={{ height: '100%', width: '100%', border: '0px' }}
+                        className="rounded-xl overflow-hidden"
+                    />
+                </div>
+            </section>
+
+            {/* Faqs */}
+            <HomeFaqs />
         </AppLayout>
     );
 }
