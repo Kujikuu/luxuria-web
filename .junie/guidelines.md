@@ -8,7 +8,7 @@ The Laravel Boost guidelines are specifically curated by Laravel maintainers for
 ## Foundational Context
 This application is a Laravel application and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
 
-- php - 8.3.25
+- php - 8.4.13
 - filament/filament (FILAMENT) - v4
 - inertiajs/inertia-laravel (INERTIA) - v2
 - laravel/framework (LARAVEL) - v12
@@ -333,7 +333,7 @@ Route::get('/users', function () {
 
 ## Livewire Core
 - Use the `search-docs` tool to find exact version specific documentation for how to write Livewire & Livewire tests.
-- Use the `php artisan make:livewire [Posts\\CreatePost]` artisan command to create new components
+- Use the `php artisan make:livewire [Posts\CreatePost]` artisan command to create new components
 - State should live on the server, with the UI reflecting it.
 - All Livewire requests hit the Laravel backend, they're like regular HTTP requests. Always validate form data, and run authorization checks in Livewire actions.
 
@@ -512,8 +512,6 @@ it('may reset the password', function () {
 });
 </code-snippet>
 
-
-
 <code-snippet name="Pest Smoke Testing Example" lang="php">
 $pages = visit(['/', '/about', '/contact']);
 
@@ -538,8 +536,6 @@ import { Link } from '@inertiajs/react'
 === inertia-react/v2/forms rules ===
 
 ## Inertia + React Forms
-
-
 
 <code-snippet name="Inertia React useForm Example" lang="react">
 

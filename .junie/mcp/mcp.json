@@ -1,19 +1,19 @@
 {
     "mcpServers": {
         "laravel-boost": {
-            "command": "C:\\Users\\Afifi\\.config\\herd\\bin\\php83\\php.exe",
+            "command": "/Users/afifi/Library/Application Support/Herd/bin/php84",
             "args": [
-                "C:\\Users\\Afifi\\luxuria-web\\artisan",
+                "/Users/afifi/Desktop/Afifi websites/luxuria-web/artisan",
                 "boost:mcp"
             ]
         },
         "herd": {
-            "command": "C:\\Users\\Afifi\\.config\\herd\\bin\\php83\\php.exe",
+            "command": "/Users/afifi/Library/Application Support/Herd/bin/php84",
             "args": [
-                "C:/Users/Afifi/.config/herd/bin/herd-mcp.phar"
+                "/Applications/Herd.app/Contents/Resources/herd-mcp.phar"
             ],
             "env": {
-                "SITE_PATH": "C:\\Users\\Afifi\\luxuria-web"
+                "SITE_PATH": "/Users/afifi/Desktop/Afifi websites/luxuria-web"
             }
         }
     }
