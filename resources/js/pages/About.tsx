@@ -115,6 +115,15 @@ export default function AboutPage() {
                                     authorImage="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
                                 />
                             </div>
+                            <div className="px-3">
+                                <TestimonialCard
+                                    quote="Knowledgeable, professional, and always one step ahead."
+                                    name="Abdulrahman Al-Jubeir"
+                                    role="Financial Advisor"
+                                    image="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
+                                    authorImage="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
+                                />
+                            </div>
                         </Slider>
                     </div>
                 </div>
