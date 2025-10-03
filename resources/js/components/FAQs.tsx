@@ -1,55 +1,67 @@
 import FAQ from "@/components/FAQ";
 import { useState } from "react";
-import { useTranslations } from "@/hooks/useLocalization";
 
-export default function FAQs() {
-    const { t } = useTranslations('pages');
+interface FaqItem {
+    id: number;
+    question: string;
+    answer: string;
+    sort_order: number;
+}
+
+interface FAQsProps {
+    faqs?: FaqItem[];
+}
+
+export default function FAQs({ faqs = [] }: FAQsProps) {
     const [openFAQIndex, setOpenFAQIndex] = useState<number>(0); // First FAQ open by default
-
-    const faqs = [
-        {
-            questionKey: "faq_services_question",
-            answerKey: "faq_services_answer",
-            fallbackQuestion: "What services does LUXURIA provide?",
-            fallbackAnswer: "We specialize in brokerage, property management, luxury housing, and investment consultancy."
-        },
-        {
-            questionKey: "faq_location_question",
-            answerKey: "faq_location_answer",
-            fallbackQuestion: "Where are your properties located?",
-            fallbackAnswer: "All properties are located in prime real estate areas, carefully selected for convenience and prestige."
-        },
-        {
-            questionKey: "faq_investment_question",
-            answerKey: "faq_investment_answer",
-            fallbackQuestion: "Why should I invest with LUXURIA?",
-            fallbackAnswer: "We offer diverse revenue streams, deep market expertise, and innovative real estate solutions tailored to client needs."
-        },
-        {
-            questionKey: "faq_maintenance_question",
-            answerKey: "faq_maintenance_answer",
-            fallbackQuestion: "Do you handle property maintenance?",
-            fallbackAnswer: "Yes. We provide complete facility management, tenant relations, and compliance with real estate regulations."
-        },
-        {
-            questionKey: "faq_contact_question",
-            answerKey: "faq_contact_answer",
-            fallbackQuestion: "How can I contact your team?",
-            fallbackAnswer: "You can reach us via email at broker@luxuria.sa or call us at 0503422777 / 0580037374."
-        }
-    ];
 
     const handleFAQClick = (index: number) => {
         setOpenFAQIndex(openFAQIndex === index ? -1 : index);
     };
 
+    // Fallback data if no FAQs are provided
+    const fallbackFaqs = [
+        {
+            id: 1,
+            question: "What services does LUXURIA provide?",
+            answer: "We specialize in brokerage, property management, luxury housing, and investment consultancy.",
+            sort_order: 1
+        },
+        {
+            id: 2,
+            question: "Where are your properties located?",
+            answer: "All properties are located in prime real estate areas, carefully selected for convenience and prestige.",
+            sort_order: 2
+        },
+        {
+            id: 3,
+            question: "Why should I invest with LUXURIA?",  
+            answer: "We offer diverse revenue streams, deep market expertise, and innovative real estate solutions tailored to client needs.",
+            sort_order: 3
+        },
+        {
+            id: 4,
+            question: "Do you handle property maintenance?",
+            answer: "Yes. We provide complete facility management, tenant relations, and compliance with real estate regulations.",
+            sort_order: 4
+        },
+        {
+            id: 5,
+            question: "How can I contact your team?",
+            answer: "You can reach us via email at broker@luxuria.sa or call us at 0503422777 / 0580037374.",
+            sort_order: 5
+        }
+    ];
+
+    const displayFaqs = faqs.length > 0 ? faqs : fallbackFaqs;
+
     return (
         <div className="flex flex-col w-full gap-3">
-            {faqs.map((faq, index) => (
+            {displayFaqs.map((faq, index) => (
                 <FAQ
-                    key={index}
-                    question={t(faq.questionKey) || faq.fallbackQuestion}
-                    answer={t(faq.answerKey) || faq.fallbackAnswer}
+                    key={faq.id}
+                    question={faq.question}
+                    answer={faq.answer}
                     isOpen={openFAQIndex === index}
                     onClick={() => handleFAQClick(index)}
                 />

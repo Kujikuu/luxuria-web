@@ -16,11 +16,28 @@ interface Property {
     price: number;
 }
 
-interface HomePageProps {
-    featuredProperties: Property[];
+interface FaqItem {
+    id: number;
+    question: string;
+    answer: string;
+    sort_order: number;
 }
 
-export default function HomePage({ featuredProperties }: HomePageProps) {
+interface Feature {
+    id: number;
+    title: string;
+    description: string;
+    image: string | null;
+    sort_order: number;
+}
+
+interface HomePageProps {
+    featuredProperties: Property[];
+    faqs?: FaqItem[];
+    features?: Feature[];
+}
+
+export default function HomePage({ featuredProperties, faqs, features }: HomePageProps) {
     const { t } = useTranslations();
     
     return (
@@ -34,10 +51,10 @@ export default function HomePage({ featuredProperties }: HomePageProps) {
 
             {/* Features Container */}
             <div className="w-full relative h-fit flex py-10 md:py-24 bg-ui-2 border-t border-b border-ui-3 justify-center">
-                <Features />
+                <Features features={features} />
             </div>
 
-            <HomeFaqs />
+            <HomeFaqs faqs={faqs} />
 
         </AppLayout>
     );

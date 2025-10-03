@@ -55,6 +55,8 @@ Route::get('/language/{locale}', function (Request $request, string $locale) {
 Route::get('/', function () {
     return Inertia::render('Home', [
         'featuredProperties' => PropertyController::getFeaturedProperties(),
+        'faqs' => \App\Helpers\SystemSettingsHelper::getLocalizedFaqs(),
+        'features' => \App\Helpers\SystemSettingsHelper::getLocalizedFeatures(),
     ]);
 })->name('home');
 
@@ -62,11 +64,15 @@ Route::get('/properties', [PropertyController::class, 'index'])->name('propertie
 Route::get('/properties/{slug}', [PropertyController::class, 'show'])->name('properties.show');
 
 Route::get('/about', function () {
-    return Inertia::render('About');
+    return Inertia::render('About', [
+        'faqs' => \App\Helpers\SystemSettingsHelper::getLocalizedFaqs(),
+    ]);
 })->name('about');
 
 Route::get('/contact', function () {
-    return Inertia::render('Contact');
+    return Inertia::render('Contact', [
+        'faqs' => \App\Helpers\SystemSettingsHelper::getLocalizedFaqs(),
+    ]);
 })->name('contact');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
@@ -81,6 +87,8 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'ar|he|fa|ur']], f
     Route::get('/', function () {
         return Inertia::render('Home', [
             'featuredProperties' => PropertyController::getFeaturedProperties(),
+            'faqs' => \App\Helpers\SystemSettingsHelper::getLocalizedFaqs(),
+            'features' => \App\Helpers\SystemSettingsHelper::getLocalizedFeatures(),
         ]);
     })->name('localized.home');
 
@@ -88,11 +96,15 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'ar|he|fa|ur']], f
     Route::get('/properties/{slug}', [PropertyController::class, 'show'])->name('localized.properties.show');
 
     Route::get('/about', function () {
-        return Inertia::render('About');
+        return Inertia::render('About', [
+            'faqs' => \App\Helpers\SystemSettingsHelper::getLocalizedFaqs(),
+        ]);
     })->name('localized.about');
 
     Route::get('/contact', function () {
-        return Inertia::render('Contact');
+        return Inertia::render('Contact', [
+            'faqs' => \App\Helpers\SystemSettingsHelper::getLocalizedFaqs(),
+        ]);
     })->name('localized.contact');
 
     Route::get('/blog', [BlogController::class, 'index'])->name('localized.blog');

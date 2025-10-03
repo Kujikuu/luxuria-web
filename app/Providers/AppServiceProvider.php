@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Faq;
+use App\Models\Feature;
+use App\Observers\FaqObserver;
+use App\Observers\FeatureObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Register model observers
+        Faq::observe(FaqObserver::class);
+        Feature::observe(FeatureObserver::class);
     }
 }

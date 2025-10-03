@@ -14,8 +14,18 @@ import HomeFaqs from "@/components/Home/HomeFaqs";
 import FeatureCard from "@/components/Cards/FeatureCard";
 import { useTranslations } from "@/hooks/useLocalization";
 
+interface FaqItem {
+    id: number;
+    question: string;
+    answer: string;
+    sort_order: number;
+}
 
-export default function AboutPage() {
+interface AboutPageProps {
+    faqs?: FaqItem[];
+}
+
+export default function AboutPage({ faqs }: AboutPageProps) {
     const { t } = useTranslations('pages');
     const { t: tc } = useTranslations('common');
     
@@ -181,7 +191,7 @@ export default function AboutPage() {
             </section>
 
             {/* Faqs */}
-            <HomeFaqs />
+            <HomeFaqs faqs={faqs} />
         </AppLayout>
     );
 }

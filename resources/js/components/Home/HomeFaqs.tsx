@@ -4,7 +4,18 @@ import Tag from "../Tag";
 import { Text } from "../Typography";
 import { useTranslations } from "@/hooks/useLocalization";
 
-export default function HomeFaqs() {
+interface FaqItem {
+    id: number;
+    question: string;
+    answer: string;
+    sort_order: number;
+}
+
+interface HomeFaqsProps {
+    faqs?: FaqItem[];
+}
+
+export default function HomeFaqs({ faqs }: HomeFaqsProps) {
     const { t } = useTranslations('pages');
     
     return (
@@ -21,7 +32,7 @@ export default function HomeFaqs() {
                     </div>
                 </div>
                 <div className="lg:col-span-2">
-                    <FAQs />
+                    <FAQs faqs={faqs} />
                 </div>
             </div>
         </section>

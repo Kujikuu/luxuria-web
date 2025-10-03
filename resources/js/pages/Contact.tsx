@@ -13,11 +13,19 @@ import HomeFaqs from "@/components/Home/HomeFaqs";
 import { FormEventHandler } from "react";
 import { useTranslations } from "@/hooks/useLocalization";
 
-interface ContactProps {
-    success?: string;
+interface FaqItem {
+    id: number;
+    question: string;
+    answer: string;
+    sort_order: number;
 }
 
-export default function Contact({ success }: ContactProps) {
+interface ContactProps {
+    success?: string;
+    faqs?: FaqItem[];
+}
+
+export default function Contact({ success, faqs }: ContactProps) {
     const { t } = useTranslations('pages');
     const { t: tc } = useTranslations('common');
     
@@ -256,7 +264,7 @@ export default function Contact({ success }: ContactProps) {
             </section>
 
             {/* Faqs */}
-            <HomeFaqs />
+            <HomeFaqs faqs={faqs} />
         </AppLayout>
     );
 }
