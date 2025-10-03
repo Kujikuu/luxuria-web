@@ -5,7 +5,7 @@ export default function FeatureCard({ iconName, title, description }: { iconName
     const IconComponent = (PhosphorIcons as any)[iconName] || PhosphorIcons.BuildingIcon;
 
     return (
-        <div className="flex flex-col gap-6 w-[374px] px-6 py-11 bg-ui-1 border border-ui-3 rounded-2xl">
+        <div className="flex flex-col gap-6 w-[374px] h-full px-6 py-11 bg-ui-1 border border-ui-3 rounded-2xl">
             <div className="bg-primary p-2 rounded-lg items-center justify-center flex w-max">
                 <IconComponent size={36} className="text-ui-1" />
             </div>

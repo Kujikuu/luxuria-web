@@ -32,9 +32,9 @@ export default function HomeHero() {
                 </div>
 
                 {/* Image */}
-                <div className="w-full h-[280px] sm:h-[350px] md:h-[460px] relative content-center items-center" >
+                <div className="w-full relative items-center" >
                     <div className="absolute bottom-0 left-0 right-0 w-full h-full bg-gradient-to-b from-ui-1/0 from-85% to-ui-1"></div>
-                    <img src="/assets/images/hero-img.png" alt="Hero" className="w-full max-w-[320px] sm:max-w-[500px] md:max-w-6xl object-cover justify-self-center" />
+                    <img src="/assets/images/hero-img.png" alt="Hero" className="w-full max-w-6xl object-cover justify-self-center" />
                 </div>
 
             </div>

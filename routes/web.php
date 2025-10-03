@@ -14,4 +14,7 @@ Route::get('/properties', function () {
 Route::get('/properties/{slug}', function () {
     return Inertia::render('Listings/[slug]');
 })->name('properties.slug');
-    
+
+Route::get('/about', function () {
+    return Inertia::render('About');
+})->name('about');

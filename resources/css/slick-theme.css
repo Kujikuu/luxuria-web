@@ -1,0 +1,65 @@
+/* This file contains custom styles for the Slick carousel */
+
+/* Dots */
+.slick-dots {
+    position: static;
+    margin-top: 2rem;
+}
+
+.slick-dots li {
+    margin: 0 4px;
+}
+
+.slick-dots li button:before {
+    color: #DADFE8;
+    opacity: 1;
+    font-size: 10px;
+}
+
+.slick-dots li.slick-active button:before {
+    color: #013841;
+}
+
+/* Arrows */
+.slick-prev,
+.slick-next {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: var(--color-ui-2/0);
+    transition: background-color 0.3s ease;
+    border: 1px solid var(--color-ui-3);
+    z-index: 10;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+    background-color: var(--color-ui-2);
+}
+
+.slick-prev {
+    left: -50px;
+}
+
+.slick-next {
+    right: -50px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    color: var(--color-text-primary);
+    font-size: 24px;
+    opacity: 1;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .slick-prev {
+        left: -30px;
+    }
+    
+    .slick-next {
+        right: -30px;
+    }
+}
