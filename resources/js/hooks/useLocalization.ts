@@ -1,5 +1,6 @@
 import { PageProps } from '@/types';
 import { usePage } from '@inertiajs/react';
+import { useEffect } from 'react';
 
 interface LocaleData {
     current: string;
@@ -25,17 +26,17 @@ async function loadTranslations(locale: string, namespace: string): Promise<Reco
 
     if (!translationsCache[locale][namespace]) {
         try {
-            // In a real application, you might want to fetch these from an API
-            // For now, we'll create a simple mapping
-            const response = await fetch(`/api/translations/${locale}/${namespace}`).catch(() => null);
+            const response = await fetch(`/api/translations/${locale}/${namespace}`);
 
             if (response && response.ok) {
-                translationsCache[locale][namespace] = await response.json();
+                const translations = await response.json();
+                translationsCache[locale][namespace] = translations;
             } else {
                 // Fallback to empty object if API fails
                 translationsCache[locale][namespace] = {};
             }
-        } catch {
+        } catch (error) {
+            console.warn(`Failed to load translations for ${locale}/${namespace}:`, error);
             translationsCache[locale][namespace] = {};
         }
     }
@@ -64,18 +65,48 @@ export function t(key: string, replacements: Record<string, string | number> = {
 // Hook for using translations
 export function useTranslations(namespace: string = 'common') {
     let currentLocale = 'en';
+    let translations: Record<string, string> = {};
 
     try {
         const page = usePage<PageProps>();
         currentLocale = page.props.locale?.current || 'en';
+        
+        // Get translations from the page props (passed from Laravel)
+        const pageTranslations = (page.props as any).translations || {};
+        translations = pageTranslations[namespace] || {};
+        
+        // Also update the cache for consistency
+        if (!translationsCache[currentLocale]) {
+            translationsCache[currentLocale] = {};
+        }
+        translationsCache[currentLocale][namespace] = translations;
     } catch {
         // Fallback if usePage is not available
         currentLocale = 'en';
+        translations = translationsCache[currentLocale]?.[namespace] || {};
     }
 
     const translate = (key: string, replacements: Record<string, string | number> = {}): string => {
-        const translations = translationsCache[currentLocale]?.[namespace] || {};
-        let translation = translations[key] || key;
+        let translation = translations[key];
+
+        // If translation not found, try the fallback cache
+        if (!translation) {
+            translation = translationsCache[currentLocale]?.[namespace]?.[key];
+        }
+
+        // If still not found, return the key as fallback
+        if (!translation || translation === key) {
+            // Try to return the key itself or a formatted version
+            if (key.includes('_')) {
+                // Format snake_case to Title Case as fallback
+                translation = key
+                    .split('_')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(' ');
+            } else {
+                translation = key;
+            }
+        }
 
         // Replace placeholders
         Object.keys(replacements).forEach((placeholder) => {
@@ -143,7 +174,7 @@ export function useLocale() {
 
 // Initialize translations for common namespaces
 export async function initializeTranslations(locale: string) {
-    await Promise.all([loadTranslations(locale, 'common'), loadTranslations(locale, 'pages')]);
+    await Promise.all([loadTranslations(locale, 'common'), loadTranslations(locale, 'pages'), loadTranslations(locale, 'components')]);
 }
 
 // Simple client-side translation data

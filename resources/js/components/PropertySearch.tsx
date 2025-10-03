@@ -24,7 +24,7 @@ export default function PropertySearch({
     propertyCategories,
     propertyDescriptions
 }: PropertySearchProps) {
-    const { t } = useTranslations('components');
+    const { t, isRtl } = useTranslations('components');
     const [search, setSearch] = useState(filters.search || '');
     const [propertyType, setPropertyType] = useState(filters.property_type || '');
     const [propertyCategory, setPropertyCategory] = useState(filters.property_category || '');
@@ -62,7 +62,7 @@ export default function PropertySearch({
 
     const formatPropertyTypeLabel = (type: string) => {
         const translatedType = t(`property_type_${type}`);
-        if (translatedType) return translatedType;
+        if (translatedType && translatedType !== `property_type_${type}`) return translatedType;
         
         const labels: { [key: string]: string } = {
             'sell': 'For Sale',
@@ -75,7 +75,7 @@ export default function PropertySearch({
 
     const formatPropertyDescriptionLabel = (description: string) => {
         const translatedDescription = t(`property_description_${description}`);
-        if (translatedDescription) return translatedDescription;
+        if (translatedDescription && translatedDescription !== `property_description_${description}`) return translatedDescription;
         
         return description.replace('_', ' ').split(' ').map(word =>
             word.charAt(0).toUpperCase() + word.slice(1)
@@ -84,7 +84,7 @@ export default function PropertySearch({
 
     const formatCategoryLabel = (category: string) => {
         const translatedCategory = t(`property_category_${category}`);
-        if (translatedCategory) return translatedCategory;
+        if (translatedCategory && translatedCategory !== `property_category_${category}`) return translatedCategory;
         
         return category.charAt(0).toUpperCase() + category.slice(1);
     };
@@ -96,7 +96,9 @@ export default function PropertySearch({
                 <div className="relative">
                     <MagnifyingGlassIcon
                         size={20}
-                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary"
+                        className={`absolute top-1/2 transform -translate-y-1/2 text-text-secondary ${
+                            isRtl ? 'right-3' : 'left-3'
+                        }`}
                     />
                     <Input
                         type="text"
@@ -104,7 +106,8 @@ export default function PropertySearch({
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         onKeyPress={handleKeyPress}
-                        className="pl-10"
+                        className={isRtl ? 'pr-10 text-right' : 'pl-10 text-left'}
+                        dir={isRtl ? 'rtl' : 'ltr'}
                     />
                 </div>
 

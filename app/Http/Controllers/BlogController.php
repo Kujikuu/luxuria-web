@@ -17,9 +17,14 @@ class BlogController extends Controller
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('title', 'like', "%{$search}%")
+                      ->orWhere('title_ar', 'like', "%{$search}%")
                       ->orWhere('about', 'like', "%{$search}%")
+                      ->orWhere('about_ar', 'like', "%{$search}%")
+                      ->orWhere('content', 'like', "%{$search}%")
+                      ->orWhere('content_ar', 'like', "%{$search}%")
                       ->orWhereHas('author', function ($authorQuery) use ($search) {
-                          $authorQuery->where('name', 'like', "%{$search}%");
+                          $authorQuery->where('name', 'like', "%{$search}%")
+                                     ->orWhere('name_ar', 'like', "%{$search}%");
                       });
                 });
             })

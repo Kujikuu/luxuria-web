@@ -19,8 +19,12 @@ class PropertyController extends Controller
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('title', 'like', "%{$search}%")
+                        ->orWhere('title_ar', 'like', "%{$search}%")
                         ->orWhere('slug', 'like', "%{$search}%")
-                        ->orWhere('property_location', 'like', "%{$search}%");
+                        ->orWhere('description', 'like', "%{$search}%")
+                        ->orWhere('description_ar', 'like', "%{$search}%")
+                        ->orWhere('property_location', 'like', "%{$search}%")
+                        ->orWhere('property_location_ar', 'like', "%{$search}%");
                 });
             })
             ->when($propertyType, function ($query, $type) {

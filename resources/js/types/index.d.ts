@@ -12,6 +12,11 @@ export interface SharedData {
     quote: { message: string; author: string };
     auth: Auth;
     locale: Locale;
+    translations?: {
+        [namespace: string]: {
+            [key: string]: string;
+        };
+    };
     [key: string]: unknown;
 }
 
