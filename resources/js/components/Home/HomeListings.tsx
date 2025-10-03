@@ -1,5 +1,5 @@
 import Button from "../Buttons/Button";
-import ListingCard from "../Cards/ListingCard";
+import PropertyCard from "../Cards/PropertyCard";
 import Tag from "../Tag";
 import { Text } from "../Typography";
 
@@ -20,7 +20,7 @@ export default function HomeListings() {
             {/* Container */}
             <div className="w-full">
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 relative w-full">
-                    <ListingCard
+                    <PropertyCard
                         href="/properties/link"
                         img="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200"
                         name="Villa for Sale in Al Rawdah"
@@ -29,7 +29,7 @@ export default function HomeListings() {
                         bath={2}
                         livingSpce={1200}
                     />
-                    <ListingCard
+                    <PropertyCard
                         href="/properties/link"
                         img="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200"
                         name="Villa for Sale in Al Rawdah"
@@ -38,7 +38,7 @@ export default function HomeListings() {
                         bath={2}
                         livingSpce={1200}
                     />
-                    <ListingCard
+                    <PropertyCard
                         href="/properties/link"
                         img="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200"
                         name="Villa for Sale in Al Rawdah"
@@ -47,7 +47,7 @@ export default function HomeListings() {
                         bath={2}
                         livingSpce={1200}
                     />
-                    <ListingCard
+                    <PropertyCard
                         href="/properties/link"
                         img="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200"
                         name="Villa for Sale in Al Rawdah"
@@ -56,7 +56,7 @@ export default function HomeListings() {
                         bath={2}
                         livingSpce={1200}
                     />
-                    <ListingCard
+                    <PropertyCard
                         href="/properties/link"
                         img="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200"
                         name="Villa for Sale in Al Rawdah"
@@ -65,7 +65,7 @@ export default function HomeListings() {
                         bath={2}
                         livingSpce={1200}
                     />
-                    <ListingCard
+                    <PropertyCard
                         href="/properties/link"
                         img="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200"
                         name="Villa for Sale in Al Rawdah"

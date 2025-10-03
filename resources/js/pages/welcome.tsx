@@ -4,7 +4,7 @@ import { delay, motion } from 'framer-motion';
 import Header from '@/components/Navigation/Header';
 import Footer from '@/components/Navigation/Footer';
 import PrimaryButton from '@/components/Buttons/Button';
-import ListingCard from '@/components/Cards/ListingCard';
+import PropertyCard from '@/components/Cards/PropertyCard';
 import { BlogCardLarge, BlogCardMedium } from '@/components/Cards/BlogCard';
 import AgentCard from '@/components/Cards/AgentCard';
 import DetailCard from '@/components/Cards/DetailCard';
@@ -58,7 +58,7 @@ export default function Welcome() {
                         </Text>
                     </motion.div>
 
-                    <ListingCard
+                    <PropertyCard
                         href="/link"
                         img="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200"
                         name="Villa for Sale in Al Rawdah"
