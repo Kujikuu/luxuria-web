@@ -17,14 +17,14 @@ export default function PropertyPaywall({ propertyId, onUnlock }: PropertyPaywal
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         // Call the parent's unlock handler
         onUnlock({
             name: data.name,
             phone: data.phone,
             email: data.email,
         });
-        
+
         // Submit the form
         post('/property-inquiries', {
             onSuccess: () => {
@@ -46,20 +46,20 @@ export default function PropertyPaywall({ propertyId, onUnlock }: PropertyPaywal
                     </div>
                 </div>
                 <Text variant="heading3" className="text-text-primary">
-                    Unlock ALL property details for 30 days
+                    Please add your details to unlock this property
                 </Text>
-                <Text variant="bodyLarge" className="text-text-secondary max-w-md mx-auto">
+                {/* <Text variant="bodyLarge" className="text-text-secondary max-w-md mx-auto">
                     Get instant access to this property and ALL future property details for 30 days. View pricing, full descriptions, image galleries, location maps, and contact information.
                 </Text>
                 <div className="flex items-center justify-center gap-2 px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full">
                     <Text variant="bodySmall" className="text-yellow-800 font-medium">
                         🎉 One-time unlock gives you access to all properties!
                     </Text>
-                </div>
+                </div> */}
             </div>
 
             {/* Benefits */}
-            <div className="flex flex-col gap-4">
+            {/* <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-text-primary rounded-full flex-shrink-0"></div>
                     <Text variant="bodyMedium" className="text-text-secondary">View complete pricing for ALL properties</Text>
@@ -80,7 +80,7 @@ export default function PropertyPaywall({ propertyId, onUnlock }: PropertyPaywal
                     <div className="w-2 h-2 bg-text-primary rounded-full flex-shrink-0"></div>
                     <Text variant="bodyMedium" className="text-text-secondary">30 days unlimited access to all future listings</Text>
                 </div>
-            </div>
+            </div> */}
 
             {/* Unlock Form */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -94,7 +94,7 @@ export default function PropertyPaywall({ propertyId, onUnlock }: PropertyPaywal
                         required
                     />
                     {errors.name && <Text variant="bodySmall" className="text-red-500">{errors.name}</Text>}
-                    
+
                     <input
                         type="tel"
                         placeholder="Your phone number *"
@@ -104,7 +104,7 @@ export default function PropertyPaywall({ propertyId, onUnlock }: PropertyPaywal
                         required
                     />
                     {errors.phone && <Text variant="bodySmall" className="text-red-500">{errors.phone}</Text>}
-                    
+
                     <input
                         type="email"
                         placeholder="Your email (optional)"
@@ -114,7 +114,7 @@ export default function PropertyPaywall({ propertyId, onUnlock }: PropertyPaywal
                     />
                     {errors.email && <Text variant="bodySmall" className="text-red-500">{errors.email}</Text>}
                 </div>
-                <button 
+                <button
                     type="submit"
                     disabled={processing || !data.name.trim() || !data.phone.trim()}
                     className="px-6 py-3 bg-text-primary text-ui-1 rounded-xl font-medium hover:bg-text-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all w-full flex items-center justify-center gap-2"
@@ -125,7 +125,7 @@ export default function PropertyPaywall({ propertyId, onUnlock }: PropertyPaywal
                             Submitting...
                         </>
                     ) : (
-                        'Unlock Property Details'
+                        'Unlock'
                     )}
                 </button>
             </form>

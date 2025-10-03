@@ -9,8 +9,6 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -31,7 +29,7 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => '#013841',
             ])
 
-            ->brandLogo('assets/images/luxuria.svg')
+            ->brandLogo('/assets/images/luxuria.png')
             ->brandLogoHeight('2rem')
             ->darkMode(false)
 
@@ -43,8 +41,6 @@ class AdminPanelProvider extends PanelProvider
             ->topbar(false)
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
