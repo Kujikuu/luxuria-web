@@ -1,1 +1,0 @@
-import{j as e}from"./app-BdAtDFXP.js";import{H as r,F as a}from"./Header-CX9PPkBI.js";function n({children:s,color:t="white",section:o="nav"}){return e.jsxs("main",{className:"flex flex-col items-center",children:[e.jsx(r,{section:o,color:t}),s,e.jsx(a,{})]})}const m=({children:s,...t})=>e.jsx(n,{...t,children:s});export{m as A};
