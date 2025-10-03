@@ -9,11 +9,11 @@ export default function ListingsPage() {
             <Head title="Listings" />
 
             {/* Hero */}
-            <div className="flex flex-col items-center justify-center gap-10 pt-48 px-10 pb-24">
+            <div className="flex flex-col items-center justify-center gap-10 pt-48 px-4 sm:px-6 md:px-10 pb-24">
                 {/* Header */}
-                <div className="flex gap-6 max-w-6xl ">
+                <div className="flex flex-col lg:flex-row gap-6 max-w-6xl w-full">
                     <Text variant="heading2" className="w-full text-text-primary">Discover homes tailored to your unique way of living</Text>
-                    <div className="flex gap-6 w-full items-end max-w-96 justify-end">
+                    <div className="flex gap-6 w-full items-start lg:items-end max-w-96 lg:justify-end">
                         <Text variant="bodyLarge" className="text-text-secondary">Step into a curated portfolio of breathtaking residences.</Text>
                     </div>
                 </div>

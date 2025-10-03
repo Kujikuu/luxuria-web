@@ -11,10 +11,10 @@ export default function ListingPage() {
             <Head title="Listing" />
 
             {/* Hero */}
-            <div className="flex flex-col gap-10 pt-48 px-10 pb-24">
+            <div className="flex flex-col gap-10 pt-48 px-4 sm:px-6 md:px-10 pb-24">
                 <Text variant="heading2" className="text-text-primary max-w-6xl" as="h1">Villa for Sale in Al Rawdah</Text>
-                <img src="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200" alt="Listing" className="w-full max-w-6xl h-[500px] object-cover rounded-2xl" />
-                <div className="flex w-full gap-6">
+                <img src="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200" alt="Listing" className="w-full max-w-6xl h-[300px] sm:h-[400px] md:h-[500px] object-cover rounded-2xl" />
+                <div className="flex flex-col lg:flex-row w-full gap-6">
                     {/* Container */}
                     <div className="w-full h-fit gap-6 flex flex-col overflow-hidden">
                         {/* Tags */}
@@ -36,7 +36,7 @@ export default function ListingPage() {
                     </div>
 
                     {/* Details */}
-                    <div className="w-full h-fit gap-6 flex flex-col p-6 overflow-hidden bg-ui-2 border border-ui-3 rounded-2xl">
+                    <div className="w-full h-fit gap-6 flex flex-col p-4 sm:p-6 overflow-hidden bg-ui-2 border border-ui-3 rounded-2xl">
                         <Text variant="heading3" className="text-text-primary w-full">Details</Text>
                         <div className="flex flex-col gap-4">
                             {/* Size */}
@@ -70,8 +70,8 @@ export default function ListingPage() {
 
                 {/* Gallery */}
                 <div className="flex flex-col w-full gap-6">
-                    <img src="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200" alt="Listing" className="w-full max-w-6xl h-[500px] object-cover rounded-2xl" />
-                    <img src="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200" alt="Listing" className="w-full max-w-6xl h-[500px] object-cover rounded-2xl" />
+                    <img src="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200" alt="Listing" className="w-full max-w-6xl h-[300px] sm:h-[400px] md:h-[500px] object-cover rounded-2xl" />
+                    <img src="https://framerusercontent.com/images/rDUuK6TPTafFezTpUu0H4njdJ8.png?width=904&height=1200" alt="Listing" className="w-full max-w-6xl h-[300px] sm:h-[400px] md:h-[500px] object-cover rounded-2xl" />
                 </div>
             </div>
         </AppLayout>
