@@ -13,7 +13,7 @@ const appearEffect = {
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, amount: 0.3 },
     transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 80,
         mass: 1,
