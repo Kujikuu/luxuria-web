@@ -17,11 +17,11 @@ interface PropertySearchProps {
     propertyDescriptions: string[];
 }
 
-export default function PropertySearch({ 
-    filters, 
-    propertyTypes, 
-    propertyCategories, 
-    propertyDescriptions 
+export default function PropertySearch({
+    filters,
+    propertyTypes,
+    propertyCategories,
+    propertyDescriptions
 }: PropertySearchProps) {
     const [search, setSearch] = useState(filters.search || '');
     const [propertyType, setPropertyType] = useState(filters.property_type || '');
@@ -69,7 +69,7 @@ export default function PropertySearch({
     };
 
     const formatPropertyDescriptionLabel = (description: string) => {
-        return description.replace('_', ' ').split(' ').map(word => 
+        return description.replace('_', ' ').split(' ').map(word =>
             word.charAt(0).toUpperCase() + word.slice(1)
         ).join(' ');
     };
@@ -79,8 +79,8 @@ export default function PropertySearch({
             <div className="flex flex-col gap-4">
                 {/* Search Input */}
                 <div className="relative">
-                    <MagnifyingGlassIcon 
-                        size={20} 
+                    <MagnifyingGlassIcon
+                        size={20}
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary"
                     />
                     <Input
@@ -94,65 +94,69 @@ export default function PropertySearch({
                 </div>
 
                 {/* Filters */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {/* Property Type */}
-                    <Select value={propertyType} onValueChange={setPropertyType}>
-                        <SelectTrigger>
-                            <SelectValue placeholder="Property Type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {propertyTypes.map((type) => (
-                                <SelectItem key={type} value={type}>
-                                    {formatPropertyTypeLabel(type)}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
+                <div className="flex justify-between flex-wrap gap-4">
 
-                    {/* Property Category */}
-                    <Select value={propertyCategory} onValueChange={setPropertyCategory}>
-                        <SelectTrigger>
-                            <SelectValue placeholder="Category" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {propertyCategories.map((category) => (
-                                <SelectItem key={category} value={category}>
-                                    {category.charAt(0).toUpperCase() + category.slice(1)}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
+                    <div className="flex gap-4">
+                        {/* Property Type */}
+                        <Select value={propertyType} onValueChange={setPropertyType}>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Property Type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {propertyTypes.map((type) => (
+                                    <SelectItem key={type} value={type}>
+                                        {formatPropertyTypeLabel(type)}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
 
-                    {/* Property Description */}
-                    <Select value={propertyDescription} onValueChange={setPropertyDescription}>
-                        <SelectTrigger>
-                            <SelectValue placeholder="Property Type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {propertyDescriptions.map((description) => (
-                                <SelectItem key={description} value={description}>
-                                    {formatPropertyDescriptionLabel(description)}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
-                </div>
+                        {/* Property Category */}
+                        <Select value={propertyCategory} onValueChange={setPropertyCategory}>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Category" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {propertyCategories.map((category) => (
+                                    <SelectItem key={category} value={category}>
+                                        {category.charAt(0).toUpperCase() + category.slice(1)}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
 
-                {/* Action Buttons */}
-                <div className="flex gap-3">
-                    <Button 
-                        onClick={handleSearch}
-                        className="flex-1 md:flex-initial"
-                    >
-                        Search Properties
-                    </Button>
-                    <Button 
-                        variant="outline" 
-                        onClick={handleClear}
-                        className="flex-1 md:flex-initial"
-                    >
-                        Clear Filters
-                    </Button>
+                        {/* Property Description */}
+                        <Select value={propertyDescription} onValueChange={setPropertyDescription}>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Property Type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {propertyDescriptions.map((description) => (
+                                    <SelectItem key={description} value={description}>
+                                        {formatPropertyDescriptionLabel(description)}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-3">
+                        <Button
+                            onClick={handleSearch}
+                            className="flex-1 md:flex-initial"
+                        >
+                            Search Properties
+                        </Button>
+                        <Button
+                            variant="outline"
+                            onClick={handleClear}
+                            className="flex-1 md:flex-initial"
+                        >
+                            Clear Filters
+                        </Button>
+                    </div>
+
                 </div>
             </div>
         </div>
