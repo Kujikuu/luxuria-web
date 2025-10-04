@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+            TranslationSeeder::class,
             AuthorSeeder::class,
             BlogSeeder::class,
             PropertySeeder::class,

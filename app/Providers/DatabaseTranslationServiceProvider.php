@@ -2,22 +2,18 @@
 
 namespace App\Providers;
 
-use App\Models\Faq;
-use App\Models\Feature;
-use App\Observers\FaqObserver;
-use App\Observers\FeatureObserver;
 use App\Services\DatabaseTranslationLoader;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Translation\Translator;
 
-class AppServiceProvider extends ServiceProvider
+class DatabaseTranslationServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
      */
     public function register(): void
     {
-        //
+        // This will be called in boot() after all services are registered
     }
 
     /**
@@ -25,19 +21,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Register model observers
-        Faq::observe(FaqObserver::class);
-        Feature::observe(FeatureObserver::class);
+        // Replace the translation loader after all services are booted
+        $this->app->singleton('translation.loader', function ($app) {
+            return new DatabaseTranslationLoader();
+        });
         
-        // Replace the default translation loader with our database loader
+        // Replace the translator instance
         $this->app->extend('translator', function ($translator, $app) {
             $loader = new DatabaseTranslationLoader();
             $locale = $app['config']['app.locale'];
             
-            $newTranslator = new Translator($loader, $locale);
-            $newTranslator->setFallback($app['config']['app.fallback_locale']); 
+            $trans = new Translator($loader, $locale);
+            $trans->setFallback($app['config']['app.fallback_locale']);
             
-            return $newTranslator;
+            return $trans;
         });
     }
 }
