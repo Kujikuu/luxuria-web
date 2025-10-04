@@ -21,13 +21,15 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->respond(function (\Symfony\Component\HttpFoundation\Response $response) {
-            if ($response->getStatusCode() === 404 && request()->header('X-Inertia')) {
-                return \Inertia\Inertia::render('Errors/404')
-                    ->toResponse(request())
-                    ->setStatusCode(404);
+        $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e, \Illuminate\Http\Request $request) {
+            // Handle API requests
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Not Found'], 404);
             }
-            
-            return $response;
+
+            // For web requests, render the Inertia 404 page
+            return \Inertia\Inertia::render('Errors/404')
+                ->toResponse($request)
+                ->setStatusCode(404);
         });
     })->create();

@@ -20,11 +20,11 @@ export default function NotFound() {
                     </div>
 
                     {/* Title and Description */}
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-4 items-center">
                         <Text variant="heading1" className="text-text-primary">
                             {t('404_heading')}
                         </Text>
-                        <Text variant="bodyLarge" className="text-text-secondary max-w-md">
+                        <Text variant="bodyLarge" className="text-text-secondary text-center max-w-md">
                             {t('404_description')}
                         </Text>
                     </div>
@@ -43,21 +43,6 @@ export default function NotFound() {
                         </Link>
                     </div>
 
-                    {/* Helpful Links */}
-                    <div className="flex flex-wrap justify-center gap-6 mt-8 text-sm">
-                        <Link href="/properties" className="text-accent-primary hover:underline">
-                            {tc('properties')}
-                        </Link>
-                        <Link href="/about" className="text-accent-primary hover:underline">
-                            {tc('about')}
-                        </Link>
-                        <Link href="/blog" className="text-accent-primary hover:underline">
-                            {tc('blog')}
-                        </Link>
-                        <Link href="/contact" className="text-accent-primary hover:underline">
-                            {tc('contact')}
-                        </Link>
-                    </div>
                 </div>
             </section>
         </AppLayout>

@@ -56,9 +56,6 @@ class HandleInertiaRequests extends Middleware
 
     /**
      * Get all translations for the given locale
-     *
-     * @param string $locale
-     * @return array
      */
     private function getTranslations(string $locale): array
     {
