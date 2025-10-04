@@ -34,7 +34,7 @@ export default function HomeHero() {
                     {/* Action Buttons */}
                     <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.8 }} className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
                         <Button text={t('explore_more') || 'Explore more'} onClick={() => window.scrollTo({ top: document.getElementById("nav")?.offsetTop || 0, behavior: 'smooth' })} />
-                        <Button text={t('download_profile') || 'Company Profile'} href="/storage/luxuria-company-profile.pdf" download="LUXURIA-Company-Profile.pdf" variant="secondary" icon={<DownloadSimpleIcon />} />
+                        <Button text={t('download_profile') || 'Company Profile'} href="/storage/luxuria-company-profile.pdf" download="LUXURIA-Company-Profile.pdf" variant='outline' icon={<DownloadSimpleIcon />} />
                     </motion.div>
                 </div>
 

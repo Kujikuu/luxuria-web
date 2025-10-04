@@ -24,6 +24,11 @@ const BUTTON_VARIANTS = {
         text: "text-ui-1",
         icon: "text-ui-1",
     },
+    outline: {
+        container: "border-2 border-ui-1",
+        text: "text-ui-1",
+        icon: "text-ui-1",
+    },
     form: {
         container: "bg-primary",
         text: "text-ui-1",
@@ -72,24 +77,24 @@ export default function Button({ href, text, variant = "primary", icon = true, i
             // For custom icons, just render them without animation
             return (
                 <div className={cn("flex items-center justify-center gap-2.5 px-1 md:px-1.5 overflow-hidden relative", styles.icon)}>
-                <motion.div
-                    animate={{
-                        x: isHovered ? (isRtl ? 24 : -24) : 0,
-                    }}
-                    transition={ARROW_TRANSITION}
-                >
-                    {icon}
-                </motion.div>
-                <motion.div
-                    className="absolute"
-                    animate={{
-                        x: isHovered ? 0 : (isRtl ? -24 : 24),
-                    }}
-                    transition={ARROW_TRANSITION}
-                >
-                    {icon}
-                </motion.div>
-            </div>
+                    <motion.div
+                        animate={{
+                            x: isHovered ? (isRtl ? 24 : -24) : 0,
+                        }}
+                        transition={ARROW_TRANSITION}
+                    >
+                        {icon}
+                    </motion.div>
+                    <motion.div
+                        className="absolute"
+                        animate={{
+                            x: isHovered ? 0 : (isRtl ? -24 : 24),
+                        }}
+                        transition={ARROW_TRANSITION}
+                    >
+                        {icon}
+                    </motion.div>
+                </div>
             );
         }
 
