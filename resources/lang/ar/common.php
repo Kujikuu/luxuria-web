@@ -79,6 +79,9 @@ return [
     'main_pages' => 'الصفحات الرئيسية',
     'follow_us' => 'تابعنا',
     'powered_by' => 'مدعوم بواسطة',
-    'afifi_studio' => 'عفيفي',
+    'afifi_studio' => 'عفيفي ستوديو',
+    'download_company_profile' => 'تحميل الملف التعريفي للشركة',
+    'download_pdf' => 'تحميل PDF',
+    'footer_description' => 'في لكجريا، نحن نعيد تعريف العقارات من خلال دمج الابتكار والاحترافية والفخامة.',
 
 ];

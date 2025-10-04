@@ -1,8 +1,9 @@
 import { Text } from "../Typography";
 import { LuxuriaLogo } from "./LuxuriaLogo";
 import { NavLink } from "./NavLink";
-import { DotIcon } from "@phosphor-icons/react";
+import { DotIcon, DownloadSimpleIcon } from "@phosphor-icons/react";
 import { useLocale, useTranslations } from "@/hooks/useLocalization";
+import { Button } from "../ui/button";
 
 export default function Footer() {
     const { getLocalizedPath } = useLocale();
@@ -13,7 +14,23 @@ export default function Footer() {
                 <div className="flex md:gap-11 md:flex-row gap-11 flex-col">
                     <div className="flex flex-col gap-6 w-full">
                         <LuxuriaLogo />
-                        <Text variant='bodyMedium' className="max-w-96 text-ui-2">At LUXURIA, we redefine real estate by blending innovation, professionalism, and luxury.</Text>
+                        <div className="flex flex-col gap-4">
+                            <Text variant='bodyMedium' className="max-w-96 text-ui-2">{t('footer_description') || 'At LUXURIA, we redefine real estate by blending innovation, professionalism, and luxury.'}</Text>
+                            <div className="flex flex-col gap-2 mt-2">
+                                <Text variant='bodySmall' className="text-ui-2">{t('download_company_profile') || 'Download Company Profile'}</Text>
+                                <Button
+                                    variant='link'
+                                    size="sm"
+                                    className="w-fit text-ui-1 hover:underline"
+                                    asChild
+                                >
+                                    <a href="/storage/luxuria-company-profile.pdf" download="LUXURIA-Company-Profile.pdf" className="flex items-center gap-2">
+                                        <DownloadSimpleIcon size={16} />
+                                        {t('download_pdf') || 'Download PDF'}
+                                    </a>
+                                </Button>
+                            </div>
+                        </div>
                     </div>
                     <div className="grid md:grid-cols-2 grid-cols-2 gap-9 w-full">
                         <div className="flex flex-col gap-4">
