@@ -26,7 +26,7 @@ export default function HomeProperties({ properties }: HomePropertiesProps) {
         <section id="nav" className="flex flex-col relative gap-6 sm:gap-8 md:gap-10 px-4 py-8 sm:px-6 sm:py-12 md:pt-36 md:px-10 md:pb-24 items-center w-full max-w-6xl mx-auto">
             {/* Header */}
             <div className="flex flex-col xl:flex-row gap-4 sm:gap-6 w-full h-fit">
-                <Text variant="heading2" className="text-text-primary w-full text-center sm:text-left">
+                <Text variant="heading3" className="text-text-primary w-full text-center sm:text-left">
                     {t('find_homes_header') || 'Find homes that perfectly match your lifestyle'}
                 </Text>
 

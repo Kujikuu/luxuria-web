@@ -90,7 +90,7 @@ export default function Features({ features = [] }: FeaturesProps) {
                                 }`}
                             onClick={() => setActiveFeature(feature.id)}
                         >
-                            <Text variant="heading4" className="text-text-primary">
+                            <Text variant="heading4" className="text-text-primary font-bold">
                                 {feature.title}
                             </Text>
                             {activeFeature === feature.id && (

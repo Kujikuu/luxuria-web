@@ -49,7 +49,7 @@ export default function Button({ href, text, variant = "primary", icon = true, o
 
     const commonProps = {
         className: cn(
-            "flex items-center w-max justify-center transition-all duration-400 px-6 py-3 rounded-xl cursor-pointer",
+            "flex items-center w-max justify-center transition-all duration-400 px-3 md:px-6 py-2 md:py-3 rounded-xl cursor-pointer",
             icon ? "gap-2 hover:gap-3" : "",
             isRtl ? "flex-row-reverse" : "",
             styles.container
@@ -61,7 +61,7 @@ export default function Button({ href, text, variant = "primary", icon = true, o
     const content = (
         <>
             {isRtl && icon && (
-                <div className={cn("flex items-center justify-center gap-2.5 px-1.5 overflow-hidden relative", styles.icon)}>
+                <div className={cn("flex items-center justify-center gap-2.5 px-1 md:px-1.5 overflow-hidden relative", styles.icon)}>
                     <motion.div
                         animate={{
                             x: isHovered ? 24 : 0,
@@ -83,7 +83,7 @@ export default function Button({ href, text, variant = "primary", icon = true, o
             )}
             <Text variant='bodyMedium' className={styles.text}>{text}</Text>
             {!isRtl && icon && (
-                <div className={cn("flex items-center justify-center gap-2.5 px-1.5 overflow-hidden relative", styles.icon)}>
+                <div className={cn("flex items-center justify-center gap-2.5 px-1 md:px-1.5 overflow-hidden relative", styles.icon)}>
                     <motion.div
                         animate={{
                             x: isHovered ? -24 : 0,

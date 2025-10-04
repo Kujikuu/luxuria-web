@@ -31,23 +31,23 @@ interface VariantConfig {
 // Move variant configs outside component to prevent recreation on each render
 const VARIANT_CONFIGS: Record<TextVariant, VariantConfig> = {
     heading1: {
-        sizes: { lg: 66, md: 64, sm: 50 },
+        sizes: { lg: 66, md: 60, sm: 40 },
         weight: "font-semibold",
         leading: "leading-tight"
     },
     heading2: {
-        sizes: { lg: 42, md: 40, sm: 30 },
+        sizes: { lg: 52, md: 42, sm: 28 },
         weight: "font-semibold",
         leading: "leading-tight"
     },
     heading3: {
-        sizes: { lg: 32, md: 24, sm: 18 },
-        weight: "font-medium",
+        sizes: { lg: 32, md: 24, sm: 20 },
+        weight: "font-semibold",
         leading: "leading-tight"
     },
     heading4: {
-        sizes: { lg: 22, md: 20, sm: 18 },
-        weight: "font-medium",
+        sizes: { lg: 22, md: 20, sm: 20 },
+        weight: "font-semibold",
         leading: "leading-tight"
     },
     bodyLarge: {
