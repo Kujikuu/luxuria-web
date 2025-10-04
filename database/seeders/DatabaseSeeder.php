@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             PropertySeeder::class,
             FaqSeeder::class,
             FeatureSeeder::class,
+            CustomPageSeeder::class,
         ]);
     }
 }

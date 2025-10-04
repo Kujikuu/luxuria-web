@@ -78,6 +78,40 @@ Route::get('/contact', function () {
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
+Route::get('/privacy-policy', function () {
+    $page = \App\Models\CustomPage::findBySlug('privacy-policy');
+    
+    if (!$page) {
+        abort(404);
+    }
+    
+    return Inertia::render('CustomPage', [
+        'page' => [
+            'slug' => $page->slug,
+            'title' => $page->getLocalizedTitle(),
+            'subtitle' => $page->getLocalizedSubtitle(),
+            'content' => $page->getLocalizedContent(),
+        ]
+    ]);
+})->name('privacy-policy');
+
+Route::get('/terms-of-service', function () {
+    $page = \App\Models\CustomPage::findBySlug('terms-of-service');
+    
+    if (!$page) {
+        abort(404);
+    }
+    
+    return Inertia::render('CustomPage', [
+        'page' => [
+            'slug' => $page->slug,
+            'title' => $page->getLocalizedTitle(),
+            'subtitle' => $page->getLocalizedSubtitle(),
+            'content' => $page->getLocalizedContent(),
+        ]
+    ]);
+})->name('terms-of-service');
+
 Route::post('/property-inquiries', [PropertyInquiryController::class, 'store'])->name('property-inquiries.store');
 Route::post('/contact-inquiries', [ContactInquiryController::class, 'store'])->name('contact-inquiries.store');
 
@@ -109,6 +143,40 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'ar|he|fa|ur']], f
 
     Route::get('/blog', [BlogController::class, 'index'])->name('localized.blog');
     Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('localized.blog.show');
+
+    Route::get('/privacy-policy', function () {
+        $page = \App\Models\CustomPage::findBySlug('privacy-policy');
+        
+        if (!$page) {
+            abort(404);
+        }
+        
+        return Inertia::render('CustomPage', [
+            'page' => [
+                'slug' => $page->slug,
+                'title' => $page->getLocalizedTitle(),
+                'subtitle' => $page->getLocalizedSubtitle(),
+                'content' => $page->getLocalizedContent(),
+            ]
+        ]);
+    })->name('localized.privacy-policy');
+
+    Route::get('/terms-of-service', function () {
+        $page = \App\Models\CustomPage::findBySlug('terms-of-service');
+        
+        if (!$page) {
+            abort(404);
+        }
+        
+        return Inertia::render('CustomPage', [
+            'page' => [
+                'slug' => $page->slug,
+                'title' => $page->getLocalizedTitle(),
+                'subtitle' => $page->getLocalizedSubtitle(),
+                'content' => $page->getLocalizedContent(),
+            ]
+        ]);
+    })->name('localized.terms-of-service');
 
     Route::post('/property-inquiries', [PropertyInquiryController::class, 'store'])->name('localized.property-inquiries.store');
     Route::post('/contact-inquiries', [ContactInquiryController::class, 'store'])->name('localized.contact-inquiries.store');

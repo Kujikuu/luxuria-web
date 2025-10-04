@@ -15,7 +15,6 @@ class AuthorSeeder extends Seeder
         Author::factory(1)->create(
             [
                 'name' => 'Ahmed Afifi',
-                'email' => 'admin@luxuria.com.sa',
                 'name_ar' => 'أحمد عفيفي',
                 'role' => 'Content Wrtiter',
                 'role_ar' => 'كاتب محتوى',

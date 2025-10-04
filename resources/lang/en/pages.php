@@ -200,4 +200,10 @@ return [
     'social_twitter' => 'Twitter',
     'social_facebook' => 'Facebook',
 
+    // 404 Error Page
+    '404_title' => 'Page Not Found',
+    '404_heading' => 'Oops! Page Not Found',
+    '404_description' => 'The page you\'re looking for doesn\'t exist or has been moved. Let us help you find what you need.',
+    '404_go_home' => 'Go to Home',
+    '404_contact_us' => 'Contact Us',
 ];
