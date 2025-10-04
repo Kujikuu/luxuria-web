@@ -16,6 +16,7 @@ return [
     'home_title' => 'لكجريا - العقارات المميزة',
     'home_subtitle' => 'اكتشف عقار أحلامك',
     'home_description' => 'اعثر على العقار الفاخر المثالي من خلال منصتنا العقارية الشاملة.',
+    'download_profile' => 'الملف التعريفي',
 
     // About page
     'about_title' => 'من نحن',
@@ -97,7 +98,7 @@ return [
     'property_category_commercial' => 'تجاري',
 
     // Home page content
-    'home_hero_title' => 'صناعة الحياة الفاخرة',
+    'home_hero_title' => 'نصنع الاوقات الفاخرة',
     'home_hero_subtitle' => 'إعادة تعريف العقارات من خلال التميز والابتكار والثقة.',
     'explore_more' => 'اكتشف المزيد',
 

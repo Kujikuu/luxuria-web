@@ -16,6 +16,7 @@ return [
     'home_title' => 'Luxuria - Premium Real Estate',
     'home_subtitle' => 'Discover Your Dream Property',
     'home_description' => 'Find the perfect luxury property with our comprehensive real estate platform.',
+    'download_profile' => 'Company Profile',
 
     // About page
     'about_title' => 'About Us',
@@ -97,7 +98,7 @@ return [
     'property_category_commercial' => 'Commercial',
 
     // Home page content
-    'home_hero_title' => 'Crafting Luxury Life',
+    'home_hero_title' => 'Crafting Luxury Moments',
     'home_hero_subtitle' => 'Redefining real estate through excellence, innovation, and trust.',
     'explore_more' => 'Explore more',
 

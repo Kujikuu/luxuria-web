@@ -2,6 +2,8 @@ import { motion } from "motion/react";
 import { Text } from "../Typography";
 import Button from "../Buttons/Button";
 import { useTranslations } from "@/hooks/useLocalization";
+import { Button as UIButton } from "../ui/button";
+import { DownloadSimpleIcon } from "@phosphor-icons/react";
 
 const fadeInUp = {
     initial: { opacity: 0, y: 10, filter: 'blur(10px)' },
@@ -23,13 +25,16 @@ export default function HomeHero() {
                 {/* Text */}
                 <div className="flex flex-col relative items-center justify-center gap-4 sm:gap-5 md:gap-6 px-4 sm:px-6 md:px-10 w-full text-center">
                     <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.4 }}>
-                        <Text variant="heading2" className="text-ui-1 max-w-[280px] sm:max-w-[400px] md:max-w-[700px]" >{t('home_hero_title') || 'Crafting Luxury Life'}</Text>
+                        <Text variant="heading1" className="text-ui-1 max-w-[280px] sm:max-w-[400px] md:max-w-[700px]" >{t('home_hero_title') || 'Crafting Luxury Life'}</Text>
                     </motion.div>
                     <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.6 }}>
                         <Text variant='bodyMedium' className="text-ui-2 max-w-[280px] sm:max-w-[350px] md:max-w-[440px]">{t('home_hero_subtitle') || 'Redefining real estate through excellence, innovation, and trust.'}</Text>
                     </motion.div>
-                    <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.8 }}>
+
+                    {/* Action Buttons */}
+                    <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.8 }} className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
                         <Button text={t('explore_more') || 'Explore more'} onClick={() => window.scrollTo({ top: document.getElementById("nav")?.offsetTop || 0, behavior: 'smooth' })} />
+                        <Button text={t('download_profile') || 'Company Profile'} href="/storage/luxuria-company-profile.pdf" download="LUXURIA-Company-Profile.pdf" variant="secondary" icon={<DownloadSimpleIcon />} />
                     </motion.div>
                 </div>
 

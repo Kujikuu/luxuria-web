@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react";
 import { motion, type Transition } from "motion/react";
-import { useState } from "react";
+import { useState, type ReactElement } from "react";
 import { Text } from "../Typography";
 import { ArrowRightIcon, ArrowLeftIcon } from "@phosphor-icons/react";
 import { cn } from "../../lib/utils";
@@ -35,22 +35,29 @@ type ButtonVariant = keyof typeof BUTTON_VARIANTS;
 
 interface ButtonProps {
     href?: string;
+    download?: string;
     text: string;
     variant?: ButtonVariant;
-    icon?: boolean;
+    icon?: boolean | ReactElement;
+    iconSize?: number;
     onClick?: () => void;
 }
 
-export default function Button({ href, text, variant = "primary", icon = true, onClick }: ButtonProps) {
+export default function Button({ href, text, variant = "primary", icon = true, iconSize = 18, onClick, download }: ButtonProps) {
     const [isHovered, setIsHovered] = useState(false);
     const { isRtl } = useTranslations();
     const styles = BUTTON_VARIANTS[variant];
     const ArrowIcon = isRtl ? ArrowLeftIcon : ArrowRightIcon;
 
+    // Determine if we should show an icon and what type
+    const showIcon = icon !== false;
+    const isCustomIcon = typeof icon === 'object' && icon !== null;
+    const useArrowAnimation = !isCustomIcon && showIcon;
+
     const commonProps = {
         className: cn(
             "flex items-center w-max justify-center transition-all duration-400 px-3 md:px-6 py-2 md:py-3 rounded-xl cursor-pointer",
-            icon ? "gap-2 hover:gap-3" : "",
+            showIcon ? (useArrowAnimation ? "gap-2 hover:gap-3" : "gap-2") : "",
             isRtl ? "flex-row-reverse" : "",
             styles.container
         ),
@@ -58,51 +65,63 @@ export default function Button({ href, text, variant = "primary", icon = true, o
         onMouseLeave: () => setIsHovered(false),
     };
 
+    const renderIcon = () => {
+        if (!showIcon) return null;
+
+        if (isCustomIcon) {
+            // For custom icons, just render them without animation
+            return (
+                <div className={cn("flex items-center justify-center gap-2.5 px-1 md:px-1.5 overflow-hidden relative", styles.icon)}>
+                <motion.div
+                    animate={{
+                        x: isHovered ? (isRtl ? 24 : -24) : 0,
+                    }}
+                    transition={ARROW_TRANSITION}
+                >
+                    {icon}
+                </motion.div>
+                <motion.div
+                    className="absolute"
+                    animate={{
+                        x: isHovered ? 0 : (isRtl ? -24 : 24),
+                    }}
+                    transition={ARROW_TRANSITION}
+                >
+                    {icon}
+                </motion.div>
+            </div>
+            );
+        }
+
+        // For default arrow icons, use the animated behavior
+        return (
+            <div className={cn("flex items-center justify-center gap-2.5 px-1 md:px-1.5 overflow-hidden relative", styles.icon)}>
+                <motion.div
+                    animate={{
+                        x: isHovered ? (isRtl ? 24 : -24) : 0,
+                    }}
+                    transition={ARROW_TRANSITION}
+                >
+                    <ArrowIcon size={iconSize} />
+                </motion.div>
+                <motion.div
+                    className="absolute"
+                    animate={{
+                        x: isHovered ? 0 : (isRtl ? -24 : 24),
+                    }}
+                    transition={ARROW_TRANSITION}
+                >
+                    <ArrowIcon size={iconSize} />
+                </motion.div>
+            </div>
+        );
+    };
+
     const content = (
         <>
-            {isRtl && icon && (
-                <div className={cn("flex items-center justify-center gap-2.5 px-1 md:px-1.5 overflow-hidden relative", styles.icon)}>
-                    <motion.div
-                        animate={{
-                            x: isHovered ? 24 : 0,
-                        }}
-                        transition={ARROW_TRANSITION}
-                    >
-                        <ArrowIcon size={18} />
-                    </motion.div>
-                    <motion.div
-                        className="absolute"
-                        animate={{
-                            x: isHovered ? 0 : -24,
-                        }}
-                        transition={ARROW_TRANSITION}
-                    >
-                        <ArrowIcon size={18} />
-                    </motion.div>
-                </div>
-            )}
+            {isRtl && renderIcon()}
             <Text variant='bodyMedium' className={styles.text}>{text}</Text>
-            {!isRtl && icon && (
-                <div className={cn("flex items-center justify-center gap-2.5 px-1 md:px-1.5 overflow-hidden relative", styles.icon)}>
-                    <motion.div
-                        animate={{
-                            x: isHovered ? -24 : 0,
-                        }}
-                        transition={ARROW_TRANSITION}
-                    >
-                        <ArrowIcon size={18} />
-                    </motion.div>
-                    <motion.div
-                        className="absolute"
-                        animate={{
-                            x: isHovered ? 0 : 24,
-                        }}
-                        transition={ARROW_TRANSITION}
-                    >
-                        <ArrowIcon size={18} />
-                    </motion.div>
-                </div>
-            )}
+            {!isRtl && renderIcon()}
         </>
     );
 
@@ -119,12 +138,12 @@ export default function Button({ href, text, variant = "primary", icon = true, o
 
     if (href) {
         return (
-            <Link
-                href={href}
+            <a
+                href={href} download={download}
                 {...commonProps}
             >
                 {content}
-            </Link>
+            </a>
         );
     }
 
