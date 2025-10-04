@@ -35,11 +35,11 @@ export default function Footer() {
                     <div className="grid md:grid-cols-2 grid-cols-2 gap-9 w-full">
                         <div className="flex flex-col gap-4">
                             <Text variant='bodyBold' className="text-ui-1">{t('main_pages') || 'Main Pages'}</Text>
-                            <NavLink color="ui-1" href={getLocalizedPath('/')}>{t('home')}</NavLink>
-                            <NavLink color="ui-1" href={getLocalizedPath('/properties')}>{t('properties')}</NavLink>
-                            <NavLink color="ui-1" href={getLocalizedPath('/blog')}>{t('blog')}</NavLink>
-                            <NavLink color="ui-1" href={getLocalizedPath('/about')}>{t('about')}</NavLink>
-                            <NavLink color="ui-1" href={getLocalizedPath('/contact')}>{t('contact')}</NavLink>
+                            <NavLink color="ui-1" href={'/'}>{t('home')}</NavLink>
+                            <NavLink color="ui-1" href={'/properties'}>{t('properties')}</NavLink>
+                            <NavLink color="ui-1" href={'/blog'}>{t('blog')}</NavLink>
+                            <NavLink color="ui-1" href={'/about'}>{t('about')}</NavLink>
+                            <NavLink color="ui-1" href={'/contact'}>{t('contact')}</NavLink>
                         </div>
                         {/* <div className="flex flex-col gap-4">
                             <Text variant='bodyBold' className="text-ui-1">Other Pages</Text>
@@ -61,7 +61,7 @@ export default function Footer() {
                     <div className="flex">
                         <Text variant='bodyMedium' className="text-ui-2">{t('all_rights_reserved')}</Text>
                         <DotIcon size={24} />
-                        <NavLink color="ui-2" href={getLocalizedPath('/privacy-policy')}>{t('privacy_policy')}</NavLink>
+                        <NavLink color="ui-2" href={'/privacy-policy'}>{t('privacy_policy')}</NavLink>
                     </div>
                     <div className="flex gap-2">
                         <Text variant='bodyMedium' className="text-ui-2">{t('powered_by') || 'Powered by'}</Text>
