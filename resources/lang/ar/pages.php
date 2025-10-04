@@ -72,6 +72,8 @@ return [
     'view_pdf' => 'عرض PDF',
     'listed_date' => 'تاريخ الإدراج',
     'gallery' => 'المعرض',
+    'location' => 'الموقع',
+    'description' => 'الوصف',
 
     // Property types
     'property_type_sell' => 'للبيع',

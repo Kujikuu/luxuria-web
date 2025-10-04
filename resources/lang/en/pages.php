@@ -72,6 +72,8 @@ return [
     'view_pdf' => 'View PDF',
     'listed_date' => 'Listed Date',
     'gallery' => 'Gallery',
+    'location' => 'Location',
+    'description' => 'Description',
 
     // Property types
     'property_type_sell' => 'For Sale',
