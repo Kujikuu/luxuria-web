@@ -13,7 +13,10 @@ class DatabaseTranslationServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // This will be called in boot() after all services are registered
+        // Override translation services in register to ensure they take priority
+        $this->app->extend('translation.loader', function ($loader, $app) {
+            return new DatabaseTranslationLoader();
+        });
     }
 
     /**
@@ -21,20 +24,6 @@ class DatabaseTranslationServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Replace the translation loader after all services are booted
-        $this->app->singleton('translation.loader', function ($app) {
-            return new DatabaseTranslationLoader();
-        });
-        
-        // Replace the translator instance
-        $this->app->extend('translator', function ($translator, $app) {
-            $loader = new DatabaseTranslationLoader();
-            $locale = $app['config']['app.locale'];
-            
-            $trans = new Translator($loader, $locale);
-            $trans->setFallback($app['config']['app.fallback_locale']);
-            
-            return $trans;
-        });
+        // Additional boot logic if needed
     }
 }

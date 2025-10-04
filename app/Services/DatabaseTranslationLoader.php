@@ -18,7 +18,7 @@ class DatabaseTranslationLoader implements Loader
     /**
      * Cache TTL in minutes
      */
-    protected int $cacheTtl = 60;
+    protected int $cacheTtl = 5;
 
     /**
      * File loader instance for fallback

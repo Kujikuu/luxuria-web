@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -55,22 +54,22 @@ class HandleInertiaRequests extends Middleware
     }
 
     /**
-     * Get all translations for the given locale
+     * Get all translations for the given locale from the database
      */
     private function getTranslations(string $locale): array
     {
-        $translationDir = resource_path("lang/{$locale}");
         $translations = [];
+        
+        // Get all unique groups for this locale from the database
+        $groups = \App\Models\Translation::where('locale', $locale)
+            ->select('group')
+            ->distinct()
+            ->pluck('group');
 
-        if (File::isDirectory($translationDir)) {
-            $files = File::files($translationDir);
-
-            foreach ($files as $file) {
-                if ($file->getExtension() === 'php') {
-                    $namespace = pathinfo($file->getFilename(), PATHINFO_FILENAME);
-                    $translations[$namespace] = include $file->getPathname();
-                }
-            }
+        // Load translations for each group using Laravel's translation service
+        // This will use our DatabaseTranslationLoader
+        foreach ($groups as $group) {
+            $translations[$group] = app('translator')->get($group, [], $locale);
         }
 
         return $translations;
