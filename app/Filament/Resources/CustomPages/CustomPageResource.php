@@ -9,6 +9,7 @@ use App\Filament\Resources\CustomPages\Schemas\CustomPageForm;
 use App\Filament\Resources\CustomPages\Tables\CustomPagesTable;
 use App\Models\CustomPage;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -25,6 +26,8 @@ class CustomPageResource extends Resource
     protected static ?string $pluralModelLabel = 'Custom Pages';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocument;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Content Management';
 
     public static function form(Schema $schema): Schema
     {
