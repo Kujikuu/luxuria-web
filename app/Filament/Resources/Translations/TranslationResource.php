@@ -9,6 +9,7 @@ use App\Filament\Resources\Translations\Schemas\TranslationForm;
 use App\Filament\Resources\Translations\Tables\TranslationsTable;
 use App\Models\Translation;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\IconPosition;
@@ -25,6 +26,7 @@ class TranslationResource extends Resource
     protected static ?string $modelLabel = 'Translation';
     
     protected static ?string $pluralModelLabel = 'Translations';
+    protected static string|UnitEnum|null $navigationGroup = 'System Settings';
     
     protected static ?int $navigationSort = 6;
 
