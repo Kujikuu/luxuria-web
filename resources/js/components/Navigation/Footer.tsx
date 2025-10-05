@@ -63,10 +63,10 @@ export default function Footer() {
                         <DotIcon size={24} />
                         <NavLink color="ui-2" href={'/privacy-policy'}>{t('privacy_policy')}</NavLink>
                     </div>
-                    <div className="flex gap-2">
+                    {/* <div className="flex gap-2">
                         <Text variant='bodyMedium' className="text-ui-2">{t('powered_by') || 'Powered by'}</Text>
-                        {/* <NavLink color="ui-2" href="https://afifistudio.com" target="_blank">{t('afifi_studio') || 'Afifi Studio'}</NavLink> */}
-                    </div>
+                        <NavLink color="ui-2" href="https://afifistudio.com" target="_blank">{t('afifi_studio') || 'Afifi Studio'}</NavLink>
+                    </div> */}
                 </div>
             </div>
         </footer>
