@@ -40,6 +40,12 @@ class AdminPanelProvider extends PanelProvider
                 Dashboard::class,
             ])
             ->topbar(false)
+            ->navigationGroups([
+                'Real Estate',
+                'Content Management',
+                'Communication',
+                'System Settings',
+            ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 \App\Filament\Widgets\PropertyStatsWidget::class,
