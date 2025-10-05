@@ -66,13 +66,6 @@ class RecentInquiriesWidget extends BaseWidget
                     ->falseColor('warning')
                     ->sortable(),
             ])
-            ->actions([
-                Actions\Action::make('view')
-                    ->label('View')
-                    ->icon('heroicon-m-eye')
-                    ->url(fn (PropertyInquiry $record): string => route('filament.admin.resources.property-inquiries', $record))
-                    ->openUrlInNewTab(false),
-            ])
             ->paginated([5, 10, 25])
             ->striped()
             ->heading('Recent Property Inquiries')
