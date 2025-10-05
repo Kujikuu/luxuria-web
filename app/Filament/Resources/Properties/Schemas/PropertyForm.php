@@ -210,8 +210,9 @@ class PropertyForm
                     ->schema([
                         FileUpload::make('pdf')
                             ->acceptedFileTypes(['application/pdf'])
+                            ->disk('public')
                             ->directory('property-documents')
-                            ->visibility('private')
+                            ->visibility('public')
                             ->helperText('Upload property brochure, floor plans, or other documents (PDF only)'),
                     ])
                     ->columnSpan(3)
