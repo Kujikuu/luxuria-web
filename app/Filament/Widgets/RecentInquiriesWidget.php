@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use App\Models\PropertyInquiry;
 use Filament\Actions;
+use Filament\Actions\ViewAction;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -65,6 +66,9 @@ class RecentInquiriesWidget extends BaseWidget
                     ->trueColor('success')
                     ->falseColor('warning')
                     ->sortable(),
+            ])
+            ->actions([
+                ViewAction::make()
             ])
             ->paginated([5, 10, 25])
             ->striped()
