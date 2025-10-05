@@ -3,7 +3,7 @@
         "laravel-boost": {
             "command": "/Users/afifi/Library/Application Support/Herd/bin/php84",
             "args": [
-                "/Users/afifi/Desktop/Afifi websites/luxuria-web/artisan",
+                "/Users/afifi/luxuria-web/artisan",
                 "boost:mcp"
             ]
         },
@@ -13,7 +13,7 @@
                 "/Applications/Herd.app/Contents/Resources/herd-mcp.phar"
             ],
             "env": {
-                "SITE_PATH": "/Users/afifi/Desktop/Afifi websites/luxuria-web"
+                "SITE_PATH": "/Users/afifi/luxuria-web"
             }
         }
     }
