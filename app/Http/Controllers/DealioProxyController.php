@@ -18,7 +18,7 @@ class DealioProxyController extends Controller
         $query = $request->query();
         unset($query['industry'], $query['industry[]']);
 
-        // $query['industry'] = [self::REAL_ESTATE_INDUSTRY];
+        $query['industry'] = [self::REAL_ESTATE_INDUSTRY];
 
         $response = $this->dealio()->get('/api/v1/opportunities', $query);
 
