@@ -34,7 +34,7 @@ export default function FinancialsGrid({ opportunity }: FinancialsGridProps) {
 
     return (
         <section className="flex flex-col gap-5">
-            <Text variant="heading3" className="text-text-primary">
+            <Text variant="bodyLarge" className="text-text-primary">
                 {t('dealio_financials')}
             </Text>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

@@ -82,9 +82,16 @@ export default function DealioShowPage({ slug }: DealioShowPageProps) {
             <Head title={title} />
 
             <section id="hero" className="-mt-20 flex w-full max-w-6xl flex-col gap-10 px-4 pt-24 pb-24 sm:px-6 sm:pt-32 md:px-10 md:pt-52">
-                <NavLink href={getLocalizedPath('/dealio')} className="text-text-primary" arrow>
-                    {t('go_back')}
-                </NavLink>
+                <div className="flex justify-between items-center">
+                    <div>
+                        <NavLink href={getLocalizedPath('/dealio')} className="text-text-primary" arrow={true}>
+                            {t('go_back') || 'Go Back'}
+                        </NavLink>
+                    </div>
+                    
+                    {/* Unlock Status Indicator */}
+                    {/* <UnlockStatusBanner compact /> */}
+                </div>
 
                 {loading ? (
                     <div className="flex flex-col gap-6">
@@ -105,14 +112,6 @@ export default function DealioShowPage({ slug }: DealioShowPageProps) {
                             <Text variant="heading2" className="max-w-6xl text-text-primary" as="h1">
                                 {title}
                             </Text>
-                            {region && (
-                                <div className="flex items-center gap-2 text-text-secondary">
-                                    <MapPinIcon size={20} />
-                                    <Text variant="bodyMedium" className="text-text-secondary">
-                                        {region}
-                                    </Text>
-                                </div>
-                            )}
                         </div>
 
                         <div className="flex flex-col gap-3">
@@ -151,6 +150,14 @@ export default function DealioShowPage({ slug }: DealioShowPageProps) {
 
                         <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-[1fr_24rem]">
                             <div className="flex flex-col gap-8">
+                                {region && (
+                                <div className="flex items-center gap-2 text-text-secondary">
+                                    <MapPinIcon size={20} />
+                                    <Text variant="bodyMedium" className="text-text-secondary">
+                                        {region}
+                                    </Text>
+                                </div>
+                            )}
                                 {opportunity.tags && opportunity.tags.length > 0 && (
                                     <div className="flex flex-wrap gap-2">
                                         {opportunity.tags.map((tag, index) => (
@@ -166,7 +173,7 @@ export default function DealioShowPage({ slug }: DealioShowPageProps) {
 
                                 {description && (
                                     <section className="flex flex-col gap-4">
-                                        <Text variant="heading3" className="text-text-primary">
+                                        <Text variant="bodyLarge" className="text-text-primary">
                                             {t('description')}
                                         </Text>
                                         <div
@@ -180,12 +187,12 @@ export default function DealioShowPage({ slug }: DealioShowPageProps) {
 
                                 {similarOpportunities.length > 0 && (
                                     <section className="flex flex-col gap-5">
-                                        <Text variant="heading3" className="text-text-primary">
+                                        <Text variant="bodyLarge" className="text-text-primary">
                                             {componentTranslations.t('dealio_similar')}
                                         </Text>
                                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                             {similarOpportunities.slice(0, 2).map((similar) => (
-                                                <OpportunityCard key={similar.id || similar.slug} opportunity={similar} />
+                                                <OpportunityCard variant="small" key={similar.id || similar.slug} opportunity={similar} />
                                             ))}
                                         </div>
                                     </section>
