@@ -163,24 +163,26 @@ export default function OpportunityCard({ opportunity, variant = 'default' }: Op
                         </Text>
                     )}
 
-                    <div className="grid grid-cols-2 gap-3">
-                        <div className="rounded-xl bg-ui-1 p-3">
-                            <Text variant="bodySmall" className="text-text-secondary">
-                                {t('dealio_min_investment')}
-                            </Text>
-                            <Text variant="bodySmallBold" className="mt-1 text-text-primary">
-                                {formatSAR(opportunity.minInvestment, currentLocale) || '-'}
-                            </Text>
+                   <div className="flex items-end justify-between gap-4">
+                            <div className="flex flex-col gap-1">
+                                <Text variant="bodySmall" className="text-text-secondary">
+                                    {t('dealio_min_investment')}
+                                </Text>
+                                <Text variant="heading4" className="text-text-primary">
+                                    {formatSAR(opportunity.minInvestment, currentLocale)}
+                                </Text>
+                            </div>
+                            {(opportunity.roiMin || opportunity.roiMax) && (
+                                <div className="flex flex-col items-end gap-1 text-right">
+                                    <Text variant="bodySmall" className="text-text-secondary">
+                                        {t('dealio_expected_roi')}
+                                    </Text>
+                                    <Text variant="bodySmallBold" className="text-text-primary">
+                                        {[opportunity.roiMin, opportunity.roiMax].filter(Boolean).map((roi) => `${formatNumber(roi, currentLocale)}%`).join(' - ')}
+                                    </Text>
+                                </div>
+                            )}
                         </div>
-                        <div className="rounded-xl bg-ui-1 p-3">
-                            <Text variant="bodySmall" className="text-text-secondary">
-                                {t('dealio_expected_roi')}
-                            </Text>
-                            <Text variant="bodySmallBold" className="mt-1 text-text-primary">
-                                {roiRange ? `${roiRange}%` : '-'}
-                            </Text>
-                        </div>
-                    </div>
                 </motion.div>
             </motion.article>
         </Link>
