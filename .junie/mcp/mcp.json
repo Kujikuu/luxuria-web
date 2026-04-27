@@ -1,19 +1,19 @@
 {
     "mcpServers": {
         "laravel-boost": {
-            "command": "/Users/afifi/Library/Application Support/Herd/bin/php84",
+            "command": "/Users/apple/Library/Application Support/Herd/bin/php84",
             "args": [
-                "/Users/afifi/luxuria-web/artisan",
+                "/Users/apple/Desktop/Desktop Archive/luxuria-web/artisan",
                 "boost:mcp"
             ]
         },
         "herd": {
-            "command": "/Users/afifi/Library/Application Support/Herd/bin/php84",
+            "command": "/Users/apple/Library/Application Support/Herd/bin/php84",
             "args": [
                 "/Applications/Herd.app/Contents/Resources/herd-mcp.phar"
             ],
             "env": {
-                "SITE_PATH": "/Users/afifi/luxuria-web"
+                "SITE_PATH": "/Users/apple/Desktop/Desktop Archive/luxuria-web"
             }
         }
     }

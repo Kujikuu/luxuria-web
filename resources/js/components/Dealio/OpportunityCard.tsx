@@ -30,7 +30,7 @@ export default function OpportunityCard({ opportunity, featured = false }: Oppor
                 onHoverStart={() => setIsHovered(true)}
                 onHoverEnd={() => setIsHovered(false)}
             >
-                <div className={`relative w-full overflow-hidden ${featured ? 'h-72 xl:h-full' : 'h-64 sm:h-72'}`}>
+                <div className={`h-64 w-full overflow-hidden rounded-2xl ${featured ? 'h-72 xl:h-full' : 'h-64 sm:h-72'}`}>
                     {image ? (
                         <motion.img
                             src={image}
