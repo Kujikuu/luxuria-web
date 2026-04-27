@@ -112,6 +112,13 @@ export function normalizeOpportunity(opportunity: DealioOpportunity): DealioOppo
     };
 }
 
+export function decodeHtmlEntities(html: string): string {
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = html;
+
+    return textarea.value;
+}
+
 export function sortOpportunities(opportunities: DealioOpportunity[]): DealioOpportunity[] {
     let promotedFeaturedCount = 0;
 

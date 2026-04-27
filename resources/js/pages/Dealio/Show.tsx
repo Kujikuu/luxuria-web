@@ -2,7 +2,7 @@ import FinancialsGrid from '@/components/Dealio/FinancialsGrid';
 import InterestForm from '@/components/Dealio/InterestForm';
 import OpportunityCard from '@/components/Dealio/OpportunityCard';
 import RoiCalculator from '@/components/Dealio/RoiCalculator';
-import { formatTagLabel, localizedLocation, mediaUrl, normalizeOpportunity } from '@/components/Dealio/dealio-utils';
+import { decodeHtmlEntities, formatTagLabel, localizedLocation, mediaUrl, normalizeOpportunity } from '@/components/Dealio/dealio-utils';
 import { NavLink } from '@/components/Navigation/NavLink';
 import Tag from '@/components/Tag';
 import { Text } from '@/components/Typography';
@@ -178,7 +178,7 @@ export default function DealioShowPage({ slug }: DealioShowPageProps) {
                                         </Text>
                                         <div
                                             className="prose prose-sm max-w-none text-text-secondary [&>h2]:mt-4 [&>h2]:mb-2 [&>h2]:text-lg [&>h2]:font-semibold [&>h2]:text-text-primary [&>h3]:mt-3 [&>h3]:mb-2 [&>h3]:text-base [&>h3]:font-medium [&>h3]:text-text-primary [&>li]:mb-1 [&>ol]:mb-3 [&>p]:mb-3 [&>ul]:mb-3"
-                                            dangerouslySetInnerHTML={{ __html: description }}
+                                            dangerouslySetInnerHTML={{ __html: decodeHtmlEntities(description) }}
                                         />
                                     </section>
                                 )}
