@@ -36,6 +36,8 @@ export default function DealioIndexPage() {
     const [hasMore, setHasMore] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const featuredOpportunities = opportunities.filter((opportunity) => opportunity.promotedFeatured);
+    const standardOpportunities = opportunities.filter((opportunity) => !opportunity.promotedFeatured);
 
     const fetchOptions = async () => {
         const [regionsResponse, typesResponse] = await Promise.all([fetch('/api/dealio/regions'), fetch('/api/dealio/types')]);
@@ -183,10 +185,22 @@ export default function DealioIndexPage() {
                             <Button onClick={() => fetchOpportunities(true)}>{componentTranslations.t('dealio_retry')}</Button>
                         </div>
                     ) : opportunities.length > 0 ? (
-                        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
-                            {opportunities.map((opportunity) => (
-                                <OpportunityCard key={opportunity.id || opportunity.slug} opportunity={opportunity} featured={opportunity.promotedFeatured} />
-                            ))}
+                        <div className="flex flex-col gap-4 sm:gap-6">
+                            {featuredOpportunities.length > 0 && (
+                                <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
+                                    {featuredOpportunities.map((opportunity) => (
+                                        <OpportunityCard key={opportunity.id || opportunity.slug} opportunity={opportunity} featured />
+                                    ))}
+                                </div>
+                            )}
+
+                            {standardOpportunities.length > 0 && (
+                                <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
+                                    {standardOpportunities.map((opportunity) => (
+                                        <OpportunityCard key={opportunity.id || opportunity.slug} opportunity={opportunity} />
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     ) : (
                         <div className="flex flex-col items-center justify-center py-16">

@@ -24,7 +24,7 @@ export default function OpportunityCard({ opportunity, featured = false }: Oppor
     const fundedPercentage = Number(opportunity.fundedPercentage || 0);
 
     return (
-        <Link href={getLocalizedPath(`/dealio/${opportunity.slug}`)} className={featured ? 'xl:col-span-3' : ''}>
+        <Link href={getLocalizedPath(`/dealio/${opportunity.slug}`)}>
             <motion.article
                 className={`group h-full overflow-hidden rounded-2xl border border-ui-3 bg-ui-2 ${featured ? 'xl:grid xl:grid-cols-[0.9fr_1.1fr]' : 'flex flex-col'}`}
                 onHoverStart={() => setIsHovered(true)}
