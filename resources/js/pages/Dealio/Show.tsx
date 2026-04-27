@@ -2,7 +2,7 @@ import FinancialsGrid from '@/components/Dealio/FinancialsGrid';
 import InterestForm from '@/components/Dealio/InterestForm';
 import OpportunityCard from '@/components/Dealio/OpportunityCard';
 import RoiCalculator from '@/components/Dealio/RoiCalculator';
-import { formatTagLabel, mediaUrl, normalizeOpportunity } from '@/components/Dealio/dealio-utils';
+import { formatTagLabel, localizedLocation, mediaUrl, normalizeOpportunity } from '@/components/Dealio/dealio-utils';
 import { NavLink } from '@/components/Navigation/NavLink';
 import Tag from '@/components/Tag';
 import { Text } from '@/components/Typography';
@@ -75,7 +75,7 @@ export default function DealioShowPage({ slug }: DealioShowPageProps) {
     const description = opportunity ? (isArabic && opportunity.description_ar ? opportunity.description_ar : opportunity.description) : '';
     const mediaItems = opportunity?.mediaItems || [];
     const activeImage = mediaUrl(mediaItems[activeMediaIndex]);
-    const region = opportunity ? [isArabic && opportunity.city_ar ? opportunity.city_ar : opportunity.city, opportunity.regionName].filter(Boolean).join(', ') : '';
+    const region = opportunity ? localizedLocation(opportunity, isArabic) : '';
 
     return (
         <AppLayout color="white" section="hero">
@@ -117,7 +117,11 @@ export default function DealioShowPage({ slug }: DealioShowPageProps) {
 
                         <div className="flex flex-col gap-3">
                             {activeImage ? (
-                                <img src={activeImage} alt={title} className="h-[300px] w-full max-w-6xl rounded-2xl object-cover sm:h-[400px] md:h-[500px]" />
+                                <img
+                                    src={activeImage}
+                                    alt={title}
+                                    className="h-[300px] w-full max-w-6xl rounded-2xl object-cover sm:h-[400px] md:h-[500px]"
+                                />
                             ) : (
                                 <div className="flex h-[300px] w-full items-center justify-center rounded-2xl bg-ui-2 sm:h-[400px] md:h-[500px]">
                                     <Text variant="bodyMedium" className="text-text-secondary">
@@ -150,7 +154,10 @@ export default function DealioShowPage({ slug }: DealioShowPageProps) {
                                 {opportunity.tags && opportunity.tags.length > 0 && (
                                     <div className="flex flex-wrap gap-2">
                                         {opportunity.tags.map((tag, index) => (
-                                            <span key={`${formatTagLabel(tag)}-${index}`} className="rounded-full bg-ui-2 px-3 py-1.5 text-sm font-medium text-text-secondary">
+                                            <span
+                                                key={`${formatTagLabel(tag)}-${index}`}
+                                                className="rounded-full bg-ui-2 px-3 py-1.5 text-sm font-medium text-text-secondary"
+                                            >
                                                 {formatTagLabel(tag)}
                                             </span>
                                         ))}

@@ -15,6 +15,17 @@ export function optionLabel(option: DealioOption): string {
     return option.name || option.label || option.slug || String(option.id || '');
 }
 
+function localizedOptionLabel(option: DealioOption | undefined, locale: 'en' | 'ar'): string {
+    if (!option) {
+        return '';
+    }
+
+    const localizedName = option[`name_${locale}` as keyof DealioOption];
+    const localizedLabel = option[`label_${locale}` as keyof DealioOption];
+
+    return String(localizedName || localizedLabel || option.name || option.label || option.slug || option.id || '');
+}
+
 export function mediaUrl(item: string | DealioMediaItem | undefined): string {
     if (!item) {
         return '';
@@ -53,14 +64,32 @@ export function formatSAR(value: number | string | null | undefined, locale: str
     return formatted ? `${formatted} SAR` : '';
 }
 
+export function localizedLocation(opportunity: DealioOpportunity, isArabic: boolean): string {
+    const city = isArabic ? opportunity.city_ar || opportunity.cityNameAr || opportunity.cityName : opportunity.cityName;
+    const region = isArabic ? opportunity.regionNameAr || opportunity.regionName : opportunity.regionName;
+
+    return [city, region].filter(Boolean).join(', ');
+}
+
 export function normalizeOpportunity(opportunity: DealioOpportunity): DealioOpportunity {
     const region = opportunity.region;
     const financials = opportunity.financials || {};
+    const cityOption = typeof opportunity.city === 'object' ? opportunity.city : undefined;
+    const cityName =
+        opportunity.city_en ||
+        opportunity.cityName ||
+        (typeof opportunity.city === 'string' ? opportunity.city : localizedOptionLabel(cityOption, 'en'));
+    const cityNameAr = opportunity.city_ar || opportunity.cityNameAr || localizedOptionLabel(cityOption, 'ar');
 
     return {
         ...opportunity,
         typeLabel: opportunity.type_label || opportunity.typeLabel || formatTagLabel(opportunity.type || ''),
         regionName: typeof region === 'string' ? region : region?.name || region?.label || '',
+        regionNameAr: typeof region === 'string' ? '' : localizedOptionLabel(region, 'ar'),
+        city: cityName,
+        cityName,
+        city_ar: cityNameAr,
+        cityNameAr,
         mediaItems: Array.isArray(opportunity.media) ? opportunity.media : opportunity.mediaItems || [],
         highlights: Array.isArray(opportunity.highlights) ? opportunity.highlights : [],
         minInvestment: financials.min_investment ?? opportunity.min_investment ?? opportunity.minInvestment ?? null,

@@ -2,7 +2,9 @@ export interface DealioOption {
     id?: number | string;
     slug?: string;
     name?: string;
+    name_ar?: string;
     label?: string;
+    label_ar?: string;
 }
 
 export interface DealioMediaItem {
@@ -39,10 +41,14 @@ export interface DealioOpportunity {
     type?: string;
     type_label?: string;
     typeLabel?: string;
-    city?: string;
+    city?: string | DealioOption;
+    city_en?: string;
     city_ar?: string;
+    cityName?: string;
+    cityNameAr?: string;
     region?: string | DealioOption;
     regionName?: string;
+    regionNameAr?: string;
     industry?: string | DealioOption;
     industries?: Array<string | DealioOption>;
     media?: Array<string | DealioMediaItem>;

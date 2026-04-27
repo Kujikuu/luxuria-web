@@ -1,7 +1,10 @@
-import { Text } from "@/components/Typography";
-import { StarIcon } from "@phosphor-icons/react";
-import { useForm } from "@inertiajs/react";
-import { useTranslations } from "@/hooks/useLocalization";
+import { Text } from '@/components/Typography';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useTranslations } from '@/hooks/useLocalization';
+import { cn } from '@/lib/utils';
+import { useForm } from '@inertiajs/react';
+import { StarIcon } from '@phosphor-icons/react';
 
 interface PropertyPaywallProps {
     propertyId: number;
@@ -35,15 +38,15 @@ export default function PropertyPaywall({ propertyId, onUnlock }: PropertyPaywal
             },
             onError: (errors) => {
                 console.error('Form submission error:', errors);
-            }
+            },
         });
     };
 
     return (
-        <div className="flex flex-col gap-8 p-8 bg-gradient-to-br from-ui-2 to-ui-1 border-2 border-ui-3 rounded-2xl my-6">
+        <div className="my-6 flex flex-col gap-8 rounded-2xl border-2 border-ui-3 bg-gradient-to-br from-ui-2 to-ui-1 p-8">
             <div className="flex flex-col gap-6 text-center">
                 <div className="flex justify-center">
-                    <div className="p-4 bg-text-primary rounded-full">
+                    <div className="rounded-full bg-text-primary p-4">
                         <StarIcon size={32} className="text-ui-1" />
                     </div>
                 </div>
@@ -87,52 +90,76 @@ export default function PropertyPaywall({ propertyId, onUnlock }: PropertyPaywal
             {/* Unlock Form */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <div className="grid grid-cols-1 gap-4">
-                    <input
+                    <Input
                         type="text"
                         placeholder={t('name_placeholder') || 'Your name *'}
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
-                        className={`px-4 py-3 border rounded-xl bg-ui-1 text-text-primary placeholder-text-secondary focus:outline-none focus:border-text-primary transition-colors ${isRtl ? 'text-right' : 'text-left'} ${errors.name ? 'border-red-500' : 'border-ui-3'}`}
+                        className={cn(
+                            'h-12 rounded-xl border-ui-3 bg-ui-1 px-4 py-3 text-text-primary placeholder:text-text-secondary focus-visible:border-text-primary focus-visible:ring-text-primary/20',
+                            isRtl ? 'text-right' : 'text-left',
+                        )}
                         dir={isRtl ? 'rtl' : 'ltr'}
+                        aria-invalid={!!errors.name}
                         required
                     />
-                    {errors.name && <Text variant="bodySmall" className={`text-red-500 ${isRtl ? 'text-right' : 'text-left'}`}>{errors.name}</Text>}
+                    {errors.name && (
+                        <Text variant="bodySmall" className={`text-red-500 ${isRtl ? 'text-right' : 'text-left'}`}>
+                            {errors.name}
+                        </Text>
+                    )}
 
-                    <input
+                    <Input
                         type="tel"
                         placeholder={t('phone_placeholder') || 'Your phone number *'}
                         value={data.phone}
                         onChange={(e) => setData('phone', e.target.value)}
-                        className={`px-4 py-3 border rounded-xl bg-ui-1 text-text-primary placeholder-text-secondary focus:outline-none focus:border-text-primary transition-colors ${isRtl ? 'text-right' : 'text-left'} ${errors.phone ? 'border-red-500' : 'border-ui-3'}`}
+                        className={cn(
+                            'h-12 rounded-xl border-ui-3 bg-ui-1 px-4 py-3 text-text-primary placeholder:text-text-secondary focus-visible:border-text-primary focus-visible:ring-text-primary/20',
+                            isRtl ? 'text-right' : 'text-left',
+                        )}
                         dir={isRtl ? 'rtl' : 'ltr'}
+                        aria-invalid={!!errors.phone}
                         required
                     />
-                    {errors.phone && <Text variant="bodySmall" className={`text-red-500 ${isRtl ? 'text-right' : 'text-left'}`}>{errors.phone}</Text>}
+                    {errors.phone && (
+                        <Text variant="bodySmall" className={`text-red-500 ${isRtl ? 'text-right' : 'text-left'}`}>
+                            {errors.phone}
+                        </Text>
+                    )}
 
-                    <input
+                    <Input
                         type="email"
                         placeholder={t('email_placeholder') || 'Your email (optional)'}
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
-                        className={`px-4 py-3 border rounded-xl bg-ui-1 text-text-primary placeholder-text-secondary focus:outline-none focus:border-text-primary transition-colors ${isRtl ? 'text-right' : 'text-left'} ${errors.email ? 'border-red-500' : 'border-ui-3'}`}
+                        className={cn(
+                            'h-12 rounded-xl border-ui-3 bg-ui-1 px-4 py-3 text-text-primary placeholder:text-text-secondary focus-visible:border-text-primary focus-visible:ring-text-primary/20',
+                            isRtl ? 'text-right' : 'text-left',
+                        )}
                         dir={isRtl ? 'rtl' : 'ltr'}
+                        aria-invalid={!!errors.email}
                     />
-                    {errors.email && <Text variant="bodySmall" className={`text-red-500 ${isRtl ? 'text-right' : 'text-left'}`}>{errors.email}</Text>}
+                    {errors.email && (
+                        <Text variant="bodySmall" className={`text-red-500 ${isRtl ? 'text-right' : 'text-left'}`}>
+                            {errors.email}
+                        </Text>
+                    )}
                 </div>
-                <button
+                <Button
                     type="submit"
                     disabled={processing || !data.name.trim() || !data.phone.trim()}
-                    className="px-6 py-3 bg-text-primary text-ui-1 rounded-xl font-medium hover:bg-text-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all w-full flex items-center justify-center gap-2"
+                    className="h-12 w-full rounded-xl bg-text-primary px-6 py-3 text-ui-1 hover:bg-text-primary/90"
                 >
                     {processing ? (
                         <>
-                            <div className="animate-spin rounded-full h-4 w-4 border-2 border-ui-1 border-t-transparent"></div>
+                            <div className="h-4 w-4 animate-spin rounded-full border-2 border-ui-1 border-t-transparent"></div>
                             {t('submitting') || 'Submitting...'}
                         </>
                     ) : (
                         t('unlock') || 'Unlock'
                     )}
-                </button>
+                </Button>
             </form>
         </div>
     );

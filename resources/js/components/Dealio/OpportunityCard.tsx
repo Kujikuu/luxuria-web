@@ -2,11 +2,11 @@ import { Text } from '@/components/Typography';
 import { Progress } from '@/components/ui/progress';
 import { useLocale, useTranslations } from '@/hooks/useLocalization';
 import type { DealioOpportunity } from '@/types/dealio';
-import { ArrowUpRightIcon, MapPinIcon, TrendUpIcon } from '@phosphor-icons/react';
 import { Link } from '@inertiajs/react';
+import { ArrowUpRightIcon, MapPinIcon, TrendUpIcon } from '@phosphor-icons/react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
-import { formatNumber, formatSAR, formatTagLabel, mediaUrl } from './dealio-utils';
+import { formatNumber, formatSAR, formatTagLabel, localizedLocation, mediaUrl } from './dealio-utils';
 
 interface OpportunityCardProps {
     opportunity: DealioOpportunity;
@@ -20,7 +20,7 @@ export default function OpportunityCard({ opportunity, featured = false }: Oppor
     const image = mediaUrl(opportunity.mediaItems?.[0]);
     const title = isArabic && opportunity.title_ar ? opportunity.title_ar : opportunity.title;
     const summary = isArabic && opportunity.summary_ar ? opportunity.summary_ar : opportunity.summary;
-    const region = [isArabic && opportunity.city_ar ? opportunity.city_ar : opportunity.city, opportunity.regionName].filter(Boolean).join(', ');
+    const region = localizedLocation(opportunity, isArabic);
     const fundedPercentage = Number(opportunity.fundedPercentage || 0);
 
     return (
@@ -49,9 +49,7 @@ export default function OpportunityCard({ opportunity, featured = false }: Oppor
                         </div>
                     )}
                     <div className="absolute top-3 right-3 left-3 flex items-start justify-between gap-3">
-                        <span className="rounded-full bg-primary px-3 py-1 text-xs font-semibold text-ui-1">
-                            {opportunity.typeLabel}
-                        </span>
+                        <span className="rounded-full bg-primary px-3 py-1 text-xs font-semibold text-ui-1">{opportunity.typeLabel}</span>
                         {opportunity.is_featured && (
                             <span className="rounded-full bg-ui-1 px-3 py-1 text-xs font-semibold text-primary">{t('dealio_featured')}</span>
                         )}
@@ -89,7 +87,10 @@ export default function OpportunityCard({ opportunity, featured = false }: Oppor
                     {opportunity.tags && opportunity.tags.length > 0 && (
                         <div className="flex flex-wrap gap-1.5">
                             {opportunity.tags.slice(0, featured ? 4 : 3).map((tag, index) => (
-                                <span key={`${formatTagLabel(tag)}-${index}`} className="rounded-full bg-ui-3 px-2.5 py-1 text-xs font-medium text-text-secondary">
+                                <span
+                                    key={`${formatTagLabel(tag)}-${index}`}
+                                    className="rounded-full bg-ui-3 px-2.5 py-1 text-xs font-medium text-text-secondary"
+                                >
                                     {formatTagLabel(tag)}
                                 </span>
                             ))}
@@ -112,7 +113,10 @@ export default function OpportunityCard({ opportunity, featured = false }: Oppor
                                         {t('dealio_expected_roi')}
                                     </Text>
                                     <Text variant="bodySmallBold" className="text-text-primary">
-                                        {[opportunity.roiMin, opportunity.roiMax].filter(Boolean).map((roi) => `${formatNumber(roi, currentLocale)}%`).join(' - ')}
+                                        {[opportunity.roiMin, opportunity.roiMax]
+                                            .filter(Boolean)
+                                            .map((roi) => `${formatNumber(roi, currentLocale)}%`)
+                                            .join(' - ')}
                                     </Text>
                                 </div>
                             )}

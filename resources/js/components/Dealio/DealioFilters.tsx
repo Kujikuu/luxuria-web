@@ -59,16 +59,16 @@ export default function DealioFilters({
                         placeholder={t('dealio_search_placeholder')}
                         value={search}
                         onChange={(event) => onSearchChange(event.target.value)}
-                        onKeyPress={handleKeyPress}
+                        onKeyDown={handleKeyPress}
                         className={isRtl ? 'pr-10 text-right' : 'pl-10 text-left'}
                         dir={isRtl ? 'rtl' : 'ltr'}
                     />
                 </div>
 
                 <div className="flex flex-wrap justify-between gap-4">
-                    <div className="flex gap-4">
+                    <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:w-auto lg:grid-cols-3">
                         <Select value={displaySelectValue(region)} onValueChange={(value) => onRegionChange(normalizeSelectValue(value))}>
-                            <SelectTrigger>
+                            <SelectTrigger className="w-full min-w-0 bg-ui-1 lg:min-w-48" dir={isRtl ? 'rtl' : 'ltr'}>
                                 <SelectValue placeholder={t('dealio_region')} />
                             </SelectTrigger>
                             <SelectContent>
@@ -82,7 +82,7 @@ export default function DealioFilters({
                         </Select>
 
                         <Select value={displaySelectValue(type)} onValueChange={(value) => onTypeChange(normalizeSelectValue(value))}>
-                            <SelectTrigger>
+                            <SelectTrigger className="w-full min-w-0 bg-ui-1 lg:min-w-48" dir={isRtl ? 'rtl' : 'ltr'}>
                                 <SelectValue placeholder={t('dealio_type')} />
                             </SelectTrigger>
                             <SelectContent>
@@ -95,8 +95,11 @@ export default function DealioFilters({
                             </SelectContent>
                         </Select>
 
-                        <Select value={displaySelectValue(investmentRange)} onValueChange={(value) => onInvestmentRangeChange(normalizeSelectValue(value))}>
-                            <SelectTrigger>
+                        <Select
+                            value={displaySelectValue(investmentRange)}
+                            onValueChange={(value) => onInvestmentRangeChange(normalizeSelectValue(value))}
+                        >
+                            <SelectTrigger className="w-full min-w-0 bg-ui-1 lg:min-w-56" dir={isRtl ? 'rtl' : 'ltr'}>
                                 <SelectValue placeholder={t('dealio_investment_range')} />
                             </SelectTrigger>
                             <SelectContent>
