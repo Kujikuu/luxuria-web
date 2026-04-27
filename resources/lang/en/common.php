@@ -18,6 +18,7 @@ return [
     'about' => 'About',
     'contact' => 'Contact',
     'properties' => 'Properties',
+    'dealio' => 'DEALIO™',
     'blog' => 'Blog',
     'search' => 'Search',
     'menu' => 'Menu',

@@ -41,6 +41,15 @@ return [
     'property_inquiry_title' => 'مهتم بهذا العقار؟',
     'property_inquiry_description' => 'أرسل لنا استفسارك وسنتواصل معك قريباً.',
 
+    // Dealio page
+    'dealio_title' => 'DEALIO',
+    'dealio_header' => 'اكتشف فرص الاستثمار العقاري',
+    'dealio_subtitle' => 'تصفح فرصاً عقارية منتقاة مع مؤشرات مالية واضحة ونسبة تمويل وتفاصيل الشركاء.',
+    'dealio_found_opportunities' => 'عرض :count فرصة عقارية',
+    'dealio_no_opportunities' => 'لم يتم العثور على فرص',
+    'dealio_no_opportunities_description' => 'جرب تعديل المنطقة أو نوع الفرصة أو حجم الاستثمار.',
+    'dealio_opportunity' => 'فرصة',
+
     // Blog page
     'blog' => 'المدونة',
     'blog_title' => 'المدونة',

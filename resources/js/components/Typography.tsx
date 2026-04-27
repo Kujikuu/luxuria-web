@@ -1,4 +1,4 @@
-import { JSX, ReactNode, forwardRef } from "react";
+import { ElementType, JSX, ReactNode, forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
 type TextVariant =
@@ -99,7 +99,7 @@ const Text = forwardRef<HTMLElement, TextProps>(
         const config = VARIANT_CONFIGS[variant];
         const defaultColor = variant === "bodyLight" ? "text-muted-foreground" : "text-foreground";
 
-        const Element = as || (VARIANT_TO_ELEMENT[variant] as keyof JSX.IntrinsicElements) || "p";
+        const Element = (as || (VARIANT_TO_ELEMENT[variant] as keyof JSX.IntrinsicElements) || "p") as ElementType;
 
         const variantClasses = cn(
             // Responsive font sizes using CSS custom properties

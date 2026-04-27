@@ -18,6 +18,7 @@ return [
     'about' => 'من نحن',
     'contact' => 'تواصل معنا',
     'properties' => 'العقارات',
+    'dealio' => 'DEALIO™',
     'blog' => 'المدونة',
     'search' => 'بحث',
     'menu' => 'القائمة',

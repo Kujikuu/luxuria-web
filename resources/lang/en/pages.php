@@ -41,6 +41,15 @@ return [
     'property_inquiry_title' => 'Interested in this property?',
     'property_inquiry_description' => 'Send us your inquiry and we\'ll get back to you soon.',
 
+    // Dealio page
+    'dealio_title' => 'DEALIO',
+    'dealio_header' => 'Discover real estate investment opportunities',
+    'dealio_subtitle' => 'Browse curated real estate opportunities with clear financials, funding progress, and partner details.',
+    'dealio_found_opportunities' => 'Showing :count real estate opportunities',
+    'dealio_no_opportunities' => 'No opportunities found',
+    'dealio_no_opportunities_description' => 'Try adjusting the region, type, or investment size filters.',
+    'dealio_opportunity' => 'Opportunity',
+
     // Blog page
     'blog' => 'Blog',
     'blog_title' => 'Blog',

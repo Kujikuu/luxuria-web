@@ -59,15 +59,19 @@ class HandleInertiaRequests extends Middleware
     private function getTranslations(string $locale): array
     {
         $translations = [];
-        
-        // Get all unique groups for this locale from the database
+
+        $groups = collect(['common', 'pages', 'components']);
+
+        // Add any extra unique groups from the database.
+        // Laravel's translation loader merges file translations with database overrides.
         $groups = \App\Models\Translation::where('locale', $locale)
             ->select('group')
             ->distinct()
-            ->pluck('group');
+            ->pluck('group')
+            ->merge($groups)
+            ->unique()
+            ->values();
 
-        // Load translations for each group using Laravel's translation service
-        // This will use our DatabaseTranslationLoader
         foreach ($groups as $group) {
             $translations[$group] = app('translator')->get($group, [], $locale);
         }

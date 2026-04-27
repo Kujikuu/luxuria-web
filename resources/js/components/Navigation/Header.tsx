@@ -6,7 +6,7 @@ import LanguageSwitcher from "../LanguageSwitcher";
 
 import { Link } from "@inertiajs/react";
 import PhoneMenu from "./PhoneMenu";
-import { useTranslations } from "@/hooks/useLocalization";
+import { useLocale, useTranslations } from "@/hooks/useLocalization";
 
 const appearEffect = {
     initial: { opacity: 0, y: 20 },
@@ -30,9 +30,11 @@ export default function Header({ section = "hero", color = "white" }: HeaderProp
     const [isMobile, setIsMobile] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const { t } = useTranslations();
+    const { getLocalizedPath } = useLocale();
 
     const navigationItems = [
         { href: '/properties', label: t('properties') },
+        { href: '/dealio', label: t('dealio') },
         { href: '/blog', label: t('blog') },
         { href: '/about', label: t('about') },
         { href: '/contact', label: t('contact') },
@@ -143,7 +145,7 @@ export default function Header({ section = "hero", color = "white" }: HeaderProp
                     {navigationItems.map((item) => (
                         <NavLink
                             key={item.href}
-                            href={item.href}
+                            href={getLocalizedPath(item.href)}
                             color={isScrolled ? scrollNavLinkColor : defaultNavLinkColor}
                         >
                             {item.label}
@@ -170,7 +172,7 @@ export default function Header({ section = "hero", color = "white" }: HeaderProp
                     {navigationItems.map((item) => (
                         <NavLink
                             key={item.href}
-                            href={item.href}
+                            href={getLocalizedPath(item.href)}
                             color="primary"
                         >
                             {item.label}

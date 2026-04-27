@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'dealio' => [
+        'api_url' => env('DEALIO_API_URL'),
+        'api_token' => env('DEALIO_API_TOKEN'),
+    ],
+
 ];

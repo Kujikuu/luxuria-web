@@ -4,9 +4,9 @@ namespace App\Services;
 
 use App\Models\Translation;
 use Illuminate\Contracts\Translation\Loader;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Translation\FileLoader;
-use Illuminate\Filesystem\Filesystem;
 
 class DatabaseTranslationLoader implements Loader
 {
@@ -27,7 +27,7 @@ class DatabaseTranslationLoader implements Loader
 
     public function __construct()
     {
-        $this->fileLoader = new FileLoader(new Filesystem(), [
+        $this->fileLoader = new FileLoader(new Filesystem, [
             resource_path('lang'),
             resource_path('lang/vendor'),
         ]);
@@ -39,7 +39,6 @@ class DatabaseTranslationLoader implements Loader
      * @param  string  $locale
      * @param  string  $group
      * @param  string|null  $namespace
-     * @return array
      */
     public function load($locale, $group, $namespace = null): array
     {
@@ -50,14 +49,17 @@ class DatabaseTranslationLoader implements Loader
 
         // Only handle our custom translation groups from database
         $customGroups = ['common', 'pages', 'components'];
-        if (!in_array($group, $customGroups)) {
+        if (! in_array($group, $customGroups)) {
             return $this->fileLoader->load($locale, $group, $namespace);
         }
 
         $cacheKey = $this->getCacheKey($locale, $group);
 
-        return Cache::remember($cacheKey, $this->cacheTtl * 60, function () use ($locale, $group) {
-            return Translation::getGroup($group, $locale);
+        return Cache::remember($cacheKey, $this->cacheTtl * 60, function () use ($locale, $group, $namespace) {
+            return array_replace(
+                $this->fileLoader->load($locale, $group, $namespace),
+                Translation::getGroup($group, $locale),
+            );
         });
     }
 
@@ -66,7 +68,6 @@ class DatabaseTranslationLoader implements Loader
      *
      * @param  string  $namespace
      * @param  string  $hint
-     * @return void
      */
     public function addNamespace($namespace, $hint): void
     {
@@ -77,7 +78,6 @@ class DatabaseTranslationLoader implements Loader
      * Add a new JSON path to the loader.
      *
      * @param  string  $path
-     * @return void
      */
     public function addJsonPath($path): void
     {
@@ -86,8 +86,6 @@ class DatabaseTranslationLoader implements Loader
 
     /**
      * Get all namespaces.
-     *
-     * @return array
      */
     public function namespaces(): array
     {
@@ -96,10 +94,6 @@ class DatabaseTranslationLoader implements Loader
 
     /**
      * Get cache key for translations
-     *
-     * @param  string  $locale
-     * @param  string  $group
-     * @return string
      */
     protected function getCacheKey(string $locale, string $group): string
     {
@@ -108,10 +102,6 @@ class DatabaseTranslationLoader implements Loader
 
     /**
      * Clear translation cache for a specific locale and group
-     *
-     * @param  string|null  $locale
-     * @param  string|null  $group
-     * @return void
      */
     public function clearCache(?string $locale = null, ?string $group = null): void
     {
@@ -119,23 +109,21 @@ class DatabaseTranslationLoader implements Loader
             Cache::forget($this->getCacheKey($locale, $group));
         } else {
             // Clear all translation cache
-            Cache::forget($this->cachePrefix . '.*');
+            Cache::forget($this->cachePrefix.'.*');
         }
     }
 
     /**
      * Refresh translation cache
-     *
-     * @return void
      */
     public function refreshCache(): void
     {
         $this->clearCache();
-        
+
         // Preload common translations for available locales
         $locales = ['en', 'ar'];
         $groups = ['common', 'pages', 'components'];
-        
+
         foreach ($locales as $locale) {
             foreach ($groups as $group) {
                 $this->load($locale, $group);
@@ -145,8 +133,6 @@ class DatabaseTranslationLoader implements Loader
 
     /**
      * Get all available translation groups
-     *
-     * @return array
      */
     public function getAvailableGroups(): array
     {
@@ -155,8 +141,6 @@ class DatabaseTranslationLoader implements Loader
 
     /**
      * Get all available locales
-     *
-     * @return array
      */
     public function getAvailableLocales(): array
     {

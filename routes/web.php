@@ -3,6 +3,7 @@
 use App\Helpers\LocaleHelper;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactInquiryController;
+use App\Http\Controllers\DealioProxyController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\PropertyInquiryController;
 use Illuminate\Http\Request;
@@ -63,6 +64,16 @@ Route::get('/', function () {
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties');
 Route::get('/properties/{slug}', [PropertyController::class, 'show'])->name('properties.show');
 
+Route::get('/dealio', function () {
+    return Inertia::render('Dealio/Index');
+})->name('dealio');
+
+Route::get('/dealio/{slug}', function (string $slug) {
+    return Inertia::render('Dealio/Show', [
+        'slug' => $slug,
+    ]);
+})->name('dealio.show');
+
 Route::get('/about', function () {
     return Inertia::render('About', [
         'faqs' => \App\Helpers\SystemSettingsHelper::getLocalizedFaqs(),
@@ -80,35 +91,35 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::get('/privacy-policy', function () {
     $page = \App\Models\CustomPage::findBySlug('privacy-policy');
-    
-    if (!$page) {
+
+    if (! $page) {
         abort(404);
     }
-    
+
     return Inertia::render('CustomPage', [
         'page' => [
             'slug' => $page->slug,
             'title' => $page->getLocalizedTitle(),
             'subtitle' => $page->getLocalizedSubtitle(),
             'content' => $page->getLocalizedContent(),
-        ]
+        ],
     ]);
 })->name('privacy-policy');
 
 Route::get('/terms-of-service', function () {
     $page = \App\Models\CustomPage::findBySlug('terms-of-service');
-    
-    if (!$page) {
+
+    if (! $page) {
         abort(404);
     }
-    
+
     return Inertia::render('CustomPage', [
         'page' => [
             'slug' => $page->slug,
             'title' => $page->getLocalizedTitle(),
             'subtitle' => $page->getLocalizedSubtitle(),
             'content' => $page->getLocalizedContent(),
-        ]
+        ],
     ]);
 })->name('terms-of-service');
 
@@ -129,6 +140,16 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'ar|he|fa|ur']], f
     Route::get('/properties', [PropertyController::class, 'index'])->name('localized.properties');
     Route::get('/properties/{slug}', [PropertyController::class, 'show'])->name('localized.properties.show');
 
+    Route::get('/dealio', function () {
+        return Inertia::render('Dealio/Index');
+    })->name('localized.dealio');
+
+    Route::get('/dealio/{slug}', function (string $locale, string $slug) {
+        return Inertia::render('Dealio/Show', [
+            'slug' => $slug,
+        ]);
+    })->name('localized.dealio.show');
+
     Route::get('/about', function () {
         return Inertia::render('About', [
             'faqs' => \App\Helpers\SystemSettingsHelper::getLocalizedFaqs(),
@@ -146,35 +167,35 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'ar|he|fa|ur']], f
 
     Route::get('/privacy-policy', function () {
         $page = \App\Models\CustomPage::findBySlug('privacy-policy');
-        
-        if (!$page) {
+
+        if (! $page) {
             abort(404);
         }
-        
+
         return Inertia::render('CustomPage', [
             'page' => [
                 'slug' => $page->slug,
                 'title' => $page->getLocalizedTitle(),
                 'subtitle' => $page->getLocalizedSubtitle(),
                 'content' => $page->getLocalizedContent(),
-            ]
+            ],
         ]);
     })->name('localized.privacy-policy');
 
     Route::get('/terms-of-service', function () {
         $page = \App\Models\CustomPage::findBySlug('terms-of-service');
-        
-        if (!$page) {
+
+        if (! $page) {
             abort(404);
         }
-        
+
         return Inertia::render('CustomPage', [
             'page' => [
                 'slug' => $page->slug,
                 'title' => $page->getLocalizedTitle(),
                 'subtitle' => $page->getLocalizedSubtitle(),
                 'content' => $page->getLocalizedContent(),
-            ]
+            ],
         ]);
     })->name('localized.terms-of-service');
 
@@ -187,4 +208,14 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'ar|he|fa|ur']], f
 Route::prefix('api')->group(function () {
     Route::get('/translations/{locale}', [App\Http\Controllers\LocaleController::class, 'getAllTranslations']);
     Route::get('/translations/{locale}/{namespace}', [App\Http\Controllers\LocaleController::class, 'getTranslations']);
+
+    Route::prefix('dealio')->group(function () {
+        Route::get('/opportunities', [DealioProxyController::class, 'opportunities'])->name('api.dealio.opportunities');
+        Route::get('/opportunities/{slug}', [DealioProxyController::class, 'show'])->name('api.dealio.opportunities.show');
+        Route::get('/opportunities/{slug}/similar', [DealioProxyController::class, 'similar'])->name('api.dealio.opportunities.similar');
+        Route::post('/opportunities/{slug}/view', [DealioProxyController::class, 'trackView'])->name('api.dealio.opportunities.view');
+        Route::get('/regions', [DealioProxyController::class, 'regions'])->name('api.dealio.regions');
+        Route::get('/types', [DealioProxyController::class, 'types'])->name('api.dealio.types');
+        Route::post('/leads', [DealioProxyController::class, 'leads'])->name('api.dealio.leads');
+    });
 });
