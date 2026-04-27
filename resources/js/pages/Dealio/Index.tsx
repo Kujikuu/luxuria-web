@@ -187,9 +187,9 @@ export default function DealioIndexPage() {
                     ) : opportunities.length > 0 ? (
                         <div className="flex flex-col gap-4 sm:gap-6">
                             {featuredOpportunities.length > 0 && (
-                                <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
+                                <div className="grid grid-cols-1 gap-4 sm:gap-6">
                                     {featuredOpportunities.map((opportunity) => (
-                                        <OpportunityCard key={opportunity.id || opportunity.slug} opportunity={opportunity} featured />
+                                        <OpportunityCard key={opportunity.id || opportunity.slug} opportunity={opportunity} variant="featured" />
                                     ))}
                                 </div>
                             )}
