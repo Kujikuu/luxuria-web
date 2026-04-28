@@ -1,3 +1,4 @@
+import SarAmount from '@/components/SarAmount';
 import { useLocale, useTranslations } from '@/hooks/useLocalization';
 import { Link } from '@inertiajs/react';
 import { RulerIcon } from '@phosphor-icons/react';
@@ -19,7 +20,7 @@ interface PropertyCardProps {
 
 export default function PropertyCard({ href, img, name, name_ar, price, area, propertyType }: PropertyCardProps) {
     const [isHovered, setIsHovered] = useState(false);
-    const { isArabic } = useLocale();
+    const { currentLocale, isArabic } = useLocale();
     const { t } = useTranslations('components');
 
     return (
@@ -62,7 +63,7 @@ export default function PropertyCard({ href, img, name, name_ar, price, area, pr
                         {isArabic && name_ar ? name_ar : name}
                     </Text>
                     <Text variant="heading4" className="text-text-primary">
-                        {Math.round(price).toLocaleString('en-US')} {isArabic ? 'ر.س' : 'SAR'}
+                        <SarAmount value={Math.round(price)} locale={currentLocale} />
                     </Text>
                     <div className="flex items-center gap-3 text-sm sm:gap-4 sm:text-base md:gap-6">
                         <div className="flex items-center gap-1.5 text-text-secondary">

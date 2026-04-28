@@ -1,7 +1,8 @@
+import SarAmount from '@/components/SarAmount';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useTranslations } from '@/hooks/useLocalization';
+import { useLocale, useTranslations } from '@/hooks/useLocalization';
 import type { DealioOption } from '@/types/dealio';
 import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { investmentRanges, optionLabel, optionValue } from './dealio-utils';
@@ -23,6 +24,10 @@ interface DealioFiltersProps {
 
 const normalizeSelectValue = (value: string) => (value === 'all' ? '' : value);
 const displaySelectValue = (value: string) => value || 'all';
+const compactAmountProps = {
+    maximumFractionDigits: 1,
+    notation: 'compact' as const,
+};
 
 export default function DealioFilters({
     regions,
@@ -39,11 +44,40 @@ export default function DealioFilters({
     onClear,
 }: DealioFiltersProps) {
     const { t, isRtl } = useTranslations('components');
+    const { currentLocale } = useLocale();
 
     const handleKeyPress = (event: React.KeyboardEvent) => {
         if (event.key === 'Enter') {
             onApply();
         }
+    };
+
+    const renderInvestmentRange = (range: (typeof investmentRanges)[number]) => {
+        if (range.value === '0_500000') {
+            return (
+                <span className="flex items-center gap-1.5">
+                    <span>{isRtl ? 'حتى' : 'Up to'}</span>
+                    <SarAmount value={range.max} locale={currentLocale} {...compactAmountProps} />
+                </span>
+            );
+        }
+
+        if (range.max === '') {
+            return (
+                <span className="flex items-center gap-1.5">
+                    <SarAmount value={range.min} locale={currentLocale} {...compactAmountProps} />
+                    <span>{isRtl ? 'وأكثر' : '+'}</span>
+                </span>
+            );
+        }
+
+        return (
+            <span className="flex items-center gap-1.5">
+                <SarAmount value={range.min} locale={currentLocale} {...compactAmountProps} />
+                <span>-</span>
+                <SarAmount value={range.max} locale={currentLocale} {...compactAmountProps} />
+            </span>
+        );
     };
 
     return (
@@ -106,7 +140,7 @@ export default function DealioFilters({
                                 <SelectItem value="all">{t('dealio_any_investment')}</SelectItem>
                                 {investmentRanges.map((range) => (
                                     <SelectItem key={range.value} value={range.value}>
-                                        {t(range.labelKey) || range.fallback}
+                                        {renderInvestmentRange(range)}
                                     </SelectItem>
                                 ))}
                             </SelectContent>

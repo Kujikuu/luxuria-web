@@ -1,6 +1,5 @@
 import { PageProps } from '@/types';
 import { usePage } from '@inertiajs/react';
-import { useEffect } from 'react';
 
 interface LocaleData {
     current: string;
@@ -70,7 +69,7 @@ export function useTranslations(namespace: string = 'common') {
     try {
         const page = usePage<PageProps>();
         currentLocale = page.props.locale?.current || 'en';
-        
+
         // Get translations from the page props (passed from Laravel)
         const pageTranslations = (page.props as any).translations || {};
 
@@ -106,7 +105,7 @@ export function useTranslations(namespace: string = 'common') {
                 // Format snake_case to Title Case as fallback
                 translation = key
                     .split('_')
-                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
                     .join(' ');
             } else {
                 translation = key;
@@ -281,10 +280,10 @@ const clientTranslations: TranslationsCache = {
             dealio_all_types: 'All types',
             dealio_investment_range: 'Investment size',
             dealio_any_investment: 'Any investment',
-            dealio_range_0_500000: 'Up to 500K SAR',
-            dealio_range_500000_2500000: '500K - 2.5M SAR',
-            dealio_range_2500000_10000000: '2.5M - 10M SAR',
-            dealio_range_10000000_plus: '10M+ SAR',
+            dealio_range_0_500000: 'Up to 500K',
+            dealio_range_500000_2500000: '500K - 2.5M',
+            dealio_range_2500000_10000000: '2.5M - 10M',
+            dealio_range_10000000_plus: '10M+',
             dealio_search: 'Search Opportunities',
             dealio_search_placeholder: 'Search opportunities by title, city...',
             dealio_no_photo: 'No photo',
@@ -416,10 +415,10 @@ const clientTranslations: TranslationsCache = {
             dealio_all_types: 'جميع الأنواع',
             dealio_investment_range: 'حجم الاستثمار',
             dealio_any_investment: 'أي حجم استثمار',
-            dealio_range_0_500000: 'حتى 500 ألف ريال',
-            dealio_range_500000_2500000: '500 ألف - 2.5 مليون ريال',
-            dealio_range_2500000_10000000: '2.5 مليون - 10 مليون ريال',
-            dealio_range_10000000_plus: '10 مليون ريال وأكثر',
+            dealio_range_0_500000: 'حتى 500 ألف',
+            dealio_range_500000_2500000: '500 ألف - 2.5 مليون',
+            dealio_range_2500000_10000000: '2.5 مليون - 10 مليون',
+            dealio_range_10000000_plus: '10 مليون وأكثر',
             dealio_search: 'البحث في الفرص',
             dealio_search_placeholder: 'البحث في الفرص بالعنوان أو المدينة...',
             dealio_no_photo: 'لا توجد صورة',

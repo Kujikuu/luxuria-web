@@ -1,10 +1,10 @@
 import type { DealioMediaItem, DealioOpportunity, DealioOption } from '@/types/dealio';
 
 export const investmentRanges = [
-    { value: '0_500000', min: 0, max: 500000, labelKey: 'dealio_range_0_500000', fallback: 'Up to 500K SAR' },
-    { value: '500000_2500000', min: 500000, max: 2500000, labelKey: 'dealio_range_500000_2500000', fallback: '500K - 2.5M SAR' },
-    { value: '2500000_10000000', min: 2500000, max: 10000000, labelKey: 'dealio_range_2500000_10000000', fallback: '2.5M - 10M SAR' },
-    { value: '10000000_plus', min: 10000000, max: '', labelKey: 'dealio_range_10000000_plus', fallback: '10M+ SAR' },
+    { value: '0_500000', min: 0, max: 500000, labelKey: 'dealio_range_0_500000', fallback: 'Up to 500K' },
+    { value: '500000_2500000', min: 500000, max: 2500000, labelKey: 'dealio_range_500000_2500000', fallback: '500K - 2.5M' },
+    { value: '2500000_10000000', min: 2500000, max: 10000000, labelKey: 'dealio_range_2500000_10000000', fallback: '2.5M - 10M' },
+    { value: '10000000_plus', min: 10000000, max: '', labelKey: 'dealio_range_10000000_plus', fallback: '10M+' },
 ] as const;
 
 export function optionValue(option: DealioOption): string {
@@ -56,12 +56,6 @@ export function formatPercent(value: number | string | null | undefined, locale:
     }
 
     return `${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(Number(value))}%`;
-}
-
-export function formatSAR(value: number | string | null | undefined, locale: string = 'en-US'): string {
-    const formatted = formatNumber(value, locale);
-
-    return formatted ? `${formatted} SAR` : '';
 }
 
 export function localizedLocation(opportunity: DealioOpportunity, isArabic: boolean): string {

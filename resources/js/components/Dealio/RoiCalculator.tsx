@@ -1,9 +1,9 @@
+import SarAmount, { SarIcon } from '@/components/SarAmount';
 import { Text } from '@/components/Typography';
 import { Input } from '@/components/ui/input';
 import { useLocale, useTranslations } from '@/hooks/useLocalization';
 import type { DealioOpportunity } from '@/types/dealio';
 import { useMemo, useState } from 'react';
-import { formatSAR } from './dealio-utils';
 
 interface RoiCalculatorProps {
     opportunity: DealioOpportunity;
@@ -50,9 +50,7 @@ export default function RoiCalculator({ opportunity }: RoiCalculatorProps) {
                     placeholder={t('dealio_roi_placeholder')}
                     className="h-11 bg-ui-1"
                 />
-                <Text variant="bodySmall" className="shrink-0 text-text-secondary">
-                    SAR
-                </Text>
+                <SarIcon className="size-5 shrink-0 text-text-secondary" />
             </div>
 
             {calculation ? (
@@ -62,10 +60,10 @@ export default function RoiCalculator({ opportunity }: RoiCalculatorProps) {
                             {t('dealio_conservative')}
                         </Text>
                         <Text variant="bodySmall" className="mt-2 text-text-secondary">
-                            {t('dealio_annual_return')}: {formatSAR(calculation.conservativeAnnual, currentLocale)}
+                            {t('dealio_annual_return')}: <SarAmount value={calculation.conservativeAnnual} locale={currentLocale} />
                         </Text>
                         <Text variant="bodySmall" className="text-text-secondary">
-                            {t('dealio_total_return')}: {formatSAR(calculation.conservativeTotal, currentLocale)}
+                            {t('dealio_total_return')}: <SarAmount value={calculation.conservativeTotal} locale={currentLocale} />
                         </Text>
                     </div>
                     <div className="rounded-xl bg-ui-1 p-4">
@@ -73,10 +71,10 @@ export default function RoiCalculator({ opportunity }: RoiCalculatorProps) {
                             {t('dealio_optimistic')}
                         </Text>
                         <Text variant="bodySmall" className="mt-2 text-text-secondary">
-                            {t('dealio_annual_return')}: {formatSAR(calculation.optimisticAnnual, currentLocale)}
+                            {t('dealio_annual_return')}: <SarAmount value={calculation.optimisticAnnual} locale={currentLocale} />
                         </Text>
                         <Text variant="bodySmall" className="text-text-secondary">
-                            {t('dealio_total_return')}: {formatSAR(calculation.optimisticTotal, currentLocale)}
+                            {t('dealio_total_return')}: <SarAmount value={calculation.optimisticTotal} locale={currentLocale} />
                         </Text>
                     </div>
                 </div>

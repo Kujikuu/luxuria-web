@@ -1,25 +1,41 @@
+import SarAmount from '@/components/SarAmount';
 import { Text } from '@/components/Typography';
 import { Progress } from '@/components/ui/progress';
 import { useLocale, useTranslations } from '@/hooks/useLocalization';
 import type { DealioOpportunity } from '@/types/dealio';
-import { formatNumber, formatPercent, formatSAR } from './dealio-utils';
+import type { ReactNode } from 'react';
+import { formatNumber, formatPercent } from './dealio-utils';
 
 interface FinancialsGridProps {
     opportunity: DealioOpportunity;
 }
+
+const hasValue = (value: number | string | null | undefined): value is number | string => value !== null && value !== undefined && value !== '';
 
 export default function FinancialsGrid({ opportunity }: FinancialsGridProps) {
     const { currentLocale } = useLocale();
     const { t } = useTranslations('components');
     const financials = opportunity.financials || {};
     const fundedPercentage = Number(financials.funded_percentage || opportunity.fundedPercentage || 0);
-    const metrics = [
-        { label: t('dealio_min_investment'), value: formatSAR(financials.min_investment, currentLocale) },
-        { label: t('dealio_max_investment'), value: formatSAR(financials.max_investment, currentLocale) },
-        { label: t('dealio_target_amount'), value: formatSAR(financials.target_amount, currentLocale) },
+    const metrics: { label: string; value: ReactNode }[] = [
+        {
+            label: t('dealio_min_investment'),
+            value: hasValue(financials.min_investment) ? <SarAmount value={financials.min_investment} locale={currentLocale} /> : null,
+        },
+        {
+            label: t('dealio_max_investment'),
+            value: hasValue(financials.max_investment) ? <SarAmount value={financials.max_investment} locale={currentLocale} /> : null,
+        },
+        {
+            label: t('dealio_target_amount'),
+            value: hasValue(financials.target_amount) ? <SarAmount value={financials.target_amount} locale={currentLocale} /> : null,
+        },
         {
             label: t('dealio_expected_roi'),
-            value: [financials.expected_roi?.min, financials.expected_roi?.max].filter(Boolean).map((roi) => formatPercent(roi, currentLocale)).join(' - '),
+            value: [financials.expected_roi?.min, financials.expected_roi?.max]
+                .filter(Boolean)
+                .map((roi) => formatPercent(roi, currentLocale))
+                .join(' - '),
         },
         {
             label: t('dealio_investment_horizon'),

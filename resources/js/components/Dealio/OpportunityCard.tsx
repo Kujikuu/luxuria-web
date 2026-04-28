@@ -1,3 +1,4 @@
+import SarAmount from '@/components/SarAmount';
 import { Text } from '@/components/Typography';
 import { useLocale, useTranslations } from '@/hooks/useLocalization';
 import type { DealioOpportunity } from '@/types/dealio';
@@ -5,7 +6,7 @@ import { Link } from '@inertiajs/react';
 import { ArrowUpRightIcon, MapPinIcon, TrendUpIcon } from '@phosphor-icons/react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
-import { formatNumber, formatSAR, localizedLocation, mediaUrl } from './dealio-utils';
+import { formatNumber, localizedLocation, mediaUrl } from './dealio-utils';
 
 type OpportunityCardVariant = 'default' | 'small' | 'featured';
 
@@ -15,7 +16,6 @@ interface OpportunityCardProps {
 }
 
 export default function OpportunityCard({ opportunity, variant = 'default' }: OpportunityCardProps) {
-    const isSmall = variant === 'small';
     const isFeatured = variant === 'featured';
     const [isHovered, setIsHovered] = useState(false);
     const { currentLocale, getLocalizedPath, isArabic } = useLocale();
@@ -24,10 +24,6 @@ export default function OpportunityCard({ opportunity, variant = 'default' }: Op
     const title = isArabic && opportunity.title_ar ? opportunity.title_ar : opportunity.title;
     const summary = isArabic && opportunity.summary_ar ? opportunity.summary_ar : opportunity.summary;
     const region = localizedLocation(opportunity, isArabic);
-    const roiRange = [opportunity.roiMin, opportunity.roiMax]
-        .filter((value) => value !== null && value !== undefined && value !== '')
-        .map((value) => formatNumber(value, currentLocale))
-        .join(' - ');
 
     if (variant === 'small') {
         return (
@@ -87,7 +83,7 @@ export default function OpportunityCard({ opportunity, variant = 'default' }: Op
                                 {t('dealio_min_investment')}
                             </Text>
                             <Text variant="heading4" className="text-text-primary">
-                                {formatSAR(opportunity.minInvestment, currentLocale)}
+                                <SarAmount value={opportunity.minInvestment} locale={currentLocale} />
                             </Text>
                         </div>
                     </motion.div>
@@ -158,31 +154,34 @@ export default function OpportunityCard({ opportunity, variant = 'default' }: Op
                     </div>
 
                     {summary && (
-                        <Text variant="bodySmall" className="line-clamp-3 text-text-secondary grow">
+                        <Text variant="bodySmall" className="line-clamp-3 grow text-text-secondary">
                             {summary}
                         </Text>
                     )}
 
-                   <div className="flex items-end justify-between gap-4">
-                            <div className="flex flex-col gap-1">
+                    <div className="flex items-end justify-between gap-4">
+                        <div className="flex flex-col gap-1">
+                            <Text variant="bodySmall" className="text-text-secondary">
+                                {t('dealio_min_investment')}
+                            </Text>
+                            <Text variant="heading4" className="text-text-primary">
+                                <SarAmount value={opportunity.minInvestment} locale={currentLocale} />
+                            </Text>
+                        </div>
+                        {(opportunity.roiMin || opportunity.roiMax) && (
+                            <div className="flex flex-col items-end gap-1 text-right">
                                 <Text variant="bodySmall" className="text-text-secondary">
-                                    {t('dealio_min_investment')}
+                                    {t('dealio_expected_roi')}
                                 </Text>
-                                <Text variant="heading4" className="text-text-primary">
-                                    {formatSAR(opportunity.minInvestment, currentLocale)}
+                                <Text variant="bodySmallBold" className="text-text-primary">
+                                    {[opportunity.roiMin, opportunity.roiMax]
+                                        .filter(Boolean)
+                                        .map((roi) => `${formatNumber(roi, currentLocale)}%`)
+                                        .join(' - ')}
                                 </Text>
                             </div>
-                            {(opportunity.roiMin || opportunity.roiMax) && (
-                                <div className="flex flex-col items-end gap-1 text-right">
-                                    <Text variant="bodySmall" className="text-text-secondary">
-                                        {t('dealio_expected_roi')}
-                                    </Text>
-                                    <Text variant="bodySmallBold" className="text-text-primary">
-                                        {[opportunity.roiMin, opportunity.roiMax].filter(Boolean).map((roi) => `${formatNumber(roi, currentLocale)}%`).join(' - ')}
-                                    </Text>
-                                </div>
-                            )}
-                        </div>
+                        )}
+                    </div>
                 </motion.div>
             </motion.article>
         </Link>
