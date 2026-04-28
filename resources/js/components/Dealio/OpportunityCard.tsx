@@ -158,7 +158,7 @@ export default function OpportunityCard({ opportunity, variant = 'default' }: Op
                     </div>
 
                     {summary && (
-                        <Text variant="bodySmall" className="line-clamp-3 text-text-secondary">
+                        <Text variant="bodySmall" className="line-clamp-3 text-text-secondary grow">
                             {summary}
                         </Text>
                     )}
