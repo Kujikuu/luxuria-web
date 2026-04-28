@@ -37,6 +37,7 @@ export default function Footer() {
                             <Text variant='bodyBold' className="text-ui-1">{t('main_pages') || 'Main Pages'}</Text>
                             <NavLink color="ui-1" href={'/'}>{t('home')}</NavLink>
                             <NavLink color="ui-1" href={'/properties'}>{t('properties')}</NavLink>
+                            <NavLink color="ui-1" href={'/dealio'}>{t('dealio')}</NavLink>
                             <NavLink color="ui-1" href={'/blog'}>{t('blog')}</NavLink>
                             <NavLink color="ui-1" href={'/about'}>{t('about')}</NavLink>
                             <NavLink color="ui-1" href={'/contact'}>{t('contact')}</NavLink>
