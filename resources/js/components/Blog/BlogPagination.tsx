@@ -15,8 +15,8 @@ interface PaginationData {
     last_page: number;
     per_page: number;
     total: number;
-    from: number;
-    to: number;
+    from: number | null;
+    to: number | null;
     links: PaginationLink[];
 }
 
@@ -31,7 +31,9 @@ export default function BlogPagination({ pagination }: BlogPaginationProps) {
         return null;
     }
 
-    const { current_page, last_page, from, to, total, links } = pagination;
+    const { current_page, last_page, total, links } = pagination;
+    const from = pagination.from ?? 0;
+    const to = pagination.to ?? 0;
     const PrevIcon = isRtl ? ArrowRightIcon : ArrowLeftIcon;
     const NextIcon = isRtl ? ArrowLeftIcon : ArrowRightIcon;
 

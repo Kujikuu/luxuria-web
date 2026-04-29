@@ -4,6 +4,7 @@ use App\Helpers\LocaleHelper;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactInquiryController;
 use App\Http\Controllers\DealioProxyController;
+use App\Http\Controllers\NewsletterSubscriptionController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\PropertyInquiryController;
 use Illuminate\Http\Request;
@@ -88,6 +89,8 @@ Route::get('/contact', function () {
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+Route::post('/blog/{slug}/check-access', [BlogController::class, 'checkAccess'])->name('blog.check-access');
+Route::post('/blog/{slug}/subscribe', [NewsletterSubscriptionController::class, 'store'])->name('blog.subscribe');
 
 Route::get('/privacy-policy', function () {
     $page = \App\Models\CustomPage::findBySlug('privacy-policy');
@@ -164,6 +167,8 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'ar|he|fa|ur']], f
 
     Route::get('/blog', [BlogController::class, 'index'])->name('localized.blog');
     Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('localized.blog.show');
+    Route::post('/blog/{slug}/check-access', [BlogController::class, 'checkAccess'])->name('localized.blog.check-access');
+    Route::post('/blog/{slug}/subscribe', [NewsletterSubscriptionController::class, 'store'])->name('localized.blog.subscribe');
 
     Route::get('/privacy-policy', function () {
         $page = \App\Models\CustomPage::findBySlug('privacy-policy');

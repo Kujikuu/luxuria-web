@@ -40,4 +40,9 @@ return [
         'api_token' => env('DEALIO_API_TOKEN'),
     ],
 
+    'blog' => [
+        'url' => env('BLOG_API_URL', 'https://blog.test'),
+        'api_key' => env('BLOG_API_KEY'),
+    ],
+
 ];

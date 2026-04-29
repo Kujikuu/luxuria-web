@@ -8,17 +8,25 @@ import { useState } from 'react';
 
 interface BlogSearchProps {
     initialSearch: string;
+    filters?: {
+        category?: string;
+        tag?: string;
+    };
 }
 
-export default function BlogSearch({ initialSearch }: BlogSearchProps) {
+export default function BlogSearch({ initialSearch, filters = {} }: BlogSearchProps) {
     const { t, isRtl } = useTranslations('components');
     const [search, setSearch] = useState(initialSearch || '');
+    const blogPath = typeof window !== 'undefined' ? window.location.pathname : '/blog';
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         router.get(
-            '/blog',
-            { search },
+            blogPath,
+            {
+                ...filters,
+                search: search || undefined,
+            },
             {
                 preserveState: true,
                 replace: true,
@@ -29,8 +37,8 @@ export default function BlogSearch({ initialSearch }: BlogSearchProps) {
     const handleClearSearch = () => {
         setSearch('');
         router.get(
-            '/blog',
-            {},
+            blogPath,
+            filters,
             {
                 preserveState: true,
                 replace: true,
