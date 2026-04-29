@@ -37,7 +37,7 @@ function BlogCardLarge({
     return (
         <Link href={href}>
             <div className="group flex w-80 flex-col gap-3 overflow-hidden rounded-2xl border border-ui-3 bg-ui-2 md:w-3xl md:flex-row lg:w-6xl">
-                <div className="flex h-[320px] w-full overflow-hidden shadow-md md:h-[460px]">
+                <div className="flex h-[320px] w-full overflow-hidden md:h-[460px]">
                     <img
                         src={img || 'https://placehold.co/150'}
                         alt="Blog Image"
@@ -115,7 +115,7 @@ function BlogCardMedium({ img, date, title, title_ar, href }: BlogCardMediumProp
     return (
         <Link href={href}>
             <div className="group flex flex-col gap-6 overflow-hidden rounded-2xl border border-ui-3 bg-ui-2 pb-6 transition-colors duration-400 hover:border-ui-3 hover:bg-ui-2 md:border-ui-3/0 md:bg-ui-2/0">
-                <div className="flex h-[300px] w-full overflow-hidden rounded-2xl shadow-md">
+                <div className="flex h-[300px] w-full overflow-hidden rounded-2xl">
                     <img
                         src={img || 'https://placehold.co/150'}
                         alt="Blog Image"

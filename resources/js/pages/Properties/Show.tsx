@@ -152,7 +152,7 @@ export default function PropertyPage({ property }: PropertyPageProps) {
                     {isArabic && property.title_ar ? property.title_ar : property.title}
                 </Text>
                 <img
-                    src={property.images[0] || 'https://placehold.co/1200x500.png?text=No+Image'}
+                    src={property.images[0] || '/assets/images/img-placeholder.png'}
                     alt={property.title}
                     className="h-[300px] w-full max-w-6xl rounded-2xl object-cover sm:h-[400px] md:h-[500px]"
                 />

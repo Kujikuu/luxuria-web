@@ -43,7 +43,7 @@ export default function HomeProperties({ properties }: HomePropertiesProps) {
                             <PropertyCard
                                 key={property.id}
                                 href={`/properties/${property.slug}`}
-                                img={property.images[0] || 'https://placehold.co/400x300.png?text=No+Image'}
+                                img={property.images[0] || '/assets/images/img-placeholder.png'}
                                 name={property.title}
                                 name_ar={property.title_ar}
                                 price={property.price}

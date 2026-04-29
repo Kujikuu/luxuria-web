@@ -24,7 +24,7 @@ class PropertiesTable
                     ->disk('public')
                     ->size(60)
                     ->square()
-                    ->defaultImageUrl('https://placehold.co/300x300.png?text=No+Image'),
+                    ->defaultImageUrl('/assets/images/img-placeholder.png'),
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable()
