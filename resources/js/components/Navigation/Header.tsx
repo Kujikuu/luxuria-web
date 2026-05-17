@@ -1,31 +1,31 @@
-import { NavLink } from "./NavLink";
-import { useState, useEffect } from "react";
-import { LuxuriaLogo } from "./LuxuriaLogo";
 import { motion } from 'framer-motion';
-import LanguageSwitcher from "../LanguageSwitcher";
+import { useEffect, useState } from 'react';
+import LanguageSwitcher from '../LanguageSwitcher';
+import { LuxuriaLogo } from './LuxuriaLogo';
+import { NavLink } from './NavLink';
 
-import { Link } from "@inertiajs/react";
-import PhoneMenu from "./PhoneMenu";
-import { useLocale, useTranslations } from "@/hooks/useLocalization";
+import { useLocale, useTranslations } from '@/hooks/useLocalization';
+import { Link } from '@inertiajs/react';
+import PhoneMenu from './PhoneMenu';
 
 const appearEffect = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, amount: 0.3 },
     transition: {
-        type: "spring" as const,
+        type: 'spring' as const,
         stiffness: 400,
         damping: 80,
         mass: 1,
-    }
-}
+    },
+};
 
 interface HeaderProps {
     section?: string;
     color?: string;
 }
 
-export default function Header({ section = "hero", color = "white" }: HeaderProps) {
+export default function Header({ section = 'hero', color = 'white' }: HeaderProps) {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -85,82 +85,78 @@ export default function Header({ section = "hero", color = "white" }: HeaderProp
     // Default state styling based on color prop
     const getDefaultStyling = () => {
         switch (color) {
-            case "white":
-                return "bg-white text-primary";
-            case "transparent":
-                return "bg-transparent text-white";
-            case "dark":
-                return "bg-gray-900 text-white";
+            case 'white':
+                return 'bg-ui-1 text-secondary';
+            case 'transparent':
+                return 'bg-transparent text-white';
+            case 'dark':
+                return 'bg-secondary text-ui-1';
             default:
-                return "bg-transparent text-white";
+                return 'bg-transparent text-white';
         }
     };
 
     // Logo color management
     const getLogoColorClass = () => {
         if (isScrolled) {
-            return "fill-text-primary"; // Always primary color when scrolled
+            return 'fill-secondary';
         }
 
         switch (color) {
-            case "white":
-                return "fill-text-primary";
-            case "transparent":
-                return "fill-white";
-            case "dark":
-                return "fill-white";
+            case 'white':
+                return 'fill-secondary';
+            case 'transparent':
+                return 'fill-white';
+            case 'dark':
+                return 'fill-white';
             default:
-                return "fill-white";
+                return 'fill-white';
         }
     };
 
     // Scroll variant always uses white background with primary text
-    const scrollStyling = "bg-white";
-    const scrollNavLinkColor = "dark";
-    const defaultNavLinkColor = color === "white" ? "dark" : "white";
+    const scrollStyling = 'bg-ui-1/95 backdrop-blur-xl shadow-xs';
+    const scrollNavLinkColor = 'dark';
+    const defaultNavLinkColor = color === 'white' ? 'dark' : 'white';
 
     return (
-        <div className={`sticky z-50 w-full h-auto order-first top-0 left-0 right-0 transition-all duration-300 ${isScrolled ? scrollStyling : getDefaultStyling()
-            }`}>
-            <nav className={`flex items-center justify-between relative overflow-visible transition-all duration-300 ${isScrolled
-                ? 'py-3 px-4 md:py-5 md:px-11'
-                : 'py-4 px-4 md:py-6 md:px-11'
-                }`}>
-                <div className="flex items-center relative">
+        <div
+            className={`sticky top-0 right-0 left-0 z-50 order-first h-auto w-full transition-all duration-300 ${
+                isScrolled ? scrollStyling : getDefaultStyling()
+            }`}
+        >
+            <nav
+                className={`relative mx-auto flex max-w-7xl items-center justify-between overflow-visible transition-all duration-300 ${
+                    isScrolled ? 'px-4 py-3 md:px-11 md:py-5' : 'px-4 py-4 md:px-11 md:py-6'
+                }`}
+            >
+                <div className="relative flex items-center">
                     <Link href="/">
                         <LuxuriaLogo
-                            width={isScrolled ? (isMobile ? 120 : 140) : (isMobile ? 135 : 159)}
-                            height={isScrolled ? (isMobile ? 20 : 23) : (isMobile ? 22 : 26)}
+                            width={isScrolled ? (isMobile ? 120 : 140) : isMobile ? 135 : 159}
+                            height={isScrolled ? (isMobile ? 20 : 23) : isMobile ? 22 : 26}
                             className={getLogoColorClass()}
                         />
                     </Link>
                 </div>
                 <div className="md:hidden">
-                    <PhoneMenu
-                        color={isScrolled ? "primary" : (color === "white" ? "primary" : "white")}
-                        onToggle={handleMobileMenuToggle}
-                    />
+                    <PhoneMenu color={isScrolled ? 'primary' : color === 'white' ? 'primary' : 'white'} onToggle={handleMobileMenuToggle} />
                 </div>
-                <div className="hidden md:flex items-center gap-6">
+                <div className="hidden items-center gap-6 md:flex">
                     {navigationItems.map((item) => (
-                        <NavLink
-                            key={item.href}
-                            href={getLocalizedPath(item.href)}
-                            color={isScrolled ? scrollNavLinkColor : defaultNavLinkColor}
-                        >
+                        <NavLink key={item.href} href={getLocalizedPath(item.href)} color={isScrolled ? scrollNavLinkColor : defaultNavLinkColor}>
                             {item.label}
                         </NavLink>
                     ))}
                     <div className="ms-2">
                         <LanguageSwitcher
-                            className={`
-                                ${isScrolled
-                                    ? 'border-gray-300 text-gray-700 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700'
+                            className={` ${
+                                isScrolled
+                                    ? 'border-ui-3 text-secondary hover:border-primary/35 hover:bg-primary-soft dark:border-ui-3/20 dark:bg-secondary dark:text-ui-1 dark:hover:bg-secondary-soft/10'
                                     : color === 'white'
-                                        ? 'border-gray-300 text-gray-700 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700'
-                                        : 'border-white/20 text-white hover:bg-white/10 bg-transparent'
-                                }
-                            `}
+                                      ? 'border-ui-3 text-secondary hover:border-primary/35 hover:bg-primary-soft dark:border-ui-3/20 dark:bg-secondary dark:text-ui-1 dark:hover:bg-secondary-soft/10'
+                                      : 'border-white/20 bg-transparent text-white hover:bg-white/10'
+                            } `}
                         />
                     </div>
                 </div>
@@ -168,21 +164,21 @@ export default function Header({ section = "hero", color = "white" }: HeaderProp
 
             {/* Mobile Menu Overlay */}
             {isMobileMenuOpen && (
-                <motion.div {...appearEffect} transition={appearEffect.transition} className='absolute top-20 right-5 w-max z-50 md:hidden flex flex-col items-end bg-white rounded-2xl shadow-md p-8 gap-8'>
+                <motion.div
+                    {...appearEffect}
+                    transition={appearEffect.transition}
+                    className="absolute top-20 right-5 z-50 flex w-max flex-col items-end gap-8 rounded-2xl bg-ui-1 p-8 md:hidden"
+                >
                     {navigationItems.map((item) => (
-                        <NavLink
-                            key={item.href}
-                            href={getLocalizedPath(item.href)}
-                            color="primary"
-                        >
+                        <NavLink key={item.href} href={getLocalizedPath(item.href)} color="primary">
                             {item.label}
                         </NavLink>
                     ))}
-                    <div className="mt-4 pt-4 border-t border-gray-200">
-                        <LanguageSwitcher className="border-gray-300 text-gray-700 hover:bg-gray-50" />
+                    <div className="mt-4 border-t border-ui-3 pt-4">
+                        <LanguageSwitcher className="border-ui-3 text-secondary hover:bg-primary-soft" />
                     </div>
                 </motion.div>
             )}
-        </div >
+        </div>
     );
 }

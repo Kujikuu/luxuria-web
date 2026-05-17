@@ -50,7 +50,7 @@ export default function PropertyPaywall({ propertyId, onUnlock }: PropertyPaywal
                         <StarIcon size={32} className="text-ui-1" />
                     </div>
                 </div>
-                <Text variant="heading3" className={`text-text-primary ${isRtl ? 'text-right' : 'text-left'}`}>
+                <Text variant="heading3" className={`text-text-primary text-center`}>
                     {t('paywall_title') || 'Please add your details to unlock this property'}
                 </Text>
                 {/* <Text variant="bodyLarge" className="text-text-secondary max-w-md mx-auto">

@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
+@import 'tw-animate-css';
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
@@ -8,21 +8,25 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
 @theme {
-    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
-    --font-serif: 'Inter Display', ui-serif, serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-serif: 'Inter Display', ui-serif, serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
-    --font-arabic: 'Cairo', 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-arabic:
+        'Cairo', 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
-    --color-primary: #49A7DE;
-    --color-text-primary: #171717;
-    --color-text-secondary: #5C5C5C;
-    --color-ui-1: #FFFFFF;
-    --color-ui-2: #F8F8F8;
-    --color-ui-3: #EBEBEB;
+    --color-primary: #49a7de;
+    --color-primary-deep: #1d789f;
+    --color-primary-soft: #e8f6fd;
+    --color-secondary: #123846;
+    --color-secondary-soft: #eaf1f3;
+    --color-accent-primary: #c8a96a;
+    --color-accent-soft: #f6efe1;
+    --color-text-primary: #15191b;
+    --color-text-secondary: #5f6a6f;
+    --color-ui-1: #fefefe;
+    --color-ui-2: #f6f8f8;
+    --color-ui-3: #e4ebee;
 
     /* Custom font sizes for typography component */
     --font-size-14: 14px;
@@ -53,7 +57,7 @@
     --color-popover-foreground: var(--popover-foreground);
     /* --color-primary: var(--primary); */
     --color-primary-foreground: var(--primary-foreground);
-    --color-secondary: var(--secondary);
+    /* --color-secondary: var(--secondary); */
     --color-secondary-foreground: var(--secondary-foreground);
     --color-muted: var(--muted);
     --color-muted-foreground: var(--muted-foreground);
@@ -86,18 +90,18 @@
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
+    --primary: #49a7de;
+    --primary-foreground: #fefefe;
+    /* --secondary: oklch(0.97 0 0); */
+    --secondary-foreground: #fefefe;
+    --muted: #f6f8f8;
+    --muted-foreground: #5f6a6f;
+    --accent: #eaf1f3;
+    --accent-foreground: #123846;
     --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
+    --border: #dce6ea;
+    --input: #dce6ea;
+    --ring: #49a7de;
     --chart-1: oklch(0.646 0.222 41.116);
     --chart-2: oklch(0.6 0.118 184.704);
     --chart-3: oklch(0.398 0.07 227.392);
@@ -148,11 +152,11 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+    * {
+        @apply border-border outline-ring/50;
     }
-  body {
-    @apply bg-background text-foreground;
+    body {
+        @apply bg-background text-foreground;
     }
 }
 
@@ -161,70 +165,130 @@
     .font-arabic {
         font-family: var(--font-arabic);
     }
-    
+
     /* Apply Arabic font to all text when Arabic locale is active */
     .font-arabic * {
         font-family: var(--font-arabic);
     }
-    
+
     /* RTL utilities */
-    .rtl\:text-right:where([dir="rtl"], [dir="rtl"] *) {
+    .rtl\:text-right:where([dir='rtl'], [dir='rtl'] *) {
         text-align: right;
     }
-    
-    .rtl\:text-left:where([dir="rtl"], [dir="rtl"] *) {
+
+    .rtl\:text-left:where([dir='rtl'], [dir='rtl'] *) {
         text-align: left;
     }
-    
-    .rtl\:ml-auto:where([dir="rtl"], [dir="rtl"] *) {
+
+    .rtl\:ml-auto:where([dir='rtl'], [dir='rtl'] *) {
         margin-left: auto;
     }
-    
-    .rtl\:mr-auto:where([dir="rtl"], [dir="rtl"] *) {
+
+    .rtl\:mr-auto:where([dir='rtl'], [dir='rtl'] *) {
         margin-right: auto;
     }
-    
-    .rtl\:flex-row-reverse:where([dir="rtl"], [dir="rtl"] *) {
+
+    .rtl\:flex-row-reverse:where([dir='rtl'], [dir='rtl'] *) {
         flex-direction: row-reverse;
     }
-    
-    .rtl\:space-x-reverse:where([dir="rtl"], [dir="rtl"] *) > :not([hidden]) ~ :not([hidden]) {
+
+    .rtl\:space-x-reverse:where([dir='rtl'], [dir='rtl'] *) > :not([hidden]) ~ :not([hidden]) {
         --space-x-reverse: 1;
     }
 
     /* Logical margin utilities */
-    .ms-1 { margin-inline-start: 0.25rem; }
-    .ms-2 { margin-inline-start: 0.5rem; }
-    .ms-3 { margin-inline-start: 0.75rem; }
-    .ms-4 { margin-inline-start: 1rem; }
-    .ms-5 { margin-inline-start: 1.25rem; }
-    .ms-6 { margin-inline-start: 1.5rem; }
-    .ms-8 { margin-inline-start: 2rem; }
-    .ms-auto { margin-inline-start: auto; }
-    
-    .me-1 { margin-inline-end: 0.25rem; }
-    .me-2 { margin-inline-end: 0.5rem; }
-    .me-3 { margin-inline-end: 0.75rem; }
-    .me-4 { margin-inline-end: 1rem; }
-    .me-5 { margin-inline-end: 1.25rem; }
-    .me-6 { margin-inline-end: 1.5rem; }
-    .me-8 { margin-inline-end: 2rem; }
-    .me-auto { margin-inline-end: auto; }
+    .ms-1 {
+        margin-inline-start: 0.25rem;
+    }
+    .ms-2 {
+        margin-inline-start: 0.5rem;
+    }
+    .ms-3 {
+        margin-inline-start: 0.75rem;
+    }
+    .ms-4 {
+        margin-inline-start: 1rem;
+    }
+    .ms-5 {
+        margin-inline-start: 1.25rem;
+    }
+    .ms-6 {
+        margin-inline-start: 1.5rem;
+    }
+    .ms-8 {
+        margin-inline-start: 2rem;
+    }
+    .ms-auto {
+        margin-inline-start: auto;
+    }
+
+    .me-1 {
+        margin-inline-end: 0.25rem;
+    }
+    .me-2 {
+        margin-inline-end: 0.5rem;
+    }
+    .me-3 {
+        margin-inline-end: 0.75rem;
+    }
+    .me-4 {
+        margin-inline-end: 1rem;
+    }
+    .me-5 {
+        margin-inline-end: 1.25rem;
+    }
+    .me-6 {
+        margin-inline-end: 1.5rem;
+    }
+    .me-8 {
+        margin-inline-end: 2rem;
+    }
+    .me-auto {
+        margin-inline-end: auto;
+    }
 
     /* Logical padding utilities */
-    .ps-1 { padding-inline-start: 0.25rem; }
-    .ps-2 { padding-inline-start: 0.5rem; }
-    .ps-3 { padding-inline-start: 0.75rem; }
-    .ps-4 { padding-inline-start: 1rem; }
-    .ps-5 { padding-inline-start: 1.25rem; }
-    .ps-6 { padding-inline-start: 1.5rem; }
-    .ps-8 { padding-inline-start: 2rem; }
-    
-    .pe-1 { padding-inline-end: 0.25rem; }
-    .pe-2 { padding-inline-end: 0.5rem; }
-    .pe-3 { padding-inline-end: 0.75rem; }
-    .pe-4 { padding-inline-end: 1rem; }
-    .pe-5 { padding-inline-end: 1.25rem; }
-    .pe-6 { padding-inline-end: 1.5rem; }
-    .pe-8 { padding-inline-end: 2rem; }
+    .ps-1 {
+        padding-inline-start: 0.25rem;
+    }
+    .ps-2 {
+        padding-inline-start: 0.5rem;
+    }
+    .ps-3 {
+        padding-inline-start: 0.75rem;
+    }
+    .ps-4 {
+        padding-inline-start: 1rem;
+    }
+    .ps-5 {
+        padding-inline-start: 1.25rem;
+    }
+    .ps-6 {
+        padding-inline-start: 1.5rem;
+    }
+    .ps-8 {
+        padding-inline-start: 2rem;
+    }
+
+    .pe-1 {
+        padding-inline-end: 0.25rem;
+    }
+    .pe-2 {
+        padding-inline-end: 0.5rem;
+    }
+    .pe-3 {
+        padding-inline-end: 0.75rem;
+    }
+    .pe-4 {
+        padding-inline-end: 1rem;
+    }
+    .pe-5 {
+        padding-inline-end: 1.25rem;
+    }
+    .pe-6 {
+        padding-inline-end: 1.5rem;
+    }
+    .pe-8 {
+        padding-inline-end: 2rem;
+    }
 }
