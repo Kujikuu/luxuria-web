@@ -65,7 +65,7 @@ export default function Footer() {
                     </div>
                     <div className="flex gap-2">
                         <Text variant='bodyMedium' className="text-ui-2">{t('powered_by') || 'Powered by'}</Text>
-                        <NavLink color="ui-2" href="https://afifistudio.com" target="_blank">{t('Sniper') || 'Sniper'}</NavLink>
+                        <NavLink color="ui-2" href="https://sniper.com.sa" target="_blank">{t('Sniper') || 'Sniper'}</NavLink>
                     </div>
                 </div>
             </div>
