@@ -50,7 +50,7 @@ export default function InterestForm({ opportunityUuid }: InterestFormProps) {
                 throw new Error(t('dealio_interest_missing_opportunity'));
             }
 
-            const response = await fetch('/api/dealio/leads', {
+            const response = await fetch('/api/ventra/leads', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',

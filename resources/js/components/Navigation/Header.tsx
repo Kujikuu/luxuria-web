@@ -34,7 +34,7 @@ export default function Header({ section = "hero", color = "white" }: HeaderProp
 
     const navigationItems = [
         { href: '/properties', label: t('properties') },
-        { href: '/dealio', label: t('dealio') },
+        { href: '/ventra', label: t('ventra') },
         { href: '/blog', label: t('blog') },
         { href: '/about', label: t('about') },
         { href: '/contact', label: t('contact') },

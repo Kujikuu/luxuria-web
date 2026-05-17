@@ -65,15 +65,15 @@ Route::get('/', function () {
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties');
 Route::get('/properties/{slug}', [PropertyController::class, 'show'])->name('properties.show');
 
-Route::get('/dealio', function () {
-    return Inertia::render('Dealio/Index');
-})->name('dealio');
+Route::get('/ventra', function () {
+    return Inertia::render('Ventra/Index');
+})->name('ventra');
 
-Route::get('/dealio/{slug}', function (string $slug) {
-    return Inertia::render('Dealio/Show', [
+Route::get('/ventra/{slug}', function (string $slug) {
+    return Inertia::render('Ventra/Show', [
         'slug' => $slug,
     ]);
-})->name('dealio.show');
+})->name('ventra.show');
 
 Route::get('/about', function () {
     return Inertia::render('About', [
@@ -143,15 +143,15 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'ar|he|fa|ur']], f
     Route::get('/properties', [PropertyController::class, 'index'])->name('localized.properties');
     Route::get('/properties/{slug}', [PropertyController::class, 'show'])->name('localized.properties.show');
 
-    Route::get('/dealio', function () {
-        return Inertia::render('Dealio/Index');
-    })->name('localized.dealio');
+    Route::get('/ventra', function () {
+        return Inertia::render('Ventra/Index');
+    })->name('localized.ventra');
 
-    Route::get('/dealio/{slug}', function (string $locale, string $slug) {
-        return Inertia::render('Dealio/Show', [
+    Route::get('/ventra/{slug}', function (string $locale, string $slug) {
+        return Inertia::render('Ventra/Show', [
             'slug' => $slug,
         ]);
-    })->name('localized.dealio.show');
+    })->name('localized.ventra.show');
 
     Route::get('/about', function () {
         return Inertia::render('About', [
@@ -214,7 +214,7 @@ Route::prefix('api')->group(function () {
     Route::get('/translations/{locale}', [App\Http\Controllers\LocaleController::class, 'getAllTranslations']);
     Route::get('/translations/{locale}/{namespace}', [App\Http\Controllers\LocaleController::class, 'getTranslations']);
 
-    Route::prefix('dealio')->group(function () {
+    Route::prefix('ventra')->group(function () {
         Route::get('/opportunities', [DealioProxyController::class, 'opportunities'])->name('api.dealio.opportunities');
         Route::get('/opportunities/{slug}', [DealioProxyController::class, 'show'])->name('api.dealio.opportunities.show');
         Route::get('/opportunities/{slug}/similar', [DealioProxyController::class, 'similar'])->name('api.dealio.opportunities.similar');

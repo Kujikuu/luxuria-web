@@ -42,7 +42,7 @@ return [
     'property_inquiry_description' => 'Send us your inquiry and we\'ll get back to you soon.',
 
     // Dealio page
-    'dealio_title' => 'DEALIO',
+    'dealio_title' => 'VENTRA',
     'dealio_header' => 'Discover real estate investment opportunities',
     'dealio_subtitle' => 'Browse curated real estate opportunities with clear financials, funding progress, and partner details.',
     'dealio_found_opportunities' => 'Showing :count real estate opportunities',

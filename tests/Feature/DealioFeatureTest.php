@@ -48,13 +48,13 @@ it('always scopes opportunity listing requests to real estate', function () {
         ]),
     ]);
 
-    $this->getJson('/api/dealio/opportunities?industry[]=saas&type=equity')
+    $this->getJson('/api/ventra/opportunities?industry[]=saas&type=equity')
         ->assertOk();
 
     Http::assertSent(function (HttpRequest $request): bool {
         parse_str(parse_url($request->url(), PHP_URL_QUERY) ?: '', $query);
 
-        return $request->url() === 'https://dealio.test/api/v1/opportunities?type=equity&industry%5B0%5D=real-estate'
+        return $request->url() === 'https://ventra.test/api/v1/opportunities?type=equity&industry%5B0%5D=real-estate'
             || (($query['industry'][0] ?? null) === 'real-estate' && ($query['type'] ?? null) === 'equity');
     });
 });
@@ -70,16 +70,16 @@ it('does not expose non real estate opportunity details', function () {
         ]),
     ]);
 
-    $this->getJson('/api/dealio/opportunities/coffee-franchise')
+    $this->getJson('/api/ventra/opportunities/coffee-franchise')
         ->assertNotFound();
 });
 
-it('forwards valid lead submissions to Dealio', function () {
+it('forwards valid lead submissions to Ventra', function () {
     Http::fake([
-        'dealio.test/api/v1/leads' => Http::response(['message' => 'Created'], 201),
+        'ventra.test/api/v1/leads' => Http::response(['message' => 'Created'], 201),
     ]);
 
-    $this->postJson('/api/dealio/leads', [
+    $this->postJson('/api/ventra/leads', [
         'opportunity_uuid' => 'opp-123',
         'name' => 'Sara Investor',
         'email' => 'sara@example.com',
@@ -96,7 +96,7 @@ it('forwards valid lead submissions to Dealio', function () {
 it('validates lead submissions before forwarding to Dealio', function () {
     Http::fake();
 
-    $this->postJson('/api/dealio/leads', [
+    $this->postJson('/api/ventra/leads', [
         'name' => '',
         'email' => 'not-an-email',
     ])->assertUnprocessable();

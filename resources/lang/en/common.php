@@ -18,7 +18,7 @@ return [
     'about' => 'About',
     'contact' => 'Contact',
     'properties' => 'Properties',
-    'dealio' => 'DEALIO™',
+    'ventra' => 'VENTRA™',
     'blog' => 'Blog',
     'search' => 'Search',
     'menu' => 'Menu',

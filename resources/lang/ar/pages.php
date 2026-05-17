@@ -42,7 +42,7 @@ return [
     'property_inquiry_description' => 'أرسل لنا استفسارك وسنتواصل معك قريباً.',
 
     // Dealio page
-    'dealio_title' => 'DEALIO',
+    'dealio_title' => 'VENTRA',
     'dealio_header' => 'اكتشف فرص الاستثمار العقاري',
     'dealio_subtitle' => 'تصفح فرصاً عقارية منتقاة مع مؤشرات مالية واضحة ونسبة تمويل وتفاصيل الشركاء.',
     'dealio_found_opportunities' => 'عرض :count فرصة عقارية',

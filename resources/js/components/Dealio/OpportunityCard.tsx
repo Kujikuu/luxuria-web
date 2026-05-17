@@ -27,7 +27,7 @@ export default function OpportunityCard({ opportunity, variant = 'default' }: Op
 
     if (variant === 'small') {
         return (
-            <Link href={getLocalizedPath(`/dealio/${opportunity.slug}`)}>
+            <Link href={getLocalizedPath(`/ventra/${opportunity.slug}`)}>
                 <motion.article
                     className="group flex h-full flex-col overflow-hidden rounded-2xl border border-ui-3 bg-ui-2"
                     onHoverStart={() => setIsHovered(true)}
@@ -93,7 +93,7 @@ export default function OpportunityCard({ opportunity, variant = 'default' }: Op
     }
 
     return (
-        <Link href={getLocalizedPath(`/dealio/${opportunity.slug}`)} className="block h-full">
+        <Link href={getLocalizedPath(`/ventra/${opportunity.slug}`)} className="block h-full">
             <motion.article
                 className={`group flex h-full flex-col overflow-hidden rounded-2xl border border-ui-3 bg-ui-2 ${
                     isFeatured ? 'md:grid md:grid-cols-[1.05fr_0.95fr]' : ''
