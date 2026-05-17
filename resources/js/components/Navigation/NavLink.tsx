@@ -27,7 +27,7 @@ export const NavLink = ({
             case "white":
                 return "text-white";
             case "dark":
-                return "text-white";
+                return "text-text-primary";
             default:
                 return "text-white";
         }

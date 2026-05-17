@@ -51,10 +51,9 @@ export default function Footer() {
                         </div> */}
                         <div className="flex flex-col gap-4">
                             <Text variant='bodyBold' className="text-ui-1">{t('follow_us') || 'Follow Us'}</Text>
-                            <NavLink color="ui-1" href="https://www.linkedin.com/company/luxuria/" target="_blank">Linkedin</NavLink>
-                            <NavLink color="ui-1" href="https://www.instagram.com/luxuria/" target="_blank">Instagram</NavLink>
-                            <NavLink color="ui-1" href="https://www.twitter.com/luxuria/" target="_blank">Twitter</NavLink>
-                            <NavLink color="ui-1" href="https://www.youtube.com/luxuria/" target="_blank">Youtube</NavLink>
+                            <NavLink color="ui-1" href="#" target="_blank">Linkedin</NavLink>
+                            <NavLink color="ui-1" href="#" target="_blank">Instagram</NavLink>
+                            <NavLink color="ui-1" href="#" target="_blank">Twitter</NavLink>
                         </div>
                     </div>
                 </div>
@@ -64,10 +63,10 @@ export default function Footer() {
                         <DotIcon size={24} />
                         <NavLink color="ui-2" href={'/privacy-policy'}>{t('privacy_policy')}</NavLink>
                     </div>
-                    {/* <div className="flex gap-2">
+                    <div className="flex gap-2">
                         <Text variant='bodyMedium' className="text-ui-2">{t('powered_by') || 'Powered by'}</Text>
-                        <NavLink color="ui-2" href="https://afifistudio.com" target="_blank">{t('afifi_studio') || 'Afifi Studio'}</NavLink>
-                    </div> */}
+                        <NavLink color="ui-2" href="https://afifistudio.com" target="_blank">{t('Sniper') || 'Sniper'}</NavLink>
+                    </div>
                 </div>
             </div>
         </footer>

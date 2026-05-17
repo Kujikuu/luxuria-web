@@ -99,12 +99,12 @@ export default function Header({ section = "hero", color = "white" }: HeaderProp
     // Logo color management
     const getLogoColorClass = () => {
         if (isScrolled) {
-            return "fill-primary"; // Always primary color when scrolled
+            return "fill-text-primary"; // Always primary color when scrolled
         }
 
         switch (color) {
             case "white":
-                return "fill-primary";
+                return "fill-text-primary";
             case "transparent":
                 return "fill-white";
             case "dark":
@@ -116,8 +116,8 @@ export default function Header({ section = "hero", color = "white" }: HeaderProp
 
     // Scroll variant always uses white background with primary text
     const scrollStyling = "bg-white";
-    const scrollNavLinkColor = "primary";
-    const defaultNavLinkColor = color === "white" ? "primary" : "white";
+    const scrollNavLinkColor = "dark";
+    const defaultNavLinkColor = color === "white" ? "dark" : "white";
 
     return (
         <div className={`sticky z-50 w-full h-auto order-first top-0 left-0 right-0 transition-all duration-300 ${isScrolled ? scrollStyling : getDefaultStyling()

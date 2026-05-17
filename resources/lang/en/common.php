@@ -81,6 +81,7 @@ return [
     'follow_us' => 'Follow Us',
     'powered_by' => 'Powered by',
     'afifi_studio' => 'Afifi Studio',
+    'sniper' => 'Sniper',
     'download_company_profile' => 'Download Company Profile',
     'download_pdf' => 'Download PDF',
     'footer_description' => 'At LUXURIA, we redefine real estate by blending innovation, professionalism, and luxury.',
