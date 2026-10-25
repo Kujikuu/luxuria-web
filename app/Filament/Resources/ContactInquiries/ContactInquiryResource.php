@@ -19,11 +19,11 @@ class ContactInquiryResource extends Resource
 {
     protected static ?string $model = ContactInquiry::class;
 
-    protected static ?string $navigationLabel = 'Contact Inquiries';
+    protected static ?string $navigationLabel = 'Leads';
 
-    protected static ?string $modelLabel = 'Contact Inquiry';
+    protected static ?string $modelLabel = 'Lead';
 
-    protected static ?string $pluralModelLabel = 'Contact Inquiries';
+    protected static ?string $pluralModelLabel = 'Leads';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftEllipsis;
 

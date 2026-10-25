@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\ContactPhone;
+use App\Models\ContactInquiry;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreContactInquiryRequest extends FormRequest
 {
@@ -22,9 +25,11 @@ class StoreContactInquiryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'request_type' => ['required', 'string', 'in:buy,sell,rent'],
+            'request_type' => ['required', 'string', Rule::in(array_keys(ContactInquiry::leadTypes()))],
             'first_name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:20'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'consent' => ['accepted'],
+            'phone' => ['required', 'string', 'max:40', new ContactPhone],
             'email' => ['required', 'email', 'max:255'],
             'message' => ['required', 'string', 'max:2000'],
         ];
@@ -38,14 +43,16 @@ class StoreContactInquiryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'request_type.required' => 'Please select a request type.',
-            'request_type.in' => 'Please select a valid request type.',
-            'first_name.required' => 'Please provide your first name.',
-            'phone.required' => 'Please provide your phone number.',
-            'email.required' => 'Please provide your email address.',
-            'email.email' => 'Please provide a valid email address.',
-            'message.required' => 'Please provide a message.',
-            'message.max' => 'Your message cannot exceed 2000 characters.',
+            'request_type.required' => __('pages.contact_type_required'),
+            'request_type.in' => __('pages.contact_type_required'),
+            'first_name.required' => __('pages.contact_first_name_required'),
+            'last_name.required' => __('pages.contact_last_name_required'),
+            'phone.required' => __('pages.contact_phone_required'),
+            'email.required' => __('pages.contact_email_required'),
+            'email.email' => __('pages.contact_email_invalid'),
+            'message.required' => __('pages.contact_message_required'),
+            'message.max' => __('pages.contact_message_max'),
+            'consent.accepted' => __('pages.contact_consent_required'),
         ];
     }
 }

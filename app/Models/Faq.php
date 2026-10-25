@@ -44,7 +44,14 @@ class Faq extends Model
     {
         $locale = $locale ?: app()->getLocale();
 
-        return ($locale === 'ar' && $this->answer_ar) ? $this->answer_ar : $this->answer;
+        $answer = ($locale === 'ar' && $this->answer_ar) ? $this->answer_ar : $this->answer;
+
+        return strtr($answer, [
+            'broker@luxuria.sa' => __('pages.email_info', [], $locale),
+            'info@luxuria.sa' => __('pages.email_info', [], $locale),
+            'sales@luxuria.sa' => __('pages.email_info', [], $locale),
+            '0503422777 / 0580037374' => __('pages.phone_number_1', [], $locale),
+        ]);
     }
 
     /**

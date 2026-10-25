@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ContactInquiries\Pages;
 
 use App\Filament\Resources\ContactInquiries\ContactInquiryResource;
+use App\Filament\Resources\ContactInquiries\PromoteLeadAction;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
@@ -13,6 +14,7 @@ class EditContactInquiry extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+            PromoteLeadAction::make(),
             DeleteAction::make(),
         ];
     }

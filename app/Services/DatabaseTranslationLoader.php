@@ -55,12 +55,22 @@ class DatabaseTranslationLoader implements Loader
 
         $cacheKey = $this->getCacheKey($locale, $group);
 
-        return Cache::remember($cacheKey, $this->cacheTtl * 60, function () use ($locale, $group, $namespace) {
+        $messages = Cache::remember($cacheKey, $this->cacheTtl * 60, function () use ($locale, $group, $namespace) {
             return array_replace(
                 $this->fileLoader->load($locale, $group, $namespace),
                 Translation::getGroup($group, $locale),
             );
         });
+
+        if ($group === 'pages') {
+            $fileMessages = $this->fileLoader->load($locale, $group, $namespace);
+            $messages = array_replace($messages, array_intersect_key($fileMessages, array_flip([
+                'phone_number_1', 'email_info', 'address_line_1', 'address_line_2', 'faq_contact_answer',
+            ])));
+            unset($messages['phone_number_2'], $messages['email_sales']);
+        }
+
+        return $messages;
     }
 
     /**

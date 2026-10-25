@@ -40,6 +40,14 @@ return [
         'api_token' => env('DEALIO_API_TOKEN'),
     ],
 
+    'sniperhub' => [
+        'intake_enabled' => (bool) env('SNIPERHUB_INTAKE_ENABLED', false),
+        'intake_url' => env('SNIPERHUB_INTAKE_URL'),
+        'leads_url' => env('SNIPERHUB_LEADS_URL'),
+        'intake_key' => env('SNIPERHUB_INTAKE_KEY'),
+        'timeout' => (int) env('SNIPERHUB_INTAKE_TIMEOUT', 10),
+    ],
+
     'blog' => [
         'url' => env('BLOG_API_URL', 'https://blog.test'),
         'api_key' => env('BLOG_API_KEY'),

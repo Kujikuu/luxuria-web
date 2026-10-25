@@ -1,6 +1,6 @@
 import WhatsAppIcon from '@/components/WhatsAppIcon';
 import AppLayoutTemplate from '@/layouts/app/app-header-layout';
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 interface AppLayoutProps {
     children: ReactNode;
@@ -11,6 +11,6 @@ interface AppLayoutProps {
 export default ({ children, ...props }: AppLayoutProps) => (
     <AppLayoutTemplate {...props}>
         {children}
-        <WhatsAppIcon href="https://wa.me/+966555555555" />
+        <WhatsAppIcon href="https://wa.me/966503422777" />
     </AppLayoutTemplate>
 );

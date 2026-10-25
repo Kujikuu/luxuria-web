@@ -83,6 +83,7 @@ Route::get('/about', function () {
 
 Route::get('/contact', function () {
     return Inertia::render('Contact', [
+        'success' => session('success'),
         'faqs' => \App\Helpers\SystemSettingsHelper::getLocalizedFaqs(),
     ]);
 })->name('contact');
@@ -161,6 +162,7 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'ar|he|fa|ur']], f
 
     Route::get('/contact', function () {
         return Inertia::render('Contact', [
+            'success' => session('success'),
             'faqs' => \App\Helpers\SystemSettingsHelper::getLocalizedFaqs(),
         ]);
     })->name('localized.contact');

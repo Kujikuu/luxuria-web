@@ -27,7 +27,7 @@ class ContactInquiryNotification extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Contact Inquiry - '.$this->inquiry->request_type,
+            subject: 'New Luxuria Lead - '.$this->inquiry->typeLabel('en'),
             replyTo: $this->inquiry->email,
         );
     }
